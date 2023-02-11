@@ -69,3 +69,11 @@ repos:
     hooks:
       - id: bandit
         args: [-x, tests]
+  - repo: https://github.com/lunarmodules/luacheck
+    rev: v1.1.0
+    hooks:
+      - id: luacheck
+  - repo: https://github.com/JohnnyMorganz/StyLua
+    rev: v0.16.1
+    hooks:
+      - id: stylua-github
