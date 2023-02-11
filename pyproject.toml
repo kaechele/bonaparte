@@ -24,6 +24,9 @@ packages = [
 
 [tool.poetry.dependencies]
 python = "^3.10"
+bleak = "^0.19.5"
+bleak-retry-connector = "^2.13.1"
+async-timeout = "^4.0.2"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.0"
