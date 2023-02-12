@@ -68,7 +68,7 @@ jobs:
   release:
     runs-on: ubuntu-latest
     environment: release
-    if: github.ref == 'refs/heads/main'
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags')
     needs:
       - test
       - lint
