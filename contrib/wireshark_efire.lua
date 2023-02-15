@@ -11,31 +11,33 @@ local p_efire = Proto("efire", "Napoleon eFIRE")
 local t_msg_type = { [0xaa] = "Request", [0xbb] = "Response" }
 
 local t_commands = {
-	[0x27] = "Set Night Light/Standing Pilot",
-	[0x28] = "Set Split Flow/Blower Speed/Aux/Flame Height",
-	[0xb1] = "Set Light State",
-	[0xc1] = "Set Light Colors",
-	[0xc3] = "Set Timer",
-	[0xc4] = "Set Power State",
-	[0xc5] = "Login",
-	[0xc6] = "Password Management",
-	[0xc7] = "Query Time Sync",
-	[0xe0] = "Query Light State",
-	[0xe1] = "Query Light Color",
-	[0xe2] = "Query Light Mode",
-	[0xe3] = "Query Pilot/Nightlight/Main Mode State",
-	[0xe4] = "Query Split Flow/Blower Speed/Aux/Flame Height State",
-	[0xe6] = "Query Timer",
-	[0xe7] = "Query Power State",
-	[0xe8] = "Password Read",
-	[0xe9] = "Password Set Result",
-	[0xea] = "Time Sync Response", -- queries an active timer from the controller for the time that's left on it
-	[0xeb] = "Query Light State",
-	[0xee] = "Query Aux Control State",
-	[0xf1] = "Set Ember/Cycle/Hold",
-	[0xf2] = "Query BLE Version",
-	[0xf3] = "Query MCU Version",
-	[0xf4] = "Set Aux Control",
+	-- R = Read Command (Command sent without parameters, response received with state/data)
+	-- W = Write Command (Command sent with parameters, response received with return code)
+	[0x27] = "Set Night Light/Standing Pilot", -- W
+	[0x28] = "Set Split Flow/Blower Speed/Aux/Flame Height", -- W
+	[0xb1] = "Set LED State", -- W
+	[0xc1] = "Set LED Color", -- W
+	[0xc3] = "Set Timer", -- W
+	[0xc4] = "Set Power State", -- W
+	[0xc5] = "Send Password", -- W (authenticate or set password if used after sending 0xc6)
+	[0xc6] = "Manage Password", -- W
+	[0xc7] = "Set Time Sync", -- W
+	[0xe0] = "Query LED State", -- R
+	[0xe1] = "Query LED Color", -- R
+	[0xe2] = "Query LED Effect", -- R
+	[0xe3] = "Query Pilot/Night Light/Main Mode State", -- R
+	[0xe4] = "Query Split Flow/Blower Speed/Aux/Flame Height State", -- R
+	[0xe6] = "Query Timer", -- R
+	[0xe7] = "Query Power State", -- R
+	[0xe8] = "Read Password", -- R
+	[0xe9] = "Set Password", -- W (has no parameters, simply commits the previously sent password to memory)
+	[0xea] = "Time Sync Response", -- -R (queries an active timer from the controller for the time that's left on it)
+	[0xeb] = "LED Controller State Response", -- R (not seen in testing yet)
+	[0xee] = "Aux Control State Response", --R
+	[0xf1] = "Set LED Controller Effect", --W
+	[0xf2] = "Query BLE Version", --R
+	[0xf3] = "Query MCU Version", --R
+	[0xf4] = "Query Aux Control", --R
 }
 
 local t_power_states = {
@@ -77,11 +79,12 @@ local t_light_modes_short = {
 	[0x01] = "Cycle",
 }
 
--- Functions that follow the generic return code schema
+-- Functions that follow the generic return code schema (see return codes below)
 local t_generic_return = {
 	[0x27] = true,
 	[0x28] = true,
 	[0xb1] = true,
+	[0xc1] = true,
 	[0xc3] = true,
 	[0xc4] = true,
 	[0xc6] = true,
