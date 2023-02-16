@@ -399,8 +399,6 @@ class Fireplace(EfireDevice):
         await self.update_on_state_settings()
         await self.update_power_state()
         await self.update_timer_state()
-        if self._features.aux:
-            await self.query_aux_control()
         if self._features.led_lights:
             await self.update_led_state()
             await self.update_led_color()
