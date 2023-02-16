@@ -104,6 +104,26 @@ class Fireplace(EfireDevice):
         self._features = features if features else FireplaceFeatures()
         self._state = FireplaceState()
 
+    @property
+    def has_aux(self) -> bool:
+        return self._features.aux
+
+    @property
+    def has_blower(self) -> bool:
+        return self._features.blower
+
+    @property
+    def has_led_lights(self) -> bool:
+        return self._features.led_lights
+
+    @property
+    def has_night_light(self) -> bool:
+        return self._features.night_light
+
+    @property
+    def has_split_flow(self) -> bool:
+        return self._features.split_flow
+
     async def _simple_command(
         self, command: int, parameter: int | bytes | bytearray | None = None
     ) -> bool:
