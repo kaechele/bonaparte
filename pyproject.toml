@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "bonaparte"
-version = "0.0.0"
+version = "0.1.0"
 description = "Library to control Napoleon eFIRE enabled fireplaces"
 authors = ["Felix Kaechele <felix@kaechele.ca>"]
 license = "MIT"
@@ -8,10 +8,11 @@ readme = "README.md"
 repository = "https://github.com/kaechele/bonaparte"
 documentation = "https://bonaparte.readthedocs.io"
 classifiers = [
-    "Development Status :: 2 - Pre-Alpha",
+    "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
     "Natural Language :: English",
     "Operating System :: OS Independent",
+    "Topic :: Home Automation",
     "Topic :: Software Development :: Libraries",
 ]
 packages = [
@@ -27,6 +28,7 @@ python = "^3.10"
 bleak = "^0.19.5"
 bleak-retry-connector = "^2.13.1"
 async-timeout = "^4.0.2"
+aenum = "^3.1.11"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.0"
@@ -51,6 +53,9 @@ build_command = "pip install poetry && poetry build"
 addopts = "-v -Wdefault --cov=bonaparte --cov-report=term-missing:skip-covered"
 pythonpath = ["src"]
 
+[tool.black]
+target-version = ["py310", "py311"]
+
 [tool.coverage.run]
 branch = true
 
@@ -68,6 +73,7 @@ profile = "black"
 known_first_party = ["bonaparte", "tests"]
 
 [tool.mypy]
+python_version = "3.10"
 check_untyped_defs = true
 disallow_any_generics = true
 disallow_incomplete_defs = true

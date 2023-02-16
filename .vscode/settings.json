@@ -1,10 +1,12 @@
 {
   "python.formatting.provider": "black",
+  "python.formatting.blackArgs": ["--experimental-string-processing"],
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
     "source.organizeImports": true
   },
   "[lua]": {
     "editor.defaultFormatter": "JohnnyMorganz.stylua"
-  }
+  },
+  "python.analysis.typeCheckingMode": "basic"
 }

@@ -2,7 +2,7 @@
 _commit: 3aa4aef
 _src_path: gh:browniebroke/pypackage-template
 add_me_as_contributor: false
-copyright_year: '2023'
+copyright_year: "2023"
 documentation: true
 email: felix@kaechele.ca
 full_name: Felix Kaechele
@@ -16,4 +16,3 @@ project_slug: bonaparte
 run_poetry_install: false
 setup_github: false
 setup_pre_commit: false
-
