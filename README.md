@@ -53,6 +53,8 @@ This project follows the [all-contributors](https://github.com/all-contributors/
 
 ## Credits
 
+This library is heavily inspired (if not shamelessly copied) from the work by J. Nick Koston (@bdraco) over at https://github.com/bdraco/yalexs-ble
+
 This package was created with
 [Copier](https://copier.readthedocs.io/) and the
 [browniebroke/pypackage-template](https://github.com/browniebroke/pypackage-template)
