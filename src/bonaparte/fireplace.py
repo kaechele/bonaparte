@@ -86,6 +86,8 @@ class FireplaceState:
     split_flow: bool = False
     time_left: tuple[int, int, int] = (0, 0, 0)
     timer: bool = False
+    mcu_version: str = ""
+    ble_version: str = ""
 
 
 class Fireplace(EfireDevice):
@@ -423,3 +425,6 @@ class Fireplace(EfireDevice):
             await self.update_led_state()
             await self.update_led_color()
             await self.update_led_controller_mode()
+
+        self._state.mcu_version = await self.query_mcu_version()
+        self._state.ble_version = await self.query_ble_version()
