@@ -1,8 +1,14 @@
 from __future__ import annotations
 
+import sys
 from enum import IntEnum
 
 from aenum import MultiValueEnum
+
+if sys.version_info >= (3, 11):
+    from enum import StrEnum
+else:
+    from aenum import StrEnum
 
 # Package format constants
 HEADER = 0xAB
@@ -16,6 +22,14 @@ WRITE_CHAR_UUID = _BASE_UUID.format("ff01")
 READ_CHAR_UUID = _BASE_UUID.format("ff02")
 CONFIG_DESC_UUID = _BASE_UUID.format("2902")
 MODEL_NBR_UUID = _BASE_UUID.format("2a00")
+
+
+class Feature(StrEnum):
+    AUX = "aux"
+    BLOWER = "blower"
+    LED_LIGHTS = "led_lights"
+    NIGHT_LIGHT = "night_light"
+    SPLIT_FLOW = "split_flow"
 
 
 class EfireCommand(IntEnum):
