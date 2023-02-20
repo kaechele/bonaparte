@@ -3,6 +3,7 @@ from __future__ import annotations
 import logging
 from collections.abc import Awaitable, Callable
 from dataclasses import dataclass
+from dataclasses import fields as dc_fields
 from typing import Concatenate, ParamSpec, TypeVar
 
 from bleak.backends.device import BLEDevice
@@ -125,6 +126,18 @@ class Fireplace(EfireDevice):
     @property
     def has_split_flow(self) -> bool:
         return self._features.split_flow
+
+    def set_features(self, features: set[str]) -> FireplaceFeatures:
+        feature_set = {field.name for field in dc_fields(self._features)}
+        if not feature_set >= features:
+            invalid_feature = features - feature_set
+            raise ValueError(
+                "Invalid feature value%s found in input set: %s"
+                % ("s" if len(invalid_feature) > 1 else "", invalid_feature)
+            )
+        new_featureset = FireplaceFeatures(**{f: True for f in features})
+        self._features = new_featureset
+        return self._features
 
     async def _simple_command(
         self, command: int, parameter: int | bytes | bytearray | None = None
