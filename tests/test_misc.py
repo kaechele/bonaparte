@@ -4,7 +4,6 @@ import pytest
 from bonaparte import Fireplace, FireplaceFeatures
 
 fp = Fireplace(BLEDevice("aa:bb:cc:dd:ee:ff", "Fireplace", delegate=""), "0000")
-fireplace_features = FireplaceFeatures()
 
 full_valid_set = {"aux", "blower", "led_lights", "night_light", "split_flow"}
 partial_valid_set = {"blower", "night_light"}
@@ -43,7 +42,8 @@ def test_partial_valid_featureset() -> None:
 
 def test_full_invalid_featureset() -> None:
     with pytest.raises(
-        ValueError, match="Invalid feature values found in input set: {'foo', 'bar'}"
+        ValueError,
+        match=r"Invalid feature values found in input set: {'(foo|bar)', '(foo|bar)'}",
     ):
         fp.set_features(full_invalid_set)
 
