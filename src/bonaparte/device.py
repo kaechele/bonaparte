@@ -26,6 +26,7 @@ if TYPE_CHECKING:
 
     from bleak.backends.characteristic import BleakGATTCharacteristic
     from bleak.backends.device import BLEDevice
+    from bleak.backends.scanner import AdvertisementData
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -64,13 +65,14 @@ class EfireDevice:
     _read_char: BleakGATTCharacteristic | None
     _write_char: BleakGATTCharacteristic | None
     _write_lock: asyncio.Lock
+    _advertisement_data: AdvertisementData | None
     name: str | None
 
     def __init__(
-        self,
-        ble_device: BLEDevice,
+        self, ble_device: BLEDevice, advertisement_data: AdvertisementData | None = None
     ) -> None:
         self._ble_device = ble_device
+        self._advertisement_data = advertisement_data
         self._connect_lock = asyncio.Lock()
         self._is_authenticated = False
         self._is_connected = False
@@ -81,6 +83,13 @@ class EfireDevice:
     @property
     def mac(self) -> str:
         return self._mac
+
+    def set_ble_device_and_advertisement_data(
+        self, ble_device: BLEDevice, advertisement_data: AdvertisementData
+    ) -> None:
+        """Set the ble device and advertisement data."""
+        self._ble_device = ble_device
+        self._advertisement_data = advertisement_data
 
     def disconnected_callback(self, client: BleakClient) -> None:  # noqa: ARG002
         """Callback for when the device is disconnected."""
