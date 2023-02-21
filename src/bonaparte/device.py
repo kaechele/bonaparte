@@ -58,7 +58,6 @@ class EfireDevice:
     _connect_lock: asyncio.Lock
     _is_authenticated: bool
     _is_connected: bool
-    _loop: asyncio.AbstractEventLoop
     _mac: str
     _notifications_started: bool
     _notify_future: asyncio.Future[bytes] | None
@@ -75,7 +74,6 @@ class EfireDevice:
         self._connect_lock = asyncio.Lock()
         self._is_authenticated = False
         self._is_connected = False
-        self._loop = asyncio.get_running_loop()
         self._mac = ble_device.address
         self._notifications_started = False
         self._write_lock = asyncio.Lock()
