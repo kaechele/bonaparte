@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 
-class EfireException(Exception):
+class EfireException(Exception):  # noqa: N818
     pass
 
 
@@ -22,4 +22,8 @@ class FeatureNotSupported(EfireException):
 
 
 class ResponseError(EfireException):
+    pass
+
+
+class EfireMessageValueError(ValueError):
     pass

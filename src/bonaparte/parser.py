@@ -29,8 +29,8 @@ def parse_on_state(payload: bytes | bytearray) -> tuple[bool, bool, int, int]:
 def parse_timer(payload: bytes | bytearray) -> tuple[tuple[int, int, int], bool]:
     hours = payload[0]
     minutes = payload[1]
-    seconds = payload[3] if len(payload) > 3 else 0
-    timer_on = payload[2] == 1 or payload[2] == 3
+    seconds = payload[3] if len(payload) > 3 else 0  # noqa: PLR2004
+    timer_on = payload[2] == 1 or payload[2] == 3  # noqa: PLR2004
 
     return (hours, minutes, seconds), timer_on
 
@@ -42,7 +42,7 @@ def parse_led_color(payload: bytes | bytearray) -> tuple[int, int, int]:
 def parse_led_controller_state(
     payload: bytes | bytearray,
 ) -> tuple[bool, tuple[int, int, int], LedMode]:
-    light_state = payload[0] == LedState.ON.short  # type: ignore
+    light_state = payload[0] == LedState.ON.short  # type: ignore[attr-defined] # noqa: E501 pylint: disable=no-member
     light_color = (
         int(payload[1] & 0xFF),
         int(payload[2] & 0xFF),

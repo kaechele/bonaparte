@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-import sys
 from enum import IntEnum
+import sys
 
 from aenum import MultiValueEnum
 
@@ -15,6 +15,11 @@ HEADER = 0xAB
 REQUEST_HEADER = 0xAA
 RESPONSE_HEADER = 0xBB
 FOOTER = 0x55
+
+MIN_MESSAGE_LENGTH = 6
+MAX_FLAME_HEIGHT = 6
+MAX_NIGHT_LIGHT_BRIGHTNESS = 6
+MAX_BLOWER_SPEED = 6
 
 _BASE_UUID = "{:0>8}-0000-1000-8000-00805f9b34fb"
 SERVICE_UUID = _BASE_UUID.format("ff00")
@@ -33,7 +38,7 @@ class Feature(StrEnum):
 
 
 class EfireCommand(IntEnum):
-    """Command names to hex value Enum Class"""
+    """Command names to hex value Enum Class."""
 
     OFF_STATE_CMDS = 0x27
     ON_STATE_CMDS = 0x28
@@ -53,7 +58,7 @@ class EfireCommand(IntEnum):
 
 
 class ResponseCode(IntEnum):
-    """Response type names to hex value Enum Class"""
+    """Response type names to hex value Enum Class."""
 
     PASSWORD_ACTION = 0xC5
     LED_STATE = 0xE0

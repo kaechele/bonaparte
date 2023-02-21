@@ -1,14 +1,14 @@
 from __future__ import annotations
 
-import logging
-from collections.abc import Awaitable, Callable
 from dataclasses import dataclass
 from dataclasses import fields as dc_fields
-from typing import Concatenate, ParamSpec, TypeVar
-
-from bleak.backends.device import BLEDevice
+import logging
+from typing import TYPE_CHECKING, Concatenate, ParamSpec, TypeVar
 
 from .const import (
+    MAX_BLOWER_SPEED,
+    MAX_FLAME_HEIGHT,
+    MAX_NIGHT_LIGHT_BRIGHTNESS,
     AuxControlState,
     EfireCommand,
     LedMode,
@@ -31,6 +31,11 @@ from .parser import (
     parse_timer,
 )
 
+if TYPE_CHECKING:
+    from collections.abc import Awaitable, Callable
+
+    from bleak.backends.device import BLEDevice
+
 _LOGGER = logging.getLogger(__name__)
 
 P = ParamSpec("P")
@@ -45,18 +50,21 @@ def needs_auth(
     async def _authenticated_operation(
         self: Fireplace, *args: P.args, **kwargs: P.kwargs
     ) -> T:
-        if not self._is_authenticated:
+        if not self._is_authenticated:  # pylint: disable=protected-access
             _LOGGER.debug(
                 "[%s]: Command %s requires authentication. Attempting authentication.",
                 self.name,
                 func.__name__,
             )
-            auth_result = await self.authenticate(self._password)
+            auth_result = await self.authenticate(
+                self._password  # pylint: disable=protected-access
+            )
             if not auth_result:
-                raise AuthError(
+                msg = (
                     "Command requires authentication but authentication was"
                     " not successful"
                 )
+                raise AuthError(msg)
         return await func(self, *args, **kwargs)
 
     return _authenticated_operation
@@ -77,7 +85,7 @@ class FireplaceState:
     blower_speed: int = 0
     flame_height: int = 0
     led_color: tuple[int, int, int] = (0, 0, 0)
-    led_mode: LedMode = LedMode.HOLD  # type: ignore
+    led_mode: LedMode = LedMode.HOLD  # type: ignore[assignment]
     led: bool = False
     main_mode: int = 0
     night_light_brightness: int = 0
@@ -131,10 +139,11 @@ class Fireplace(EfireDevice):
         feature_set = {field.name for field in dc_fields(self._features)}
         if not feature_set >= features:
             invalid_feature = features - feature_set
-            raise ValueError(
-                "Invalid feature value%s found in input set: %s"
-                % ("s" if len(invalid_feature) > 1 else "", invalid_feature)
+            msg = (
+                f"Invalid feature value{'s' if len(invalid_feature) > 1 else ''} found"
+                f" in input set: {invalid_feature}"
             )
+            raise ValueError(msg)
         new_featureset = FireplaceFeatures(**{f: True for f in features})
         self._features = new_featureset
         return self._features
@@ -185,9 +194,9 @@ class Fireplace(EfireDevice):
         return self._is_authenticated
 
     @needs_auth
-    async def power(self, state: bool) -> bool:
+    async def power(self, *, on: bool) -> bool:
         result = await self._simple_command(
-            EfireCommand.POWER, PowerState.ON if state else PowerState.OFF
+            EfireCommand.POWER, PowerState.ON if on else PowerState.OFF
         )
 
         self._state.power = result
@@ -195,77 +204,78 @@ class Fireplace(EfireDevice):
 
     @needs_auth
     async def power_on(self) -> bool:
-        return await self.power(True)
+        return await self.power(on=True)
 
     @needs_auth
     async def power_off(self) -> bool:
-        return await self.power(False)
+        return await self.power(on=False)
 
     @needs_auth
     async def set_night_light_brightness(self, brightness: int) -> bool:
-        if not 0 <= brightness <= 6:
-            raise ValueError("Night Light brightness must be between 0 and 6.")
+        if not 0 <= brightness <= MAX_NIGHT_LIGHT_BRIGHTNESS:
+            msg = "Night Light brightness must be between 0 and 6."
+            raise ValueError(msg)
         self._state.night_light_brightness = brightness
         return await self._off_state_command()
 
     @needs_auth
-    async def set_continuous_pilot(self, enable: bool = True) -> bool:
+    async def set_continuous_pilot(self, *, enable: bool = True) -> bool:
         self._state.pilot = enable
         return await self._off_state_command()
 
     @needs_auth
-    async def set_aux(self, enabled: bool) -> bool:
+    async def set_aux(self, *, enabled: bool) -> bool:
         if not self._features.aux:
-            raise FeatureNotSupported(
-                f"Fireplace {self.name} does not support AUX relais control"
-            )
+            msg = f"Fireplace {self.name} does not support AUX relais control"
+            raise FeatureNotSupported(msg)
         self._state.aux = enabled
         return await self._on_state_command()
 
     @needs_auth
     async def set_flame_height(self, flame_height: int) -> bool:
-        if not 0 <= flame_height <= 6:
-            raise ValueError("Flame height must be between 0 and 6.")
+        if not 0 <= flame_height <= MAX_FLAME_HEIGHT:
+            msg = "Flame height must be between 0 and 6."
+            raise ValueError(msg)
         self._state.flame_height = flame_height
         return await self._on_state_command()
 
     @needs_auth
     async def set_blower_speed(self, blower_speed: int) -> bool:
         if not self._features.aux:
-            raise FeatureNotSupported(f"Fireplace {self.name} does not have a blower")
+            msg = f"Fireplace {self.name} does not have a blower"
+            raise FeatureNotSupported(msg)
 
-        if not 0 <= blower_speed <= 6:
-            raise ValueError("Blower speed must be between 0 and 6.")
+        if not 0 <= blower_speed <= MAX_BLOWER_SPEED:
+            msg = "Blower speed must be between 0 and 6."
+            raise ValueError(msg)
         self._state.blower_speed = blower_speed
         return await self._on_state_command()
 
     @needs_auth
-    async def set_split_flow(self, enabled: bool) -> bool:
+    async def set_split_flow(self, *, enabled: bool) -> bool:
         if not self._features.split_flow:
-            raise FeatureNotSupported(
-                f"Fireplace {self.name} does not have split flow valve"
-            )
+            msg = f"Fireplace {self.name} does not have split flow valve"
+            raise FeatureNotSupported(msg)
 
         self._state.split_flow = enabled
         return await self._on_state_command()
 
     @needs_auth
-    async def set_led_mode(self, light_mode: LedMode, state: bool = False) -> bool:
+    async def set_led_mode(self, light_mode: LedMode, *, on: bool = False) -> bool:
         if not self._features.led_lights:
-            raise FeatureNotSupported(
-                f"Fireplace {self.name}does not have LED controller"
-            )
+            msg = f"Fireplace {self.name}does not have LED controller"
+            raise FeatureNotSupported(msg)
         parameter = light_mode.setvalue  # pyright: ignore
 
         # the value to disable modes is the value for enabling it + 5
-        if not state:
+        if not on:
             parameter = parameter + 0x5
 
         result = await self._simple_command(EfireCommand.LED_MODE, parameter)
         return result == ReturnCode.SUCCESS
 
     @needs_auth
-    async def set_timer(self, hours: int, minutes: int, enabled: bool) -> bool:
+    async def set_timer(self, hours: int, minutes: int, *, enabled: bool) -> bool:
         ret_timer = await self._simple_command(
             EfireCommand.TIMER, bytes([hours, minutes, enabled])
         )
@@ -280,34 +290,31 @@ class Fireplace(EfireDevice):
     @needs_auth
     async def set_led_color(self, color: tuple[int, int, int]) -> bool:
         if not self._features.led_lights:
-            raise FeatureNotSupported(
-                f"Fireplace {self.name} does not have LED controller"
-            )
+            msg = f"Fireplace {self.name} does not have LED controller"
+            raise FeatureNotSupported(msg)
 
         return await self._simple_command(
             EfireCommand.LED_COLOR, bytes([color[0], color[1], color[2]])
         )
 
     @needs_auth
-    async def set_led_state(self, state: bool) -> bool:
+    async def set_led_state(self, *, on: bool) -> bool:
         if not self._features.led_lights:
-            raise FeatureNotSupported(
-                f"Fireplace {self.name} does not have LED controller"
-            )
+            msg = f"Fireplace {self.name} does not have LED controller"
+            raise FeatureNotSupported(msg)
 
-        result = await self._simple_command(
+        return await self._simple_command(
             EfireCommand.LED_POWER,
-            LedState.ON.long if state else LedState.OFF.long,  # type: ignore
+            LedState.ON.long if on else LedState.OFF.long,  # type: ignore[attr-defined] # noqa: E501 pylint: disable=no-member
         )
-        return result
 
     @needs_auth
     async def led_on(self) -> bool:
-        return await self.set_led_state(True)
+        return await self.set_led_state(on=True)
 
     @needs_auth
     async def led_off(self) -> bool:
-        return await self.set_led_state(False)
+        return await self.set_led_state(on=False)
 
     @needs_auth
     async def query_aux_control(self) -> AuxControlState:
@@ -331,18 +338,16 @@ class Fireplace(EfireDevice):
         return False
 
     async def reset_password(self) -> bool:
-        result = await self._simple_command(
+        return await self._simple_command(
             EfireCommand.PASSWORD_MGMT, PasswordAction.RESET
         )
-
-        return result
 
     # E0
     @needs_auth
     async def update_led_state(self) -> None:
         result = await self.execute_command(ResponseCode.LED_STATE)
 
-        self._state.led = result == LedState.ON.long  # type:ignore
+        self._state.led = result == LedState.ON.long  # type: ignore[attr-defined] # noqa: E501 pylint: disable=no-member
 
     # E1
     @needs_auth
@@ -364,9 +369,8 @@ class Fireplace(EfireDevice):
         result = await self.execute_command(ResponseCode.OFF_STATE_CMDS)
 
         if result[0] == ReturnCode.FAILURE:
-            raise CommandFailedException(
-                f"Command failed with return code {result.hex()}"
-            )
+            msg = f"Command failed with return code {result.hex()}"
+            raise CommandFailedException(msg)
         (
             self._state.pilot,
             self._state.night_light_brightness,

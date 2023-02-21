@@ -12,15 +12,15 @@ from bonaparte.parser import (
 from .mock_messages import response
 
 
-def test_ble_version_parser():
+def test_ble_version_parser() -> None:
     assert parse_ble_version(response["ble_version"][4:-2]) == "8"
 
 
-def test_led_color_parser():
+def test_led_color_parser() -> None:
     assert parse_led_color(response["led_color_0000ff"][4:-2]) == (0, 2, 255)
 
 
-def test_led_controller_parser():
+def test_led_controller_parser() -> None:
     assert parse_led_controller_state(response["led_controller_state"][4:-2]) == (
         True,
         (0, 0, 255),
@@ -28,17 +28,17 @@ def test_led_controller_parser():
     )
 
 
-def test_mcu_version_parser():
+def test_mcu_version_parser() -> None:
     assert parse_mcu_version(response["mcu_version"][4:-2]) == "1.14"
 
 
-def test_off_state_parser():
+def test_off_state_parser() -> None:
     assert parse_off_state(response["off_state_all_off"][4:-2]) == (False, 0, 0)
 
 
-def test_on_state_parser():
+def test_on_state_parser() -> None:
     assert parse_on_state(response["on_state_all_off"][4:-2]) == (False, False, 0, 0)
 
 
-def test_timer_parser():
+def test_timer_parser() -> None:
     assert parse_timer(response["timer_201455_on"][4:-2]) == ((20, 14, 55), True)

@@ -1,5 +1,5 @@
-import pytest
 from bleak.backends.device import BLEDevice
+import pytest
 
 from bonaparte import Fireplace, FireplaceFeatures
 
@@ -21,7 +21,7 @@ full_invalid_set = {
 partial_invalid_set = {"blower", "foo", "night_light"}
 
 
-def test_full_valid_featureset():
+def test_full_valid_featureset() -> None:
     fireplace_features = FireplaceFeatures()
     fireplace_features.aux = True
     fireplace_features.blower = True
@@ -31,7 +31,7 @@ def test_full_valid_featureset():
     assert fp.set_features(full_valid_set) == fireplace_features
 
 
-def test_partial_valid_featureset():
+def test_partial_valid_featureset() -> None:
     fireplace_features = FireplaceFeatures()
     fireplace_features.aux = False
     fireplace_features.blower = True
@@ -41,14 +41,14 @@ def test_partial_valid_featureset():
     assert fp.set_features(partial_valid_set) == fireplace_features
 
 
-def test_full_invalid_featureset():
+def test_full_invalid_featureset() -> None:
     with pytest.raises(
         ValueError, match="Invalid feature values found in input set: {'foo', 'bar'}"
     ):
         fp.set_features(full_invalid_set)
 
 
-def test_partial_invalid_featureset():
+def test_partial_invalid_featureset() -> None:
     with pytest.raises(
         ValueError, match="Invalid feature value found in input set: {'foo'}"
     ):
