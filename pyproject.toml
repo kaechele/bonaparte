@@ -72,6 +72,10 @@ exclude_lines = [
 [tool.isort]
 profile = "black"
 known_first_party = ["bonaparte", "tests"]
+force_sort_within_sections = true
+forced_separate = [
+    "tests",
+]
 
 [tool.mypy]
 python_version = "3.10"
@@ -96,6 +100,58 @@ allow_untyped_defs = true
 [[tool.mypy.overrides]]
 module = "docs.*"
 ignore_errors = true
+
+[tool.pylint.MAIN]
+py-version = "3.10"
+ignore = [
+    "tests",
+]
+load-plugins = [
+    "pylint.extensions.code_style",
+    "pylint.extensions.typing",
+]
+
+[tool.pylint."MESSAGES CONTROL"]
+disable = [
+    "format",
+    "missing-module-docstring", # no docs yet
+    "missing-class-docstring",
+    "missing-function-docstring",
+    "not-context-manager",
+    "too-few-public-methods",
+    "too-many-ancestors",
+    "too-many-arguments",
+    "too-many-branches",
+    "too-many-instance-attributes",
+    "too-many-lines",
+    "too-many-locals",
+    "too-many-public-methods",
+    "too-many-return-statements",
+    "too-many-statements",
+    "too-many-boolean-expressions",
+    "unused-argument",
+    "wrong-import-order",
+]
+enable = [
+    "useless-suppression",
+    "use-symbolic-message-instead",
+]
+
+[tool.pylint.FORMAT]
+expected-line-ending-format = "LF"
+
+[tool.ruff]
+target-version = "py310"
+exclude = ["docs"]
+select = ["ALL"]
+ignore = ["D","ANN101", "I001", "COM"] # no docs yet
+unfixable = ["ERA"]
+
+# Same as Black.
+line-length = 88
+
+[tool.ruff.per-file-ignores]
+"tests/*" = ["S101"]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
