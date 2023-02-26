@@ -3,7 +3,7 @@ import pytest
 
 from bonaparte import Fireplace, FireplaceFeatures
 
-fp = Fireplace(BLEDevice("aa:bb:cc:dd:ee:ff", "Fireplace", delegate=""), "0000")
+fp = Fireplace(BLEDevice("aa:bb:cc:dd:ee:ff", "Fireplace", delegate=""))
 
 full_valid_set = {"aux", "blower", "led_lights", "night_light", "split_flow"}
 partial_valid_set = {"blower", "night_light"}

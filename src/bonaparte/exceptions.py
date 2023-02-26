@@ -27,3 +27,7 @@ class ResponseError(EfireException):
 
 class EfireMessageValueError(ValueError):
     pass
+
+
+class CharacteristicMissingError(EfireException):
+    pass

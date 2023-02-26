@@ -16,7 +16,6 @@ from .const import (
     PasswordAction,
     PasswordCommandResult,
     PowerState,
-    ResponseCode,
     ReturnCode,
 )
 from .device import EfireDevice
@@ -45,7 +44,7 @@ T = TypeVar("T")
 def needs_auth(
     func: Callable[Concatenate[Fireplace, P], Awaitable[T]]
 ) -> Callable[Concatenate[Fireplace, P], Awaitable[T]]:
-    """Define a wrapper to authenticate if we aren't yet."""
+    """Define a wrapper to authenticate if we aren't yet authenticated."""
 
     async def _authenticated_operation(
         self: Fireplace, *args: P.args, **kwargs: P.kwargs
@@ -77,6 +76,7 @@ class FireplaceFeatures:
     led_lights: bool = False
     night_light: bool = False
     split_flow: bool = False
+    timer: bool = False
 
 
 @dataclass
@@ -101,19 +101,26 @@ class FireplaceState:
 
 class Fireplace(EfireDevice):
     _features: FireplaceFeatures
+    _is_authenticated: bool
     _state: FireplaceState
+    _password: str
 
     def __init__(
         self,
         ble_device: BLEDevice,
-        password: str,
         features: FireplaceFeatures | None = None,
     ) -> None:
         super().__init__(ble_device)
 
-        self._password = password
         self._features = features if features else FireplaceFeatures()
+        self._is_authenticated = False
         self._state = FireplaceState()
+        self._disconnect_callbacks: list[Callable[[Fireplace], None]] = []
+
+        def disconnected_callback(self: Fireplace) -> None:
+            self._is_authenticated = False
+
+        self._register_disconnect_callback(disconnected_callback)
 
     @property
     def has_aux(self) -> bool:
@@ -135,6 +142,10 @@ class Fireplace(EfireDevice):
     def has_split_flow(self) -> bool:
         return self._features.split_flow
 
+    @property
+    def state(self) -> FireplaceState:
+        return self._state
+
     def set_features(self, features: set[str]) -> FireplaceFeatures:
         feature_set = {field.name for field in dc_fields(self._features)}
         if not feature_set >= features:
@@ -153,21 +164,23 @@ class Fireplace(EfireDevice):
     ) -> bool:
         result = await self.execute_command(command, parameter)
 
-        return result == ReturnCode.SUCCESS
+        return result[0] == ReturnCode.SUCCESS
 
-    async def _off_state_command(self) -> bool:
+    async def _ifc_cmd1(self) -> bool:
         payload = bytearray(
             [
                 0x0,
-                1 | (self._state.night_light_brightness << 4) | self._state.pilot << 7,
+                self._state.main_mode << 1
+                | (self._state.night_light_brightness << 4)
+                | self._state.pilot << 7,
             ]
         )
-        result = await self._simple_command(EfireCommand.OFF_STATE_CMDS, payload)
+        result = await self._simple_command(EfireCommand.SET_IFC_CMD1, payload)
 
         _LOGGER.debug("[%s]: Off State command result: %s", self.name, result)
         return result
 
-    async def _on_state_command(self) -> bool:
+    async def _ifc_cmd2(self) -> bool:
         data = (
             (self._state.split_flow << 7)
             | (self._state.blower_speed << 4)
@@ -175,7 +188,7 @@ class Fireplace(EfireDevice):
             | self._state.flame_height
         )
         payload = bytearray([0x0, data])
-        result = await self._simple_command(EfireCommand.ON_STATE_CMDS, payload)
+        result = await self._simple_command(EfireCommand.SET_IFC_CMD2, payload)
 
         _LOGGER.debug("[%s]: On State command result: %s", self.name, result)
         return result
@@ -187,6 +200,7 @@ class Fireplace(EfireDevice):
         self._is_authenticated = False
         if response[0] == PasswordCommandResult.LOGIN_SUCCESS:
             _LOGGER.debug("[%s]: Login successful", self.name)
+            self._password = password
             self._is_authenticated = True
         elif response[0] == PasswordCommandResult.INVALID_PASSWORD:
             _LOGGER.debug("[%s]: Invalid password", self.name)
@@ -196,10 +210,13 @@ class Fireplace(EfireDevice):
     @needs_auth
     async def power(self, *, on: bool) -> bool:
         result = await self._simple_command(
-            EfireCommand.POWER, PowerState.ON if on else PowerState.OFF
+            EfireCommand.SET_POWER, PowerState.ON if on else PowerState.OFF
         )
 
         self._state.power = result
+        if not on:
+            self._state.blower_speed = 0
+            self._state.flame_height = 0
         return result
 
     @needs_auth
@@ -216,12 +233,12 @@ class Fireplace(EfireDevice):
             msg = "Night Light brightness must be between 0 and 6."
             raise ValueError(msg)
         self._state.night_light_brightness = brightness
-        return await self._off_state_command()
+        return await self._ifc_cmd1()
 
     @needs_auth
-    async def set_continuous_pilot(self, *, enable: bool = True) -> bool:
-        self._state.pilot = enable
-        return await self._off_state_command()
+    async def set_continuous_pilot(self, *, enabled: bool = True) -> bool:
+        self._state.pilot = enabled
+        return await self._ifc_cmd1()
 
     @needs_auth
     async def set_aux(self, *, enabled: bool) -> bool:
@@ -229,7 +246,7 @@ class Fireplace(EfireDevice):
             msg = f"Fireplace {self.name} does not support AUX relais control"
             raise FeatureNotSupported(msg)
         self._state.aux = enabled
-        return await self._on_state_command()
+        return await self._ifc_cmd2()
 
     @needs_auth
     async def set_flame_height(self, flame_height: int) -> bool:
@@ -237,7 +254,7 @@ class Fireplace(EfireDevice):
             msg = "Flame height must be between 0 and 6."
             raise ValueError(msg)
         self._state.flame_height = flame_height
-        return await self._on_state_command()
+        return await self._ifc_cmd2()
 
     @needs_auth
     async def set_blower_speed(self, blower_speed: int) -> bool:
@@ -249,7 +266,7 @@ class Fireplace(EfireDevice):
             msg = "Blower speed must be between 0 and 6."
             raise ValueError(msg)
         self._state.blower_speed = blower_speed
-        return await self._on_state_command()
+        return await self._ifc_cmd2()
 
     @needs_auth
     async def set_split_flow(self, *, enabled: bool) -> bool:
@@ -258,7 +275,7 @@ class Fireplace(EfireDevice):
             raise FeatureNotSupported(msg)
 
         self._state.split_flow = enabled
-        return await self._on_state_command()
+        return await self._ifc_cmd2()
 
     @needs_auth
     async def set_led_mode(self, light_mode: LedMode, *, on: bool = False) -> bool:
@@ -271,13 +288,13 @@ class Fireplace(EfireDevice):
         if not on:
             parameter = parameter + 0x5
 
-        result = await self._simple_command(EfireCommand.LED_MODE, parameter)
+        result = await self._simple_command(EfireCommand.SET_LED_MODE, parameter)
         return result == ReturnCode.SUCCESS
 
     @needs_auth
     async def set_timer(self, hours: int, minutes: int, *, enabled: bool) -> bool:
         ret_timer = await self._simple_command(
-            EfireCommand.TIMER, bytes([hours, minutes, enabled])
+            EfireCommand.SET_TIMER, bytes([hours, minutes, enabled])
         )
         # Not entirely sure what the following does. But this mimics what the app
         # would send
@@ -294,7 +311,7 @@ class Fireplace(EfireDevice):
             raise FeatureNotSupported(msg)
 
         return await self._simple_command(
-            EfireCommand.LED_COLOR, bytes([color[0], color[1], color[2]])
+            EfireCommand.SET_LED_COLOR, bytes([color[0], color[1], color[2]])
         )
 
     @needs_auth
@@ -304,8 +321,10 @@ class Fireplace(EfireDevice):
             raise FeatureNotSupported(msg)
 
         return await self._simple_command(
-            EfireCommand.LED_POWER,
-            LedState.ON.long if on else LedState.OFF.long,  # type: ignore[attr-defined] # noqa: E501 pylint: disable=no-member
+            EfireCommand.SET_LED_POWER,
+            LedState.ON.long  # type: ignore[attr-defined] # pylint: disable=no-member
+            if on
+            else LedState.OFF.long,  # type: ignore[attr-defined] # pylint: disable=no-member   # noqa: E501
         )
 
     @needs_auth
@@ -318,7 +337,7 @@ class Fireplace(EfireDevice):
 
     @needs_auth
     async def query_aux_control(self) -> AuxControlState:
-        result = await self.execute_command(EfireCommand.QUERY_AUX_CTRL)
+        result = await self.execute_command(EfireCommand.GET_AUX_CTRL)
         _LOGGER.debug("[%s]: Aux Control State: %x", self.name, result)
         return AuxControlState(int.from_bytes(result, "big"))
 
@@ -345,28 +364,31 @@ class Fireplace(EfireDevice):
     # E0
     @needs_auth
     async def update_led_state(self) -> None:
-        result = await self.execute_command(ResponseCode.LED_STATE)
+        result = await self.execute_command(EfireCommand.GET_LED_STATE)
 
-        self._state.led = result == LedState.ON.long  # type: ignore[attr-defined] # noqa: E501 pylint: disable=no-member
+        self._state.led = (
+            result
+            == LedState.ON.long  # type: ignore[attr-defined] # pylint: disable=no-member  # noqa: E501
+        )
 
     # E1
     @needs_auth
     async def update_led_color(self) -> None:
-        result = await self.execute_command(ResponseCode.LED_COLOR)
+        result = await self.execute_command(EfireCommand.GET_LED_COLOR)
 
         self._state.led_color = parse_led_color(result)
 
     # E2
     @needs_auth
     async def update_led_controller_mode(self) -> None:
-        result = await self.execute_command(ResponseCode.LED_MODE)
+        result = await self.execute_command(EfireCommand.GET_LED_MODE)
 
         self._state.led_mode = LedMode(int.from_bytes(result, "big"))  # pyright: ignore
 
     # E3
     @needs_auth
     async def update_off_state_settings(self) -> None:
-        result = await self.execute_command(ResponseCode.OFF_STATE_CMDS)
+        result = await self.execute_command(EfireCommand.GET_IFC_CMD1_STATE)
 
         if result[0] == ReturnCode.FAILURE:
             msg = f"Command failed with return code {result.hex()}"
@@ -380,7 +402,7 @@ class Fireplace(EfireDevice):
     # E4
     @needs_auth
     async def update_on_state_settings(self) -> None:
-        result = await self.execute_command(ResponseCode.ON_STATE_CMDS)
+        result = await self.execute_command(EfireCommand.GET_IFC_CMD2_STATE)
         (
             self._state.split_flow,
             self._state.aux,
@@ -391,20 +413,20 @@ class Fireplace(EfireDevice):
     # E6
     @needs_auth
     async def update_timer_state(self) -> None:
-        result = await self.execute_command(ResponseCode.TIMER)
+        result = await self.execute_command(EfireCommand.GET_TIMER)
         self._state.time_left, self._state.timer = parse_timer(result)
 
     # E7
     @needs_auth
     async def update_power_state(self) -> None:
-        result = await self.execute_command(ResponseCode.POWER_STATE)
+        result = await self.execute_command(EfireCommand.GET_POWER_STATE)
 
-        self._state.power = result == PowerState.ON
+        self._state.power = result[0] == PowerState.ON
 
     # EB
     @needs_auth
     async def update_led_controller_state(self) -> None:
-        result = await self.execute_command(ResponseCode.LED_CONTROLLER_STATE)
+        result = await self.execute_command(EfireCommand.GET_LED_CONTROLLER_STATE)
 
         (
             self._state.led,
@@ -415,21 +437,21 @@ class Fireplace(EfireDevice):
     # EE
     @needs_auth
     async def update_remote_usage(self) -> None:
-        result = await self.execute_command(ResponseCode.REMOTE_USAGE)
+        result = await self.execute_command(EfireCommand.GET_REMOTE_USAGE)
 
         self._state.remote_in_use = result == AuxControlState.USED
 
     # F2
     @needs_auth
     async def query_ble_version(self) -> str:
-        result = await self.execute_command(EfireCommand.BLE_VERSION)
+        result = await self.execute_command(EfireCommand.GET_BLE_VERSION)
 
         return parse_ble_version(result)
 
     # F3
     @needs_auth
     async def query_mcu_version(self) -> str:
-        result = await self.execute_command(EfireCommand.MCU_VERSION)
+        result = await self.execute_command(EfireCommand.GET_MCU_VERSION)
 
         return parse_mcu_version(result)
 
@@ -437,11 +459,13 @@ class Fireplace(EfireDevice):
         await self.update_off_state_settings()
         await self.update_on_state_settings()
         await self.update_power_state()
-        await self.update_timer_state()
+        if self._features.timer:
+            await self.update_timer_state()
         if self._features.led_lights:
             await self.update_led_state()
             await self.update_led_color()
             await self.update_led_controller_mode()
 
+    async def update_firmware_version(self) -> None:
         self._state.mcu_version = await self.query_mcu_version()
         self._state.ble_version = await self.query_ble_version()

@@ -35,46 +35,39 @@ class Feature(StrEnum):
     LED_LIGHTS = "led_lights"
     NIGHT_LIGHT = "night_light"
     SPLIT_FLOW = "split_flow"
+    TIMER = "timer"
 
 
 class EfireCommand(IntEnum):
     """Command names to hex value Enum Class."""
 
-    OFF_STATE_CMDS = 0x27
-    ON_STATE_CMDS = 0x28
+    SET_IFC_CMD1 = 0x27
+    SET_IFC_CMD2 = 0x28
     RESET_PASSWORD = 0x3F
-    LED_POWER = 0xB1
-    LED_COLOR = 0xC1
-    TIMER = 0xC3
-    POWER = 0xC4
+    SET_LED_POWER = 0xB1
+    SET_LED_COLOR = 0xC1
+    SET_TIMER = 0xC3
+    SET_POWER = 0xC4
     SEND_PASSWORD = 0xC5
     PASSWORD_MGMT = 0xC6
     SYNC_TIME = 0xC7
-    LED_MODE = 0xF1
-    BLE_VERSION = 0xF2
-    MCU_VERSION = 0xF3
-    QUERY_AUX_CTRL = 0xF4
-    SET_PASSWORD = 0xF5
-
-
-class ResponseCode(IntEnum):
-    """Response type names to hex value Enum Class."""
-
-    PASSWORD_ACTION = 0xC5
-    LED_STATE = 0xE0
-    LED_COLOR = 0xE1
-    LED_MODE = 0xE2
-    OFF_STATE_CMDS = 0xE3
-    ON_STATE_CMDS = 0xE4
-    TIMER = 0xE6
-    POWER_STATE = 0xE7
+    GET_LED_STATE = 0xE0
+    GET_LED_COLOR = 0xE1
+    GET_LED_MODE = 0xE2
+    GET_IFC_CMD1_STATE = 0xE3
+    GET_IFC_CMD2_STATE = 0xE4
+    GET_TIMER = 0xE6
+    GET_POWER_STATE = 0xE7
     PASSWORD_READ = 0xE8
     PASSWORD_SET = 0xE9
     TIME_SYNC = 0xEA
-    LED_CONTROLLER_STATE = 0xEB  # never appears
-    REMOTE_USAGE = 0xEE
-    BLE_VERSION = 0xF2
-    MCU_VERSION = 0xF3
+    GET_LED_CONTROLLER_STATE = 0xEB  # has not been seen while reverse engineering
+    GET_REMOTE_USAGE = 0xEE
+    SET_LED_MODE = 0xF1
+    GET_BLE_VERSION = 0xF2
+    GET_MCU_VERSION = 0xF3
+    GET_AUX_CTRL = 0xF4
+    SET_PASSWORD = 0xF5
 
 
 class ReturnCode(IntEnum):
@@ -111,12 +104,14 @@ class PasswordSetResult(IntEnum):
 
 class LedState(MultiValueEnum):
     _init_ = "short long"
+
     OFF = 0x00, "0x000000"
     ON = 0xFF, 0xFFFFFF
 
 
 class LedMode(MultiValueEnum):
     _init_ = "short long setvalue"
+
     CYCLE = 0x01, 0x010101, 0x20
     HOLD = 0x02, 0x020202, 0x30
     EMBER_BED = 0xFF, 0xFFFFFF, 0x10
