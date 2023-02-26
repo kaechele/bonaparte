@@ -114,9 +114,6 @@ load-plugins = [
 [tool.pylint."MESSAGES CONTROL"]
 disable = [
     "format",
-    "missing-module-docstring", # no docs yet
-    "missing-class-docstring",
-    "missing-function-docstring",
     "not-context-manager",
     "too-few-public-methods",
     "too-many-ancestors",
@@ -142,9 +139,11 @@ expected-line-ending-format = "LF"
 
 [tool.ruff]
 target-version = "py310"
-exclude = ["docs"]
+exclude = ["docs", "setup.py"]
+
+# Let's tone this down once we release the first version
 select = ["ALL"]
-ignore = ["D","ANN101", "I001", "COM"] # no docs yet
+ignore = ["ANN101", "I001", "COM"]
 unfixable = ["ERA"]
 
 # Same as Black.

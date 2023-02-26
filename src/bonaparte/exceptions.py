@@ -1,33 +1,30 @@
+"""Exceptions used in the Bonaparte library."""
 from __future__ import annotations
 
 
 class EfireException(Exception):  # noqa: N818
-    pass
+    """Generic eFIRE device exception."""
 
 
 class AuthError(EfireException):
-    pass
+    """For when authentication fails."""
 
 
 class CommandFailedException(EfireException):
-    pass
+    """For when a command returns a failure."""
 
 
 class DisconnectedException(EfireException):
-    pass
+    """For when the device is disconnected and we try to use it."""
 
 
 class FeatureNotSupported(EfireException):
-    pass
-
-
-class ResponseError(EfireException):
-    pass
+    """For when a feature is accessed that the device is not set up for."""
 
 
 class EfireMessageValueError(ValueError):
-    pass
+    """For when an invalid message is received or generated."""
 
 
 class CharacteristicMissingError(EfireException):
-    pass
+    """For when a required BLE GATT characteristic is missing."""

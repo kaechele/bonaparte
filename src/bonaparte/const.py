@@ -1,3 +1,5 @@
+"""Constants for Napoleon eFIRE devices."""
+
 from __future__ import annotations
 
 from enum import IntEnum
@@ -30,6 +32,8 @@ MODEL_NBR_UUID = _BASE_UUID.format("2a00")
 
 
 class Feature(StrEnum):
+    """Enum encapsulating possible device features."""
+
     AUX = "aux"
     BLOWER = "blower"
     LED_LIGHTS = "led_lights"
@@ -39,7 +43,7 @@ class Feature(StrEnum):
 
 
 class EfireCommand(IntEnum):
-    """Command names to hex value Enum Class."""
+    """Enum encapsulating device commands and their raw hex values."""
 
     SET_IFC_CMD1 = 0x27
     SET_IFC_CMD2 = 0x28
@@ -71,26 +75,36 @@ class EfireCommand(IntEnum):
 
 
 class ReturnCode(IntEnum):
+    """Enum encapsulating command return codes."""
+
     SUCCESS = 0x00
     FAILURE = 0x01
 
 
 class PowerState(IntEnum):
+    """Enum encapsulating device power states."""
+
     OFF = 0x00
     ON = 0xFF
 
 
 class AuxControlState(IntEnum):
+    """Enum encapsulating return values for remote control use."""
+
     USED = 0x00
     NOT_USED = 0xFF
 
 
 class PasswordAction(IntEnum):
+    """Enum encapsulating the values for password actions."""
+
     RESET = 0x3F
     SET = 0xF5
 
 
 class PasswordCommandResult(IntEnum):
+    """Enum encapsulating possible return values for password actions."""
+
     SET_SUCCESS = 0x00
     SET_FAILED = 0x01
     INVALID_PASSWORD = 0x19
@@ -98,11 +112,15 @@ class PasswordCommandResult(IntEnum):
 
 
 class PasswordSetResult(IntEnum):
+    """Enum encapsulating return values for authentication requests."""
+
     FAILED = 0x25
     SUCCESS = 0x53
 
 
 class LedState(MultiValueEnum):
+    """Enum encapsulating LED controller state."""
+
     _init_ = "short long"
 
     OFF = 0x00, "0x000000"
@@ -110,6 +128,8 @@ class LedState(MultiValueEnum):
 
 
 class LedMode(MultiValueEnum):
+    """Enum encapsulating LED controller modes."""
+
     _init_ = "short long setvalue"
 
     CYCLE = 0x01, 0x010101, 0x20

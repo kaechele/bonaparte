@@ -1,3 +1,4 @@
+"""Miscellaneous tests."""
 from bleak.backends.device import BLEDevice
 import pytest
 
@@ -5,7 +6,7 @@ from bonaparte import Fireplace, FireplaceFeatures
 
 fp = Fireplace(BLEDevice("aa:bb:cc:dd:ee:ff", "Fireplace", delegate=""))
 
-full_valid_set = {"aux", "blower", "led_lights", "night_light", "split_flow"}
+full_valid_set = {"aux", "blower", "led_lights", "night_light", "split_flow", "timer"}
 partial_valid_set = {"blower", "night_light"}
 
 full_invalid_set = {
@@ -16,11 +17,13 @@ full_invalid_set = {
     "night_light",
     "bar",
     "split_flow",
+    "timer",
 }
 partial_invalid_set = {"blower", "foo", "night_light"}
 
 
 def test_full_valid_featureset() -> None:
+    """Test a set of all features that is valid."""
     fireplace_features = FireplaceFeatures()
     fireplace_features.aux = True
     fireplace_features.blower = True
@@ -31,6 +34,7 @@ def test_full_valid_featureset() -> None:
 
 
 def test_partial_valid_featureset() -> None:
+    """Test a partial set of features that is valid."""
     fireplace_features = FireplaceFeatures()
     fireplace_features.aux = False
     fireplace_features.blower = True
@@ -41,6 +45,7 @@ def test_partial_valid_featureset() -> None:
 
 
 def test_full_invalid_featureset() -> None:
+    """Test a set of all features that also has invalid entries."""
     with pytest.raises(
         ValueError,
         match=r"Invalid feature values found in input set: {'(foo|bar)', '(foo|bar)'}",
@@ -49,6 +54,7 @@ def test_full_invalid_featureset() -> None:
 
 
 def test_partial_invalid_featureset() -> None:
+    """Test a partial set of features that also has invalid entries."""
     with pytest.raises(
         ValueError, match="Invalid feature value found in input set: {'foo'}"
     ):

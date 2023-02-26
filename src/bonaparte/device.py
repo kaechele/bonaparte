@@ -1,3 +1,5 @@
+"""A generic device class for Napoleon eFIRE devices."""
+
 from __future__ import annotations
 
 import asyncio
@@ -65,6 +67,8 @@ def raise_if_not_connected(
 
 
 class EfireDevice:
+    """A generic eFIRE Device."""
+
     _ble_device: BLEDevice
     _client: BleakClientWithServiceCache | None = None
     _connect_lock: asyncio.Lock
@@ -80,6 +84,7 @@ class EfireDevice:
     def __init__(
         self, ble_device: BLEDevice, advertisement_data: AdvertisementData | None = None
     ) -> None:
+        """Initialize the eFIRE Device."""
         self._address = ble_device.address
         self._advertisement_data = advertisement_data
         self._ble_device = ble_device
@@ -94,15 +99,17 @@ class EfireDevice:
 
     @property
     def name(self) -> str:
+        """Device name or, if unavailable, the device address."""
         return self._ble_device.name or self._ble_device.address
 
     @property
     def address(self) -> str:
+        """The device's Bluetooth MAC address."""
         return self._address
 
     @property
     def rssi(self) -> int | None:
-        """Get the rssi of the device."""
+        """Get the RSSI of the device."""
         if self._advertisement_data:
             return self._advertisement_data.rssi
         return None
@@ -110,13 +117,12 @@ class EfireDevice:
     def set_ble_device_and_advertisement_data(
         self, ble_device: BLEDevice, advertisement_data: AdvertisementData
     ) -> None:
-        """Set the ble device and advertisement data."""
+        """Set the BLE Device and advertisement data."""
         self._ble_device = ble_device
         self._advertisement_data = advertisement_data
 
     async def _ensure_connected(self) -> None:
-        """Connects to the device."""
-
+        """Connect to the device and ensure we stay connected."""
         if self._connect_lock.locked():
             _LOGGER.debug(
                 (
@@ -169,7 +175,7 @@ class EfireDevice:
         if not self._loop:
             self._loop = asyncio.get_running_loop()
         self._disconnect_timer = self._loop.call_later(
-            DISCONNECT_DELAY, self._disconnect
+            DISCONNECT_DELAY, self._timed_disconnect
         )
 
     def _disconnected(self, _client: BleakClientWithServiceCache) -> None:
@@ -196,12 +202,7 @@ class EfireDevice:
         self._disconnect_callbacks.append(callback)
         return unregister
 
-    async def disconnect(self) -> None:
-        """Disconnect the Fireplace."""
-        _LOGGER.debug("%s: Stop", self.name)
-        await self._execute_disconnect()
-
-    def _disconnect(self) -> Task[None]:
+    def _timed_disconnect(self) -> Task[None]:
         """Disconnect from device."""
         self._disconnect_timer = None
         return asyncio.create_task(self._execute_timed_disconnect())
@@ -213,10 +214,10 @@ class EfireDevice:
             self.name,
             DISCONNECT_DELAY,
         )
-        await self._execute_disconnect()
+        await self.disconnect()
 
-    async def _execute_disconnect(self) -> None:
-        """Execute disconnection."""
+    async def disconnect(self) -> None:
+        """Disconnect from device."""
         async with self._connect_lock:
             read_char = self._read_char
             client = self._client
@@ -290,7 +291,6 @@ class EfireDevice:
     @retry_bluetooth_connection_error(DEFAULT_ATTEMPTS)
     async def _execute_locked(self, message: bytes | bytearray) -> bytes:
         """Send command to device and read response."""
-
         if not self._write_char:
             msg = "Write characteristic missing"
             raise CharacteristicMissingError(msg)
@@ -315,14 +315,14 @@ class EfireDevice:
                 BLEAK_BACKOFF_TIME,
                 ex,
             )
-            await self._execute_disconnect()
+            await self.disconnect()
             raise
         except BleakError as ex:
             # Disconnect so we can reset state and try again
             _LOGGER.debug(
                 "%s: RSSI: %s; Disconnecting due to error: %s", self.name, self.rssi, ex
             )
-            await self._execute_disconnect()
+            await self.disconnect()
             raise
         return result
 
@@ -331,7 +331,6 @@ class EfireDevice:
         message: bytes | bytearray,
     ) -> bytes:
         """Send command to device and read response."""
-
         await self._ensure_connected()
 
         _LOGGER.debug(
@@ -375,6 +374,7 @@ class EfireDevice:
     async def execute_command(
         self, command: int, parameter: int | bytes | bytearray | None = None
     ) -> bytes:
+        """Execute a command on the device."""
         payload = bytearray([command])
 
         if parameter:
