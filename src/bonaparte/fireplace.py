@@ -285,6 +285,21 @@ class Fireplace(EfireDevice):
         if not 0 <= flame_height <= MAX_FLAME_HEIGHT:
             msg = "Flame height must be between 0 and 6."
             raise ValueError(msg)
+        # The eFIRE controller does not set the on state if we change
+        # flame height from 0 to a non-zero value. However, the IFC
+        # will ignite the burner and set the requested flame height.
+        # To maintain consistent state we force the eFIRE controller on.
+        # This has the annoying side-effect that flame height will be
+        # set to max before being set to the desired value shortly after.
+        if self._state.flame_height == 0 and flame_height > 0:
+            _LOGGER.debug(
+                (
+                    "%s: Turning on via flame_height setting, forcing controller on as"
+                    " well"
+                ),
+                self.name,
+            )
+            await self.power_on()
         self._state.flame_height = flame_height
         return await self._ifc_cmd2()
 
