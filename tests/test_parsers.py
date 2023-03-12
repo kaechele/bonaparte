@@ -38,18 +38,29 @@ def test_mcu_version_parser() -> None:
     assert parse_mcu_version(response["mcu_version"][4:-2]) == "1.14"
 
 
-def test_off_state_parser() -> None:
+def test_cmd1_state_parser() -> None:
     """Test parsing the power off state from a known message."""
-    assert parse_ifc_cmd1_state(response["off_state_all_off"][4:-2]) == (False, 0, 0)
+    assert parse_ifc_cmd1_state(response["cmd1_state_all_off"][4:-2]) == (
+        False,
+        False,
+        0,
+        0,
+    )
+    assert parse_ifc_cmd1_state(response["cmd1_state_power_on"][4:-2]) == (
+        True,
+        False,
+        0,
+        0,
+    )
 
 
-def test_on_state_parser() -> None:
+def test_cmd2_state_parser() -> None:
     """Test parsing the on state from a known message."""
-    assert parse_ifc_cmd2_state(response["on_state_all_off"][4:-2]) == (
-        False,
-        False,
+    assert parse_ifc_cmd2_state(response["cmd2_state_all_off"][4:-2]) == (
         0,
         0,
+        False,
+        False,
     )
 
 

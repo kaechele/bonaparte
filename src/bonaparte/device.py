@@ -271,7 +271,7 @@ class EfireDevice:
         _LOGGER.debug(
             "%s: Receiving response via notify: %s (expected=%s)",
             self.name,
-            message.hex(),
+            message.hex(" "),
             bool(self._notify_future),
         )
 
@@ -336,7 +336,7 @@ class EfireDevice:
         _LOGGER.debug(
             "%s: Sending message %s",
             self.name,
-            message.hex(),
+            message.hex(" "),
         )
         if self._write_lock.locked():
             _LOGGER.debug(

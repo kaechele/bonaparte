@@ -30,6 +30,7 @@ def test_full_valid_featureset() -> None:
     fireplace_features.led_lights = True
     fireplace_features.night_light = True
     fireplace_features.split_flow = True
+    fireplace_features.timer = True
     assert fp.set_features(full_valid_set) == fireplace_features
 
 
@@ -41,6 +42,7 @@ def test_partial_valid_featureset() -> None:
     fireplace_features.led_lights = False
     fireplace_features.night_light = True
     fireplace_features.split_flow = False
+    fireplace_features.timer = False
     assert fp.set_features(partial_valid_set) == fireplace_features
 
 

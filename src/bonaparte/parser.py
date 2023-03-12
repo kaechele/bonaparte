@@ -14,21 +14,22 @@ def parse_mcu_version(payload: bytes | bytearray) -> str:
     return f"{payload[0]}.{payload[1]}{payload[2]}"
 
 
-def parse_ifc_cmd1_state(payload: bytes | bytearray) -> tuple[bool, int, int]:
+def parse_ifc_cmd1_state(payload: bytes | bytearray) -> tuple[bool, bool, int, bool]:
     """Parse the fireplace state from an IFC CMD1 response."""
     pilot = bool((payload[1] >> 7) & 1)
     night_light = (payload[1] >> 4) & 7
-    main_mode = payload[1] & 2
-    return pilot, night_light, main_mode
+    thermostat = bool((payload[1] >> 1) & 2)
+    power = bool(payload[1] & 1)
+    return power, thermostat, night_light, pilot
 
 
-def parse_ifc_cmd2_state(payload: bytes | bytearray) -> tuple[bool, bool, int, int]:
+def parse_ifc_cmd2_state(payload: bytes | bytearray) -> tuple[int, int, bool, bool]:
     """Parse the fireplace state from an IFC CMD2 response."""
     split_flow = bool((payload[1] >> 7) & 1)
-    aux = bool((payload[1] >> 3) & 1)
     blower_speed = (payload[1] >> 4) & 7
+    aux = bool((payload[1] >> 3) & 1)
     flame_height = payload[1] & 7
-    return split_flow, aux, blower_speed, flame_height
+    return flame_height, blower_speed, aux, split_flow
 
 
 def parse_timer(payload: bytes | bytearray) -> tuple[tuple[int, int, int], bool]:

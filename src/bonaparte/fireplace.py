@@ -98,6 +98,7 @@ class FireplaceState:
     power: bool = False
     remote_in_use: bool = False
     split_flow: bool = False
+    thermostat: bool = False
     time_left: tuple[int, int, int] = (0, 0, 0)
     timer: bool = False
     mcu_version: str = ""
@@ -187,9 +188,10 @@ class Fireplace(EfireDevice):
         payload = bytearray(
             [
                 0x0,
-                self._state.main_mode << 1
+                self._state.power
+                | (self._state.thermostat << 1)
                 | (self._state.night_light_brightness << 4)
-                | self._state.pilot << 7,
+                | (self._state.pilot << 7),
             ]
         )
         result = await self._simple_command(EfireCommand.SET_IFC_CMD1, payload)
@@ -234,9 +236,13 @@ class Fireplace(EfireDevice):
         )
 
         self._state.power = result
-        if not on:
+        if on:
+            await self._ifc_cmd1()
+        else:
             self._state.blower_speed = 0
             self._state.flame_height = 0
+            await self._ifc_cmd1()
+            await self._ifc_cmd2()
         return result
 
     @needs_auth
@@ -436,9 +442,10 @@ class Fireplace(EfireDevice):
             msg = f"Command failed with return code {result.hex()}"
             raise CommandFailedException(msg)
         (
-            self._state.pilot,
+            _,  # power state is handled separately for eFIRE
+            self._state.thermostat,  # thermostat is not used with eFIRE
             self._state.night_light_brightness,
-            self._state.main_mode,
+            self._state.pilot,
         ) = parse_ifc_cmd1_state(result)
 
     # E4
@@ -447,10 +454,10 @@ class Fireplace(EfireDevice):
         """Update the state of the IFC CMD1 functions."""
         result = await self.execute_command(EfireCommand.GET_IFC_CMD2_STATE)
         (
-            self._state.split_flow,
-            self._state.aux,
-            self._state.blower_speed,
             self._state.flame_height,
+            self._state.blower_speed,
+            self._state.aux,
+            self._state.split_flow,
         ) = parse_ifc_cmd2_state(result)
 
     # E6
