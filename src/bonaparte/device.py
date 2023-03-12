@@ -126,7 +126,7 @@ class EfireDevice:
         if self._connect_lock.locked():
             _LOGGER.debug(
                 (
-                    "%s: Connection already in progress, waiting for it to complete;"
+                    "[%s]: Connection already in progress, waiting for it to complete;"
                     " RSSI: %s"
                 ),
                 self.name,
@@ -142,7 +142,7 @@ class EfireDevice:
             if self._client and self._client.is_connected:
                 self._reset_disconnect_timer()
                 return
-            _LOGGER.debug("%s: Connecting; RSSI: %s", self.name, self.rssi)
+            _LOGGER.debug("[%s]: Connecting; RSSI: %s", self.name, self.rssi)
             client = await establish_connection(
                 BleakClientWithServiceCache,
                 self._ble_device,
@@ -151,7 +151,7 @@ class EfireDevice:
                 use_services_cache=True,
                 ble_device_callback=lambda: self._ble_device,
             )
-            _LOGGER.debug("%s: Connected; RSSI: %s", self.name, self.rssi)
+            _LOGGER.debug("[%s]: Connected; RSSI: %s", self.name, self.rssi)
             self._write_char = client.services.get_characteristic(WRITE_CHAR_UUID)
             self._read_char = client.services.get_characteristic(READ_CHAR_UUID)
 
@@ -159,7 +159,7 @@ class EfireDevice:
             self._reset_disconnect_timer()
 
             _LOGGER.debug(
-                "%s: Subscribe to notifications; RSSI: %s", self.name, self.rssi
+                "[%s]: Subscribe to notifications; RSSI: %s", self.name, self.rssi
             )
 
             if self._read_char is None:
@@ -182,11 +182,11 @@ class EfireDevice:
         """Disconnected callback."""
         if self._expected_disconnect:
             _LOGGER.debug(
-                "%s: Disconnected from device; RSSI: %s", self.name, self.rssi
+                "[%s]: Disconnected from device; RSSI: %s", self.name, self.rssi
             )
             return
         _LOGGER.warning(
-            "%s: Device unexpectedly disconnected; RSSI: %s",
+            "[%s]: Device unexpectedly disconnected; RSSI: %s",
             self.name,
             self.rssi,
         )
@@ -210,7 +210,7 @@ class EfireDevice:
     async def _execute_timed_disconnect(self) -> None:
         """Execute timed disconnection."""
         _LOGGER.debug(
-            "%s: Disconnecting after timeout of %s",
+            "[%s]: Disconnecting after timeout of %s",
             self.name,
             DISCONNECT_DELAY,
         )
@@ -269,7 +269,7 @@ class EfireDevice:
         self, _char: BleakGATTCharacteristic, message: bytearray
     ) -> None:
         _LOGGER.debug(
-            "%s: Receiving response via notify: %s (expected=%s)",
+            "[%s]: Receiving response via notify: %s (expected=%s)",
             self.name,
             message.hex(" "),
             bool(self._notify_future),
@@ -309,7 +309,7 @@ class EfireDevice:
             # Disconnect so we can reset state and try again
             await asyncio.sleep(BLEAK_BACKOFF_TIME)
             _LOGGER.debug(
-                "%s: RSSI: %s; Backing off %ss; Disconnecting due to error: %s",
+                "[%s]: RSSI: %s; Backing off %ss; Disconnecting due to error: %s",
                 self.name,
                 self.rssi,
                 BLEAK_BACKOFF_TIME,
@@ -320,7 +320,10 @@ class EfireDevice:
         except BleakError as ex:
             # Disconnect so we can reset state and try again
             _LOGGER.debug(
-                "%s: RSSI: %s; Disconnecting due to error: %s", self.name, self.rssi, ex
+                "[%s]: RSSI: %s; Disconnecting due to error: %s",
+                self.name,
+                self.rssi,
+                ex,
             )
             await self.disconnect()
             raise
@@ -334,14 +337,14 @@ class EfireDevice:
         await self._ensure_connected()
 
         _LOGGER.debug(
-            "%s: Sending message %s",
+            "[%s]: Sending message %s",
             self.name,
             message.hex(" "),
         )
         if self._write_lock.locked():
             _LOGGER.debug(
                 (
-                    "%s: Operation already in progress, waiting for it to complete;"
+                    "[%s]: Operation already in progress, waiting for it to complete;"
                     " RSSI: %s"
                 ),
                 self.name,
@@ -352,7 +355,7 @@ class EfireDevice:
                 return await self._execute_locked(message)
             except BleakNotFoundError:
                 _LOGGER.error(
-                    "%s: device not found, no longer in range, or poor RSSI: %s",
+                    "[%s]: device not found, no longer in range, or poor RSSI: %s",
                     self.name,
                     self.rssi,
                     exc_info=True,
@@ -360,7 +363,7 @@ class EfireDevice:
                 raise
             except CharacteristicMissingError as ex:
                 _LOGGER.debug(
-                    "%s: characteristic missing: %s; RSSI: %s",
+                    "[%s]: characteristic missing: %s; RSSI: %s",
                     self.name,
                     ex,
                     self.rssi,
@@ -368,7 +371,7 @@ class EfireDevice:
                 )
                 raise
             except BLEAK_EXCEPTIONS:
-                _LOGGER.debug("%s: communication failed", self.name, exc_info=True)
+                _LOGGER.debug("[%s]: communication failed", self.name, exc_info=True)
                 raise
 
     async def execute_command(
