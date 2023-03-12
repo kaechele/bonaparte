@@ -196,7 +196,7 @@ class Fireplace(EfireDevice):
         )
         result = await self._simple_command(EfireCommand.SET_IFC_CMD1, payload)
 
-        _LOGGER.debug("[%s]: Off State command result: %s", self.name, result)
+        _LOGGER.debug("[%s]: CMD1 command result: %s", self.name, result)
         return result
 
     async def _ifc_cmd2(self) -> bool:
@@ -210,7 +210,7 @@ class Fireplace(EfireDevice):
         payload = bytearray([0x0, data])
         result = await self._simple_command(EfireCommand.SET_IFC_CMD2, payload)
 
-        _LOGGER.debug("[%s]: On State command result: %s", self.name, result)
+        _LOGGER.debug("[%s]: CMD2 command result: %s", self.name, result)
         return result
 
     async def authenticate(self, password: str) -> bool:
@@ -294,8 +294,8 @@ class Fireplace(EfireDevice):
         if self._state.flame_height == 0 and flame_height > 0:
             _LOGGER.debug(
                 (
-                    "%s: Turning on via flame_height setting, forcing controller on as"
-                    " well"
+                    "[%s]: Turning on via flame_height setting, forcing controller on"
+                    " as well"
                 ),
                 self.name,
             )
