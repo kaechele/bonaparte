@@ -291,7 +291,7 @@ class Fireplace(EfireDevice):
     @needs_auth
     async def set_blower_speed(self, blower_speed: int) -> bool:
         """Set the blower speed."""
-        if not self._features.aux:
+        if not self._features.blower:
             msg = f"Fireplace {self.name} does not have a blower"
             raise FeatureNotSupported(msg)
 
