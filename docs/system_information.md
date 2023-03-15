@@ -23,18 +23,18 @@ The module has three external connectors:
 
 1. Green terminal, prepopulated with a jumper cable, referred to in the FCC
    filing as a "Jumper for user options"
-2. Two conductor lead for the an optional LED Controller (Napoleon Model Number W190-0125)
+2. Two conductor lead for the optional LED Controller (Napoleon Model Number W190-0125)
 3. A white 2.54mm pitch 4-pin XH series header for 3.3V power and UART from the
    SIT ProFlame 2 IFC
 
 The function of the green terminal is currently unknown.
 
-The pinout for the XH header, when viewed in the orientation as seen on the above
-picture, is as follows:
+The pinout for the XH header, when viewed in the orientation as seen in the
+picture above, is as follows:
 
 `3V3 | RX | TX | GND`
 
-The GND pin is the one that is closes to the edge of the case and has the typical
+The GND pin is the one that is closest to the edge of the case and has the typical
 XH Pin 1 marking arrow on the side of the housing of the plug end of the connection.
 
 ## SIT ProFlame 2 IFC
@@ -42,7 +42,7 @@ XH Pin 1 marking arrow on the side of the housing of the plug end of the connect
 The SIT ProFlame 2 Integrated Fireplace Control is a controller commonly found
 in gas fireplaces of various brands.
 
-SIT provides it's own
+SIT provides its own
 [Wi-Fi Dongle](https://proflame.sitgroup.it/eng/proflame-connectivity/wi-fi-dongle)
 for the ProFlame 2.
 
@@ -66,7 +66,7 @@ by sniffing the serial traffic on the port using a little rig I built and the
 :width: 50%
 :align: center
 
-Custom cable that breaks out the individual connections to be intercepted by
+A custom cable breaks out the individual connections to be intercepted by two
 common USB to serial adapters.
 ```
 
@@ -107,7 +107,7 @@ on the IFC.
 
 The payload for get requests is `0x00 0x00 0x00`.
 
-For set requests it differs by register. The `0x17` and `0x18`
+For set requests, it differs by register. The `0x17` and `0x18`
 registers directly correlate to their Bluetooth protocol counterparts and use
 the same payload format as described below.
 
@@ -137,7 +137,7 @@ To which the IFC will reply
 
 if control is granted.
 
-Control is denied if the RF remote is in use. In this case the IFC will reply
+Control is denied if the RF remote is in use. In this case, the IFC will reply
 
 `0xAD 0x00 0x00 0x00 0x16 0xBB`
 
@@ -165,12 +165,12 @@ CTRL: 0x5E 0x00 0x00 0x00 0x18 0x46
  IFC: 0xAE 0x00 0x00 0x00 0x18 0xB6
 ```
 
-In this case the night light level is set to 6 and the fireplace mode is "on"
+In this case, the night light level is set to 6 and the fireplace mode is "on"
 in register `0x17`, however, since no flame height is set in register `0x18`,
-the fireplace is not actually operating the burner in this state.
+the IFC is not operating the burner in this state.
 
 When a setting in either of those registers is changed through the app the
-controller will issues the following sequence of messages and revert to it's
+controller will issue the following sequence of messages and revert to its
 polling loop immediately after:
 
 ```
@@ -191,7 +191,7 @@ CTRL: 0x5D 0x00 0x80 0x00 0x18 0xC5  # set 0x18 state (Split Flow On)
 ## Limitations
 
 The ProFlame 2 IFC currently does not report valid state information when
-ontrol is taken over using the RF remote control.
+control is taken over using the RF remote control.
 
 Querying the `0x17` and `0x18` registers while the fireplace is controlled by
 the RF remote will yield stale values at best and random values at worst.
@@ -207,4 +207,4 @@ Napoleon mentions this in their documentation by stating that the RF remote
 always takes precedence over the eFIRE app.
 Screenshots on the Google Play Store suggest the app is supposed to detect when
 this happens and block input on the app by showing an overlay.
-This is not the case on my fireplace.
+This is not the case with my fireplace.

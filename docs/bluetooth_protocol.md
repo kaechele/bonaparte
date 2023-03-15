@@ -36,7 +36,7 @@ following fields: Command, Data, Checksum and Footer.
 
 The commands are detailed in their own section below.
 
-The checksum is an XOR over the following fields: Length, Command, Data.
+The checksum is an XOR over the following fields: Length, Command and Data.
 
 A complete message in this format with a valid checksum could look like this:
 
@@ -54,7 +54,7 @@ respective parameters.
 ### `0x27`: IFC CMD1
 
 This command interacts with the first set of settings of the IFC. This first set
-of settings comprises of:
+of settings comprises:
 
 1. Power (0 or 1)
 2. Thermostat (0 or 1)
@@ -97,7 +97,7 @@ Payload format:
 ### `0x28`: IFC CMD2
 
 This command interacts with the second set of settings of the IFC. This second set
-of settings comprises of:
+of settings comprises:
 
 1. Flame Height (0-6)
 2. Blower Speed (0-6)
@@ -306,7 +306,7 @@ Get the current IFC CMD1 state.
 
 :return:
 
-    Returns 2-bytes corresponding to the format described in the
+    Returns 2 bytes corresponding to the format described in the
     <project:#ifc-cmd1> section.
 
     Example: `0x00E3`
@@ -317,7 +317,7 @@ Get the current IFC CMD2 state.
 
 :return:
 
-    Returns 2-bytes corresponding to the format described in the
+    Returns 2 bytes corresponding to the format described in the
     <project:#ifc-cmd2> section.
 
     Example: `0x00EE`
