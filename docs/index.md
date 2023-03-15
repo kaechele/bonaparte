@@ -12,6 +12,8 @@ usage
 :caption: Project Info
 :maxdepth: 2
 
+system_information
+bluetooth_protocol
 changelog
 contributing
 ```

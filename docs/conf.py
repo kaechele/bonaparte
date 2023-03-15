@@ -9,13 +9,14 @@
 project = "Bonaparte"
 copyright = "2023, Felix Kaechele"
 author = "Felix Kaechele"
-release = "0.0.0"
+release = "0.1.0"
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
 extensions = [
     "myst_parser",
+    "sphinxcontrib.packetdiag",
 ]
 
 # The suffix of source filenames.
@@ -33,3 +34,8 @@ exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 
 html_theme = "sphinx_rtd_theme"
 html_static_path = ["_static"]
+
+myst_enable_extensions = ["colon_fence", "fieldlist"]
+
+packetdiag_html_image_format = "SVG"
+packetdiag_latex_image_format = "PDF"
