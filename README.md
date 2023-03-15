@@ -23,9 +23,6 @@
   </a>
 </p>
 <p align="center">
-  <a href="https://pypi.org/project/bonaparte/">
-    <img src="https://img.shields.io/pypi/v/bonaparte.svg?logo=python&logoColor=fff&style=flat-square" alt="PyPI Version">
-  </a>
   <img src="https://img.shields.io/pypi/pyversions/bonaparte.svg?style=flat-square&logo=python&amp;logoColor=fff" alt="Supported Python versions">
   <img src="https://img.shields.io/pypi/l/bonaparte.svg?style=flat-square" alt="License">
 </p>
@@ -34,9 +31,7 @@ Library to control Napoleon eFIRE enabled fireplaces
 
 ## Installation
 
-Install this via pip (or your favourite package manager):
-
-`pip install bonaparte`
+Hopefully coming to PyPI soon: https://github.com/pypi/support/issues/2683
 
 ## Contributors ✨
 

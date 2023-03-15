@@ -1,7 +1,3 @@
 # Installation
 
-The package is published on [PyPI](https://pypi.org/project/bonaparte/) and can be installed with `pip` (or any equivalent):
-
-```bash
-pip install bonaparte
-```
+Hopefully coming to PyPI soon: https://github.com/pypi/support/issues/2683
