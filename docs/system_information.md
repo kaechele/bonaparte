@@ -70,7 +70,13 @@ A custom cable breaks out the individual connections to be intercepted by two
 common USB to serial adapters.
 ```
 
-The IFCs serial configuration is 9600–8-N-1.
+The serial header is found on the bottom right of the IFC and is labelled
+"Diagnostic Interface X0A". It uses the same kind of XH connector that is used
+on the Bluetooth controller.
+
+The GND pin is indicated on the schematic by the single filled dot on the right of the header.
+
+The full pinout is `3V3 | TX | RX | GND` and the IFC's serial parameters are 9600–8-N-1.
 
 The binary protocol seems to use a fixed length of 6 bytes per message.
 The Napoleon controller polls the IFC every second for state information and
