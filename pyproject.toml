@@ -25,7 +25,7 @@ packages = [
 
 [tool.poetry.dependencies]
 python = "^3.10"
-bleak = "^0.19.5"
+bleak = "^0.20.0"
 bleak-retry-connector = "^3.0.0"
 async-timeout = "^4.0.2"
 aenum = "^3.1.11"
