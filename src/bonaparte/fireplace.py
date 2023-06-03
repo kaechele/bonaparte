@@ -332,7 +332,7 @@ class Fireplace(EfireDevice):
         if not self._features.led_lights:
             msg = f"Fireplace {self.name}does not have LED controller"
             raise FeatureNotSupported(msg)
-        parameter = light_mode.setvalue  # pyright: ignore
+        parameter = light_mode.setvalue  # pyright: ignore[reportGeneralTypeIssues]
 
         # the value to disable modes is the value for enabling it + 5
         if not on:
@@ -445,7 +445,9 @@ class Fireplace(EfireDevice):
         """Update the mode of the LED colors."""
         result = await self.execute_command(EfireCommand.GET_LED_MODE)
 
-        self._state.led_mode = LedMode(int.from_bytes(result, "big"))  # pyright: ignore
+        self._state.led_mode = LedMode(
+            int.from_bytes(result, "big")  # pyright: ignore[reportGeneralTypeIssues]
+        )
 
     # E3
     @needs_auth

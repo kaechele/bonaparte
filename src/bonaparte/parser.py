@@ -57,6 +57,6 @@ def parse_led_controller_state(
         int(payload[2] & 0xFF),
         int(payload[3] & 0xFF),
     )
-    light_mode = LedMode(payload[4])  # pyright: ignore
+    light_mode = LedMode(payload[4])  # pyright: ignore[reportGeneralTypeIssues]
 
     return light_state, light_color, light_mode
