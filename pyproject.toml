@@ -32,7 +32,7 @@ aenum = "^3.1.11"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.0"
-pytest-cov = "^3.0"
+pytest-cov = "^4.0.0"
 black = "^23.1.0"
 pylint = "^2.16.2"
 
