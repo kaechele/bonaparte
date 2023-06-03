@@ -44,7 +44,7 @@ myst-parser = ">=0.16"
 sphinx = ">=4.0"
 sphinx-rtd-theme = ">=1.0"
 sphinxcontrib-nwdiag = "^2.0.0"
-reportlab = "^3.6.12"
+reportlab = "^4.0.0"
 
 [tool.semantic_release]
 branch = "main"
