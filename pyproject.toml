@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "bonaparte"
+name = "pybonaparte"
 version = "0.1.0"
 description = "Library to control Napoleon eFIRE enabled fireplaces"
 authors = ["Felix Kaechele <felix@kaechele.ca>"]
