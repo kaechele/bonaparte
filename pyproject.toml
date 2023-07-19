@@ -141,7 +141,7 @@ enable = [
 expected-line-ending-format = "LF"
 
 [tool.ruff]
-target-version = "py311"
+target-version = "py310"
 exclude = ["docs", "setup.py"]
 
 # Let's tone this down once we release the first version
