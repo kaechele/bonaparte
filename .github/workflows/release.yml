@@ -6,9 +6,10 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
-    environment: release
+    concurrency: release
     permissions:
       id-token: write
+      contents: write
 
     steps:
       - uses: actions/checkout@v3
