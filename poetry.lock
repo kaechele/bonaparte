@@ -299,13 +299,13 @@ pyobjc-framework-libdispatch = {version = ">=9.0.1,<10.0.0", markers = "platform
 
 [[package]]
 name = "bleak-retry-connector"
-version = "3.1.0"
+version = "3.1.1"
 description = "A connector for Bleak Clients that handles transient connection failures"
 optional = false
 python-versions = ">=3.10,<4.0"
 files = [
-    {file = "bleak_retry_connector-3.1.0-py3-none-any.whl", hash = "sha256:6ef2f42e5ed13a79f2474d6ba3624c113ff91c77c2c5edc60541c166faf58f76"},
-    {file = "bleak_retry_connector-3.1.0.tar.gz", hash = "sha256:7fa3fb585361fd0e3f806336288db6ba8c1de267a57cfc3b8d29de49620e1f8a"},
+    {file = "bleak_retry_connector-3.1.1-py3-none-any.whl", hash = "sha256:0a9e2e0930c692248ba3d89f86fa30450391fb61f63353b10931f58094a9d582"},
+    {file = "bleak_retry_connector-3.1.1.tar.gz", hash = "sha256:276796ec9ca287fa2a1634a4f4bfdfa9712b2e2efa1494bd6d911cb2d23f7566"},
 ]
 
 [package.dependencies]
