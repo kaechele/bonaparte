@@ -178,7 +178,7 @@ class Fireplace(EfireDevice):
     async def _simple_command(
         self, command: int, parameter: int | bytes | bytearray | None = None
     ) -> bool:
-        """Execute a command that returns only success of failure."""
+        """Execute a command that returns only success or failure."""
         result = await self.execute_command(command, parameter)
 
         return result[0] == ReturnCode.SUCCESS
@@ -259,7 +259,7 @@ class Fireplace(EfireDevice):
     async def set_night_light_brightness(self, brightness: int) -> bool:
         """Set the Night Light brightness."""
         if not 0 <= brightness <= MAX_NIGHT_LIGHT_BRIGHTNESS:
-            msg = "Night Light brightness must be between 0 and 6."
+            msg = "Night Light brightness must be between 0 and 6"
             raise ValueError(msg)
         self._state.night_light_brightness = brightness
         return await self._ifc_cmd1()
@@ -274,7 +274,7 @@ class Fireplace(EfireDevice):
     async def set_aux(self, *, enabled: bool) -> bool:
         """Enable or disable the AUX relay."""
         if not self._features.aux:
-            msg = f"Fireplace {self.name} does not support AUX relais control"
+            msg = f"Fireplace {self.name} does not use AUX relay control"
             raise FeatureNotSupported(msg)
         self._state.aux = enabled
         return await self._ifc_cmd2()
@@ -283,7 +283,7 @@ class Fireplace(EfireDevice):
     async def set_flame_height(self, flame_height: int) -> bool:
         """Set the flame height."""
         if not 0 <= flame_height <= MAX_FLAME_HEIGHT:
-            msg = "Flame height must be between 0 and 6."
+            msg = "Flame height must be between 0 and 6"
             raise ValueError(msg)
         # The eFIRE controller does not set the on state if we change
         # flame height from 0 to a non-zero value. However, the IFC
@@ -293,10 +293,8 @@ class Fireplace(EfireDevice):
         # set to max before being set to the desired value shortly after.
         if self._state.flame_height == 0 and flame_height > 0:
             _LOGGER.debug(
-                (
-                    "[%s]: Turning on via flame_height setting, forcing controller on"
-                    " as well"
-                ),
+                "[%s]: Turning on via flame_height setting, forcing controller on"
+                " as well",
                 self.name,
             )
             await self.power_on()
@@ -311,7 +309,7 @@ class Fireplace(EfireDevice):
             raise FeatureNotSupported(msg)
 
         if not 0 <= blower_speed <= MAX_BLOWER_SPEED:
-            msg = "Blower speed must be between 0 and 6."
+            msg = "Blower speed must be between 0 and 6"
             raise ValueError(msg)
         self._state.blower_speed = blower_speed
         return await self._ifc_cmd2()
@@ -320,7 +318,7 @@ class Fireplace(EfireDevice):
     async def set_split_flow(self, *, enabled: bool) -> bool:
         """Set the split flow valve state."""
         if not self._features.split_flow:
-            msg = f"Fireplace {self.name} does not have split flow valve"
+            msg = f"Fireplace {self.name} does not have a split flow valve"
             raise FeatureNotSupported(msg)
 
         self._state.split_flow = enabled
@@ -330,9 +328,9 @@ class Fireplace(EfireDevice):
     async def set_led_mode(self, light_mode: LedMode, *, on: bool = False) -> bool:
         """Set the LED mode/effect."""
         if not self._features.led_lights:
-            msg = f"Fireplace {self.name}does not have LED controller"
+            msg = f"Fireplace {self.name} does not have a LED controller"
             raise FeatureNotSupported(msg)
-        parameter = light_mode.setvalue  # pyright: ignore[reportGeneralTypeIssues]
+        parameter = light_mode.setvalue
 
         # the value to disable modes is the value for enabling it + 5
         if not on:
@@ -359,7 +357,7 @@ class Fireplace(EfireDevice):
     async def set_led_color(self, color: tuple[int, int, int]) -> bool:
         """Set the LED color."""
         if not self._features.led_lights:
-            msg = f"Fireplace {self.name} does not have LED controller"
+            msg = f"Fireplace {self.name} does not have a LED controller"
             raise FeatureNotSupported(msg)
 
         return await self._simple_command(
@@ -370,14 +368,14 @@ class Fireplace(EfireDevice):
     async def set_led_state(self, *, on: bool) -> bool:
         """Set the LED power state."""
         if not self._features.led_lights:
-            msg = f"Fireplace {self.name} does not have LED controller"
+            msg = f"Fireplace {self.name} does not have a LED controller"
             raise FeatureNotSupported(msg)
 
         return await self._simple_command(
             EfireCommand.SET_LED_POWER,
             LedState.ON.long  # type: ignore[attr-defined] # pylint: disable=no-member
             if on
-            else LedState.OFF.long,  # type: ignore[attr-defined] # pylint: disable=no-member   # noqa: E501
+            else LedState.OFF.long,  # type: ignore[attr-defined] # pylint: disable=no-member # noqa: E501
         )
 
     @needs_auth
@@ -426,10 +424,7 @@ class Fireplace(EfireDevice):
         """Update the power state of the LED Controller."""
         result = await self.execute_command(EfireCommand.GET_LED_STATE)
 
-        self._state.led = (
-            result
-            == LedState.ON.long  # type: ignore[attr-defined] # pylint: disable=no-member  # noqa: E501
-        )
+        self._state.led = result == LedState.ON.long  # type: ignore[attr-defined] # pylint: disable=no-member # noqa: E501
 
     # E1
     @needs_auth
@@ -445,9 +440,7 @@ class Fireplace(EfireDevice):
         """Update the mode of the LED colors."""
         result = await self.execute_command(EfireCommand.GET_LED_MODE)
 
-        self._state.led_mode = LedMode(
-            int.from_bytes(result, "big")  # pyright: ignore[reportGeneralTypeIssues]
-        )
+        self._state.led_mode = LedMode(int.from_bytes(result, "big"))
 
     # E3
     @needs_auth
