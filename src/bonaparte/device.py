@@ -125,10 +125,8 @@ class EfireDevice:
         """Connect to the device and ensure we stay connected."""
         if self._connect_lock.locked():
             _LOGGER.debug(
-                (
-                    "[%s]: Connection already in progress, waiting for it to complete;"
-                    " RSSI: %s"
-                ),
+                "[%s]: Connection already in progress, waiting for it to complete;"
+                " RSSI: %s",
                 self.name,
                 self.rssi,
             )
@@ -343,10 +341,8 @@ class EfireDevice:
         )
         if self._write_lock.locked():
             _LOGGER.debug(
-                (
-                    "[%s]: Operation already in progress, waiting for it to complete;"
-                    " RSSI: %s"
-                ),
+                "[%s]: Operation already in progress, waiting for it to complete;"
+                " RSSI: %s",
                 self.name,
                 self.rssi,
             )
@@ -354,11 +350,10 @@ class EfireDevice:
             try:
                 return await self._execute_locked(message)
             except BleakNotFoundError:
-                _LOGGER.error(
+                _LOGGER.exception(
                     "[%s]: device not found, no longer in range, or poor RSSI: %s",
                     self.name,
                     self.rssi,
-                    exc_info=True,
                 )
                 raise
             except CharacteristicMissingError as ex:
