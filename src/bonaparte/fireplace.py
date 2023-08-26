@@ -161,6 +161,11 @@ class Fireplace(EfireDevice):
         """The state of this fireplace."""
         return self._state
 
+    @property
+    def features(self) -> FireplaceFeatures:
+        """Featureset of this fireplace."""
+        return self._features
+
     def set_features(self, features: set[str]) -> FireplaceFeatures:
         """Set all features from a list of feature strings."""
         feature_set = {field.name for field in dc_fields(self._features)}
