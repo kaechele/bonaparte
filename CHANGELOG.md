@@ -2,6 +2,109 @@
 
 
 
+## v0.1.1 (2023-08-27)
+
+### Chore
+
+* chore(deps): update python-semantic-release/python-semantic-release action to v8.0.8 ([`5574dc1`](https://github.com/kaechele/bonaparte/commit/5574dc1c9fb458f3df07192f5bb0b284b24d5732))
+
+* chore(deps): update pre-commit hook commitizen-tools/commitizen to v3.7.0 ([`ffdd217`](https://github.com/kaechele/bonaparte/commit/ffdd21780c1978c226595bfc4126f7da15dcf632))
+
+* chore(deps): update pre-commit hook charliermarsh/ruff-pre-commit to v0.0.286 ([`e870715`](https://github.com/kaechele/bonaparte/commit/e8707155fa899329cc771cf3b9151558f046eb95))
+
+* chore(deps): update dependency sphinx to v7.2.3 ([`cfa203d`](https://github.com/kaechele/bonaparte/commit/cfa203d775196569da484347a9478a09d1182b0d))
+
+* chore(deps): update pre-commit hook python-poetry/poetry to v1.6.1 ([`ff5f44d`](https://github.com/kaechele/bonaparte/commit/ff5f44d35f77f272f97001bb5fd69957afe126bf))
+
+* chore(deps): update pre-commit hook python-poetry/poetry to v1.6.0 ([`6ce46a8`](https://github.com/kaechele/bonaparte/commit/6ce46a88210ae36552c97da7267042e5d882fd66))
+
+* chore(deps): update dependency furo to v2023.8.19 ([`049f4a4`](https://github.com/kaechele/bonaparte/commit/049f4a45e7838942bb6aef5b09b91b30b1116c96))
+
+* chore(deps): update dependency furo to v2023.8.17 ([`55bad98`](https://github.com/kaechele/bonaparte/commit/55bad985fb4cb974b3b9e6acc5dca6d96df3b469))
+
+* chore(deps): update pre-commit hook charliermarsh/ruff-pre-commit to v0.0.285 ([`346b839`](https://github.com/kaechele/bonaparte/commit/346b839792ff7b8c7c41e4517ca2417be63645d7))
+
+* chore(deps): update dependency sphinx to v7.2.2 ([`5ac31b5`](https://github.com/kaechele/bonaparte/commit/5ac31b535948f58ee8dc9ba1de206228188ec5fd))
+
+* chore(deps): update pre-commit hook pre-commit/mirrors-mypy to v1.5.1 ([`8d9f49f`](https://github.com/kaechele/bonaparte/commit/8d9f49fd50803f7a6a6b41641c050b4e3b8ba57f))
+
+* chore(deps): update dependency sphinx to v7.2.0 ([`61a538b`](https://github.com/kaechele/bonaparte/commit/61a538bc3828b455125c51000ef189263d010809))
+
+* chore(deps): update python-semantic-release/python-semantic-release action to v8.0.7 ([`3ca862d`](https://github.com/kaechele/bonaparte/commit/3ca862d2bf8f4aa21dc1504e4c1b46563c09ebd2))
+
+* chore(deps): update pre-commit hook kaechele/pre-commit-mirror-prettier to v3.0.2 ([`83671f6`](https://github.com/kaechele/bonaparte/commit/83671f6cf8486d3328150dd2d95ab7b73f2ac439))
+
+* chore(deps): update python-semantic-release/python-semantic-release action to v8.0.6 ([`ff10537`](https://github.com/kaechele/bonaparte/commit/ff1053741034d3c5606f520909628aae992f8c0b))
+
+* chore(deps): update pre-commit hook charliermarsh/ruff-pre-commit to v0.0.284 ([`a52dfe8`](https://github.com/kaechele/bonaparte/commit/a52dfe8fb2a3b21eed1a65a83363e943b2c27e82))
+
+* chore(deps): update pre-commit hook pre-commit/mirrors-mypy to v1.5.0 ([`2d1a4ec`](https://github.com/kaechele/bonaparte/commit/2d1a4ec2f842476734bb9b660edfc52e6117c2b4))
+
+* chore(deps): update python-semantic-release/python-semantic-release action to v8.0.5 ([`7a913c2`](https://github.com/kaechele/bonaparte/commit/7a913c2e24af05f9ef9615e4af844361374c560c))
+
+* chore(deps): update dependency async-timeout to v4.0.3 ([`6ccb2e0`](https://github.com/kaechele/bonaparte/commit/6ccb2e00ec4343509beabf5a4d98ddc46b0a7514))
+
+* chore(deps): update pre-commit hook kaechele/pre-commit-mirror-prettier to v3.0.1 ([`570fcee`](https://github.com/kaechele/bonaparte/commit/570fcee9f2eb6220b649672bbd1204297484bd8c))
+
+* chore(deps): update snok/install-poetry action to v1.3.4 ([`7827e53`](https://github.com/kaechele/bonaparte/commit/7827e539693d9a783a40be0f9d5325741d6ba52e))
+
+* chore(deps): update dependency sphinx to v7.1.2 ([`073b4dd`](https://github.com/kaechele/bonaparte/commit/073b4dd81f5d48eac6cf7add26498878854ad4c5))
+
+* chore(deps): update pre-commit hook charliermarsh/ruff-pre-commit to v0.0.282 ([`be2b3b2`](https://github.com/kaechele/bonaparte/commit/be2b3b2491028713c94528428a4258e02e3f07b8))
+
+* chore(deps): update pre-commit hook commitizen-tools/commitizen to v3.6.0 ([`275b5a5`](https://github.com/kaechele/bonaparte/commit/275b5a551a588036441c1b542a7aac6b68416948))
+
+* chore(deps): update pre-commit hook charliermarsh/ruff-pre-commit to v0.0.281 ([`aac61cc`](https://github.com/kaechele/bonaparte/commit/aac61cc17f237e6c0e2c4186019a9b0095915f27))
+
+* chore(deps): update pre-commit hook cdce8p/python-typing-update to v0.6.0 ([`16348cc`](https://github.com/kaechele/bonaparte/commit/16348cc14b1525c760e3496b60cb17c8e6bb1c1f))
+
+* chore(deps): update pre-commit hook asottile/pyupgrade to v3.10.1 ([`a2d0c9a`](https://github.com/kaechele/bonaparte/commit/a2d0c9aaaa4666fa35a66e8c78160bea663e846c))
+
+* chore(deps): update pre-commit hook pycqa/flake8 to v6.1.0 ([`a65c0f0`](https://github.com/kaechele/bonaparte/commit/a65c0f0edc946750c459cee6770a838072ad6e0b))
+
+* chore(deps): update pre-commit hook commitizen-tools/commitizen to v3.5.4 ([`567e98f`](https://github.com/kaechele/bonaparte/commit/567e98fdc7e356bc395c91b05cba4384be359296))
+
+* chore(deps): update dependency sphinx to v7.1.1 ([`80d0e0f`](https://github.com/kaechele/bonaparte/commit/80d0e0f9d0cb53c82a5aa77f1b6d0aaf38c94871))
+
+* chore(deps): update python-semantic-release/python-semantic-release action to v8.0.4 ([`d9ba369`](https://github.com/kaechele/bonaparte/commit/d9ba369b5ce6b0fce82ee5c6ddb0602cbebc103f))
+
+* chore(deps): update dependency furo to v2023.7.26 ([`2df5457`](https://github.com/kaechele/bonaparte/commit/2df5457a38249d991d369fabaf2686978cc10a3e))
+
+* chore(deps): update dependency pylint to v2.17.5 ([`6355027`](https://github.com/kaechele/bonaparte/commit/635502748d9e73fac1f8e3b4ae67b246bfc33446))
+
+* chore(deps): update pre-commit hook charliermarsh/ruff-pre-commit to v0.0.280 ([`e8bf6e1`](https://github.com/kaechele/bonaparte/commit/e8bf6e11f4d0db9ba247d092b019a5d710aa4ed0))
+
+* chore(deps): update pre-commit hook pycqa/pylint to v2.17.5 ([`242cfa7`](https://github.com/kaechele/bonaparte/commit/242cfa7cfd94ba939ab08ae59d79d213ef2cd7c2))
+
+* chore(deps): update dependency bleak-retry-connector to v3.1.1 ([`71302c4`](https://github.com/kaechele/bonaparte/commit/71302c4ad3eabddab03e8971b1e5b9e7674cd1b5))
+
+* chore(deps): update dependency sphinx to v7.1.0 ([`4600202`](https://github.com/kaechele/bonaparte/commit/46002025b8086b824f5ac6fb04e0149a7f5ce84e))
+
+* chore(deps): update wagoid/commitlint-github-action action to v5.4.3 ([`ad3bf58`](https://github.com/kaechele/bonaparte/commit/ad3bf58f669eaf77810bb23f4483e1f7626c5fef))
+
+* chore(deps): update wagoid/commitlint-github-action action to v5.4.2 ([`2f2fe86`](https://github.com/kaechele/bonaparte/commit/2f2fe86e409df6f0abae3c5af23162c80876ed19))
+
+* chore(deps): update python-semantic-release/python-semantic-release action to v8.0.3 ([`608ac5e`](https://github.com/kaechele/bonaparte/commit/608ac5ea62387bfd0da0f73c4ce69e663657a931))
+
+### Fix
+
+* fix: expose Fireplace features attribute
+
+Signed-off-by: Felix Kaechele &lt;felix@kaechele.ca&gt; ([`bddf27c`](https://github.com/kaechele/bonaparte/commit/bddf27cfbc518a8f57aec957eabc362a7a9c061d))
+
+* fix: linter error logger.error -&gt; logger.exception
+
+Signed-off-by: Felix Kaechele &lt;felix@kaechele.ca&gt; ([`9db4caa`](https://github.com/kaechele/bonaparte/commit/9db4caa4c48180b0edc47047e672b6aa3464b5fa))
+
+* fix: wording, typos and formatting
+
+Signed-off-by: Felix Kaechele &lt;felix@kaechele.ca&gt; ([`6699847`](https://github.com/kaechele/bonaparte/commit/66998470f966e00199f31627bc2368432dd680ee))
+
+* fix: use set instead of multiple comparisons (PLR1714)
+
+Signed-off-by: Felix Kaechele &lt;felix@kaechele.ca&gt; ([`21281ba`](https://github.com/kaechele/bonaparte/commit/21281ba2cda9ae3c12acae577e2c9b1c923466ca))
+
+
 ## v0.1.0 (2023-07-19)
 
 ### Chore
