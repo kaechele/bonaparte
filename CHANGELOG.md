@@ -2,9 +2,27 @@
 
 
 
-## v0.1.1 (2023-08-27)
+## v0.1.2 (2023-09-06)
 
 ### Chore
+
+* chore(deps): update actions/checkout action to v4 ([`88143f9`](https://github.com/kaechele/bonaparte/commit/88143f9e7477207ca65571e2bb52786d4788c125))
+
+* chore(deps): update pre-commit hook commitizen-tools/commitizen to v3.8.0 ([`4c9cf24`](https://github.com/kaechele/bonaparte/commit/4c9cf2475b30f0d4b52bf7773aa3f53800e3e8b0))
+
+* chore(deps): update pre-commit hook commitizen-tools/commitizen to v3.7.1 ([`9242241`](https://github.com/kaechele/bonaparte/commit/924224127fe20c6ee2a3478925a0d7360c85f696))
+
+* chore(deps): update dependency pytest to v7.4.1 ([`c9e8fc7`](https://github.com/kaechele/bonaparte/commit/c9e8fc717ea02a921ead5c7cd8730ae773d62b19))
+
+* chore(deps): update pre-commit hook charliermarsh/ruff-pre-commit to v0.0.287 ([`1312c24`](https://github.com/kaechele/bonaparte/commit/1312c24de4361fedbea0147643ad1b93dc87bfcd))
+
+* chore(deps): update pre-commit hook pycqa/autoflake to v2.2.1 ([`18c75e3`](https://github.com/kaechele/bonaparte/commit/18c75e3d9d2b001255269216d34ef027fa09bcc8))
+
+* chore(deps): update dependency sphinx to v7.2.5 ([`b64e029`](https://github.com/kaechele/bonaparte/commit/b64e02933beb7baea65330e5cbeec693f1074c0d))
+
+* chore(deps): update pre-commit hook kaechele/pre-commit-mirror-prettier to v3.0.3 ([`39591f6`](https://github.com/kaechele/bonaparte/commit/39591f69875910fdc48041a470bfc184bab03c2c))
+
+* chore(deps): update dependency sphinx to v7.2.4 ([`07ae2c1`](https://github.com/kaechele/bonaparte/commit/07ae2c1e1f335de72a9310dd39e5a5aca5bb17eb))
 
 * chore(deps): update python-semantic-release/python-semantic-release action to v8.0.8 ([`5574dc1`](https://github.com/kaechele/bonaparte/commit/5574dc1c9fb458f3df07192f5bb0b284b24d5732))
 
@@ -87,6 +105,18 @@
 * chore(deps): update python-semantic-release/python-semantic-release action to v8.0.3 ([`608ac5e`](https://github.com/kaechele/bonaparte/commit/608ac5ea62387bfd0da0f73c4ce69e663657a931))
 
 ### Fix
+
+* fix(deps): update bleak-retry-connector
+
+Signed-off-by: Felix Kaechele &lt;felix@kaechele.ca&gt; ([`dfd6d49`](https://github.com/kaechele/bonaparte/commit/dfd6d49e0772cc0fd410058ac61fddaae70360a3))
+
+* fix: sync version numbers
+
+Signed-off-by: Felix Kaechele &lt;felix@kaechele.ca&gt; ([`f41cd64`](https://github.com/kaechele/bonaparte/commit/f41cd64bd4b42050e27757911a30bb6f81fc05fe))
+
+* fix: update bleak and fix python version constraints
+
+Signed-off-by: Felix Kaechele &lt;felix@kaechele.ca&gt; ([`56f3163`](https://github.com/kaechele/bonaparte/commit/56f31634ec5b0edcf042ddf2eab9a2d15d4f4d76))
 
 * fix: expose Fireplace features attribute
 
