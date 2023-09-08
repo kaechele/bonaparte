@@ -178,16 +178,29 @@ class EfireDevice:
 
     def _disconnected(self, _client: BleakClientWithServiceCache) -> None:
         """Disconnected callback."""
-        if self._expected_disconnect:
+        pending_response = (
+            self._notify_future is not None and not self._notify_future.done()
+        )
+
+        if self._expected_disconnect and not pending_response:
             _LOGGER.debug(
                 "[%s]: Disconnected from device; RSSI: %s", self.name, self.rssi
             )
             return
+
         _LOGGER.warning(
             "[%s]: Device unexpectedly disconnected; RSSI: %s",
             self.name,
             self.rssi,
         )
+
+        if pending_response:
+            # self._notify_future cannot be None if pending_response is true,
+            # but mypy doesn't know that, hence:
+            assert self._notify_future is not None  # noqa: S101 # nosec
+            msg = "Disconnected while response from device was pending"
+            self._notify_future.set_exception(DisconnectedException(msg))
+
         for callback in self._disconnect_callbacks:
             callback(self)
 
@@ -324,6 +337,14 @@ class EfireDevice:
                 ex,
             )
             await self.disconnect()
+            raise
+        except DisconnectedException as ex:
+            _LOGGER.debug(
+                "[%s]: RSSI: %s; Disconnecting with response pending: %s",
+                self.name,
+                self.rssi,
+                ex,
+            )
             raise
         return result
 
