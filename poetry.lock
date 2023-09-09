@@ -280,19 +280,19 @@ uvloop = ["uvloop (>=0.15.2)"]
 
 [[package]]
 name = "bleak"
-version = "0.21.0"
+version = "0.21.1"
 description = "Bluetooth Low Energy platform Agnostic Klient"
 optional = false
 python-versions = ">=3.8,<3.13"
 files = [
-    {file = "bleak-0.21.0-py3-none-any.whl", hash = "sha256:b307a0324625ad696e77d9382c228f52e03c4cebee71e297e7d337e07af49075"},
-    {file = "bleak-0.21.0.tar.gz", hash = "sha256:227a88b78831e6e2322a9be209dce6628177382885e3065fbe9c25445a9bae79"},
+    {file = "bleak-0.21.1-py3-none-any.whl", hash = "sha256:ccec260a0f5ec02dd133d68b0351c0151b2ecf3ddd0bcabc4c04a1cdd7f33256"},
+    {file = "bleak-0.21.1.tar.gz", hash = "sha256:ec4a1a2772fb315b992cbaa1153070c7e26968a52b0e2727035f443a1af5c18f"},
 ]
 
 [package.dependencies]
 async-timeout = {version = ">=3.0.0,<5", markers = "python_version < \"3.11\""}
 bleak-winrt = {version = ">=1.2.0,<2.0.0", markers = "platform_system == \"Windows\" and python_version < \"3.12\""}
-dbus-fast = {version = ">=1.83.0,<2.0.0", markers = "platform_system == \"Linux\""}
+dbus-fast = {version = ">=1.83.0,<3", markers = "platform_system == \"Linux\""}
 pyobjc-core = {version = ">=9.2,<10.0", markers = "platform_system == \"Darwin\""}
 pyobjc-framework-CoreBluetooth = {version = ">=9.2,<10.0", markers = "platform_system == \"Darwin\""}
 pyobjc-framework-libdispatch = {version = ">=9.2,<10.0", markers = "platform_system == \"Darwin\""}
