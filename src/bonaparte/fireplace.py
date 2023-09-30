@@ -87,22 +87,34 @@ class FireplaceState:
     """State of each component in the fireplace."""
 
     aux: bool = False
+    ble_version: str = ""
     blower_speed: int = 0
+    bt_power: bool = False
     flame_height: int = 0
+    ifc_power: bool = False
     led_color: tuple[int, int, int] = (0, 0, 0)
     led_mode: LedMode = LedMode.HOLD  # type: ignore[assignment]
     led: bool = False
-    main_mode: int = 0
+    mcu_version: str = ""
     night_light_brightness: int = 0
     pilot: bool = False
-    power: bool = False
     remote_in_use: bool = False
     split_flow: bool = False
     thermostat: bool = False
     time_left: tuple[int, int, int] = (0, 0, 0)
     timer: bool = False
-    mcu_version: str = ""
-    ble_version: str = ""
+
+    def __init__(self, *, compatibility_mode: bool = True) -> None:
+        """Initialize the fireplace state."""
+        self._compatibility_mode = compatibility_mode
+
+    @property
+    def power(self) -> bool:
+        """Return whether the fireplace is considered turned on."""
+        if self._compatibility_mode:
+            return self.bt_power
+
+        return self.ifc_power and self.flame_height > 0
 
 
 class Fireplace(EfireDevice):
@@ -117,13 +129,17 @@ class Fireplace(EfireDevice):
         self,
         ble_device: BLEDevice,
         features: FireplaceFeatures | None = None,
+        *,
+        compatibility_mode: bool = True,
     ) -> None:
         """Initialize a fireplace."""
         super().__init__(ble_device)
 
+        self._compatibility_mode = compatibility_mode
         self._features = features if features else FireplaceFeatures()
+
         self._is_authenticated = False
-        self._state = FireplaceState()
+        self._state = FireplaceState(compatibility_mode=self._compatibility_mode)
         self._disconnect_callbacks: list[Callable[[Fireplace], None]] = []
 
         def disconnected_callback(self: Fireplace) -> None:
@@ -190,10 +206,12 @@ class Fireplace(EfireDevice):
 
     async def _ifc_cmd1(self) -> bool:
         """Call the IFC CMD1 function with the current fireplace state."""
+        # NOTE: The BT controller does not actually pass through the ifc_power
+        # bit to the IFC
         payload = bytearray(
             [
                 0x0,
-                self._state.power
+                self._state.ifc_power
                 | (self._state.thermostat << 1)
                 | (self._state.night_light_brightness << 4)
                 | (self._state.pilot << 7),
@@ -234,31 +252,81 @@ class Fireplace(EfireDevice):
         return self._is_authenticated
 
     @needs_auth
-    async def power(self, *, on: bool) -> bool:
+    async def power(self, *, on: bool, compatibility_mode: bool | None = None) -> bool:
         """Set the power state on the fireplace."""
-        result = await self._simple_command(
-            EfireCommand.SET_POWER, PowerState.ON if on else PowerState.OFF
+        compatibility_mode = (
+            self._compatibility_mode
+            if compatibility_mode is None
+            else compatibility_mode
         )
 
-        self._state.power = result
-        if on:
-            await self._ifc_cmd1()
-        else:
-            self._state.blower_speed = 0
+        if compatibility_mode:
+            # Do what the official app does
+            _LOGGER.debug(
+                "[%s]: Using compatible power on method (compatibility_mode=True)",
+                self.name,
+            )
+            result = await self._simple_command(
+                EfireCommand.SET_POWER, PowerState.ON if on else PowerState.OFF
+            )
+
+            if result:
+                self._state.bt_power = on
+
+                # Internal BT controller power command sets blower speed and
+                # flame height to certain values upon on/off.
+                # Reflect that in our state.
+                if on:
+                    self._state.flame_height = 6
+                else:
+                    self._state.blower_speed = 0
+                    self._state.flame_height = 0
+            return result
+
+        # Custom power behavior implementation
+        #
+        # The BT controller doesn't let us write the power bit on the IFC.
+        # But by setting flame height to 0 or non-zero we can power off/on
+        # as well.
+        # In doing this we can control flame and blower independently.
+        if on and self._state.flame_height == 0:
+            # Turning on without flame height assigned, might as well just
+            # use proper power on then (which sets flame height to 6).
+            self._state.flame_height = 6
+            _LOGGER.debug(
+                "[%s]: Using compatible power on method (compatibility_mode=False)",
+                self.name,
+            )
+
+            return await self._simple_command(EfireCommand.SET_POWER, PowerState.ON)
+        if not on and self._state.flame_height != 0:
             self._state.flame_height = 0
-            await self._ifc_cmd1()
-            await self._ifc_cmd2()
-        return result
+            if self._state.blower_speed == 0:
+                # Blower is off already, might as well just use the proper
+                # power off then.
+                _LOGGER.debug(
+                    "[%s]: Using compatible power off method"
+                    " (compatibility_mode=False)",
+                    self.name,
+                )
+                return await self._simple_command(
+                    EfireCommand.SET_POWER, PowerState.OFF
+                )
+        _LOGGER.debug(
+            "[%s]: Using non-compatible power off method (compatibility_mode=False)",
+            self.name,
+        )
+        return await self._ifc_cmd2()
 
     @needs_auth
-    async def power_on(self) -> bool:
+    async def power_on(self, *, compatibility_mode: bool | None = None) -> bool:
         """Power on the fireplace."""
-        return await self.power(on=True)
+        return await self.power(on=True, compatibility_mode=compatibility_mode)
 
     @needs_auth
-    async def power_off(self) -> bool:
+    async def power_off(self, *, compatibility_mode: bool | None = None) -> bool:
         """Power off the fireplace."""
-        return await self.power(on=False)
+        return await self.power(on=False, compatibility_mode=compatibility_mode)
 
     @needs_auth
     async def set_night_light_brightness(self, brightness: int) -> bool:
@@ -296,7 +364,11 @@ class Fireplace(EfireDevice):
         # To maintain consistent state we force the eFIRE controller on.
         # This has the annoying side-effect that flame height will be
         # set to max before being set to the desired value shortly after.
-        if self._state.flame_height == 0 and flame_height > 0:
+        if (
+            self._compatibility_mode
+            and self._state.flame_height == 0
+            and flame_height > 0
+        ):
             _LOGGER.debug(
                 "[%s]: Turning on via flame_height setting, forcing controller on"
                 " as well",
@@ -304,6 +376,13 @@ class Fireplace(EfireDevice):
             )
             await self.power_on()
         self._state.flame_height = flame_height
+        if flame_height == 0 and self._state.blower_speed == 0:
+            _LOGGER.debug(
+                "[%s]: Turning off fireplace from set_flame_height because blower is"
+                " off too",
+                self.name,
+            )
+            return await self.power_off(compatibility_mode=True)
         return await self._ifc_cmd2()
 
     @needs_auth
@@ -317,6 +396,13 @@ class Fireplace(EfireDevice):
             msg = "Blower speed must be between 0 and 6"
             raise ValueError(msg)
         self._state.blower_speed = blower_speed
+        if blower_speed == 0 and self._state.flame_height == 0:
+            _LOGGER.debug(
+                "[%s]: Turning off fireplace from set_blower_speed because flame is"
+                " off too",
+                self.name,
+            )
+            return await self.power_off(compatibility_mode=True)
         return await self._ifc_cmd2()
 
     @needs_auth
@@ -457,7 +543,7 @@ class Fireplace(EfireDevice):
             msg = f"Command failed with return code {result.hex()}"
             raise CommandFailedException(msg)
         (
-            _,  # power state is handled separately for eFIRE
+            self._state.ifc_power,
             self._state.thermostat,  # thermostat is not used with eFIRE
             self._state.night_light_brightness,
             self._state.pilot,
@@ -485,10 +571,10 @@ class Fireplace(EfireDevice):
     # E7
     @needs_auth
     async def update_power_state(self) -> None:
-        """Update the power state of the fireplace."""
+        """Update the power state of the fireplace as seen from the BT controller."""
         result = await self.execute_command(EfireCommand.GET_POWER_STATE)
 
-        self._state.power = result[0] == PowerState.ON
+        self._state.bt_power = result[0] == PowerState.ON
 
     # EB
     @needs_auth
@@ -530,7 +616,8 @@ class Fireplace(EfireDevice):
         """Update all state, depending on selected features."""
         await self.update_ifc_cmd1_state()
         await self.update_ifc_cmd2_state()
-        await self.update_power_state()
+        if self._compatibility_mode:
+            await self.update_power_state()
         if self._features.timer:
             await self.update_timer_state()
         if self._features.led_lights:
