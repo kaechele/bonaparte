@@ -2,7 +2,117 @@
 
 
 
-## v0.1.2 (2023-09-06)
+## v0.2.0 (2023-09-30)
+
+### Chore
+
+* chore(deps): update pre-commit hook pycqa/pylint to v2.17.6 ([`6ee7c08`](https://github.com/kaechele/bonaparte/commit/6ee7c0853728f3041e323a9b7afb5c677ed57154))
+
+* chore(deps): update dependency pylint to v2.17.6 ([`239acd6`](https://github.com/kaechele/bonaparte/commit/239acd6b5c6d4ecb2725d9c44f3da81b3b9460dc))
+
+* chore(deps): update pre-commit hook commitizen-tools/commitizen to v3.10.0 ([`513211b`](https://github.com/kaechele/bonaparte/commit/513211bcbfa3701fe3dadf511e46d5cda4f858a9))
+
+* chore(deps): update pre-commit hook asottile/pyupgrade to v3.13.0 ([`068ec8b`](https://github.com/kaechele/bonaparte/commit/068ec8b203c9870b0b391ac1f997c29d00401de8))
+
+* chore(deps): update pre-commit hook charliermarsh/ruff-pre-commit to v0.0.291 ([`acc4a5e`](https://github.com/kaechele/bonaparte/commit/acc4a5e46023b03818bdd40fb03674b415191b4b))
+
+* chore(deps): update actions/checkout digest to 8ade135 ([`dd91b4f`](https://github.com/kaechele/bonaparte/commit/dd91b4fe9e4b518a4511e71a7012d28db9e33c3c))
+
+* chore(deps): update pre-commit hook commitizen-tools/commitizen to v3.9.1 ([`3032086`](https://github.com/kaechele/bonaparte/commit/30320868307b475829cf3846de1ec86949eb6c03))
+
+* chore(deps): update pre-commit hook asottile/pyupgrade to v3.12.0 ([`193803c`](https://github.com/kaechele/bonaparte/commit/193803c136929dace097531d9d0c579f7835ce6f))
+
+* chore(deps): update pre-commit hook asottile/pyupgrade to v3.11.2 ([`4043f30`](https://github.com/kaechele/bonaparte/commit/4043f3003b1d70d6abea6be27f5941972df74bc1))
+
+* chore(deps): update dependency reportlab to v4.0.5 ([`19e5e0f`](https://github.com/kaechele/bonaparte/commit/19e5e0f7afbb3c17e315ac8e3030dae6028fb0cb))
+
+* chore(deps): update python-semantic-release/python-semantic-release action to v8.1.1 ([`444f543`](https://github.com/kaechele/bonaparte/commit/444f5434dccf14a9876761e52c0125d83bc069e9))
+
+* chore(deps): update pre-commit hook charliermarsh/ruff-pre-commit to v0.0.290 ([`ee1e220`](https://github.com/kaechele/bonaparte/commit/ee1e22097d583017c13cb28b446e2f19c3d45dc1))
+
+* chore(deps): update pre-commit hook asottile/pyupgrade to v3.11.0 ([`631c1f2`](https://github.com/kaechele/bonaparte/commit/631c1f2aaa779deadbf0ad824bda12ca19750620))
+
+* chore(deps): update pre-commit hook commitizen-tools/commitizen to v3.9.0 ([`93c4c88`](https://github.com/kaechele/bonaparte/commit/93c4c88dc6d7ea2ddfafd45c56e333e75b4504b0))
+
+* chore(deps): update codecov/codecov-action action to v4 ([`f9ab5c4`](https://github.com/kaechele/bonaparte/commit/f9ab5c4248f4d144a726d6dbcff83056116e7337))
+
+* chore(deps): update dependency sphinx to v7.2.6 ([`c979971`](https://github.com/kaechele/bonaparte/commit/c979971f662df9ca4f1283947fa6128a6e80b3e4))
+
+* chore(deps): update pre-commit hook charliermarsh/ruff-pre-commit to v0.0.289 ([`d3ca4c7`](https://github.com/kaechele/bonaparte/commit/d3ca4c744bc30f06d493d5a6b90e7c0c36892ac7))
+
+* chore(deps): update pre-commit hook charliermarsh/ruff-pre-commit to v0.0.288 ([`4909613`](https://github.com/kaechele/bonaparte/commit/49096139d55a87f58951491e73ae6f50a82f0287))
+
+* chore(deps): update pre-commit hook psf/black to v23.9.1 ([`c8fb401`](https://github.com/kaechele/bonaparte/commit/c8fb401c207d17ab1a4c9c780a752c48eca11e43))
+
+* chore(deps): update dependency black to v23.9.1 ([`0603688`](https://github.com/kaechele/bonaparte/commit/06036887f0c52d5719ef80babd3ceed55a10e01d))
+
+* chore(deps): update pre-commit hook johnnymorganz/stylua to v0.18.2 ([`7efdf9f`](https://github.com/kaechele/bonaparte/commit/7efdf9f9b97620c77a62ea1b08acbd52ffaeeff0))
+
+* chore(deps): update dependency furo to v2023.9.10 ([`0637503`](https://github.com/kaechele/bonaparte/commit/0637503f138140cd23ddc1f938bc19a912484848))
+
+* chore(deps): update pre-commit hook commitizen-tools/commitizen to v3.8.2 ([`b089a6d`](https://github.com/kaechele/bonaparte/commit/b089a6d57b5f244963a911fac2edeff55ddf4827))
+
+* chore(deps): update pre-commit hook psf/black to v23.9.0 ([`eec3be8`](https://github.com/kaechele/bonaparte/commit/eec3be883bd88370d42cab860d09539602cb3b58))
+
+* chore(deps): update dependency black to v23.9.0 ([`c149edc`](https://github.com/kaechele/bonaparte/commit/c149edc9deff45db810e03094ee46dc1df4642eb))
+
+* chore(deps): update pre-commit hook commitizen-tools/commitizen to v3.8.1 ([`81c90ef`](https://github.com/kaechele/bonaparte/commit/81c90ef494ac165a4d3d74de6f473df08fa91b27))
+
+* chore(deps): update dependency pytest to v7.4.2 ([`73280db`](https://github.com/kaechele/bonaparte/commit/73280db4186f1565f2471a0dd9c18bfa0a0175cb))
+
+### Feature
+
+* feat: add optional optimized but incompatible power function
+
+This introduces an optimized power function. The benefit of this is that
+we can control the blower independently from the flame.
+There are two scenarios where this could be useful:
+
+1. A user wants to run the blower after the flame has already been turned off.
+   The official app always turns off both blower and flame when the power
+   off button is used.
+
+2. A user wants to turn on the flame at a flame height other than 6.
+   The official app always turns the flame height to 6 when turning on.
+
+This method of control is incompatible with the official app, as it will
+start showing invalid state if connected to a fireplace that has been
+powered on or off using this method. Changing any setting from within
+the app will return the app to its normal state though.
+
+By default the compatible control mechanism is used, so this change is
+backwards compatible.
+
+Signed-off-by: Felix Kaechele &lt;felix@kaechele.ca&gt; ([`08bed77`](https://github.com/kaechele/bonaparte/commit/08bed77dff2357e315f33440f8a73da15ab7735f))
+
+### Fix
+
+* fix: select default Python version for pre-commit
+
+Signed-off-by: Felix Kaechele &lt;felix@kaechele.ca&gt; ([`a18c54d`](https://github.com/kaechele/bonaparte/commit/a18c54d6c305820e3554cea8eaf36bb848270af4))
+
+* fix(deps): update dependency bleak-retry-connector to v3.2.1 ([`3088732`](https://github.com/kaechele/bonaparte/commit/3088732cef050b38664a4ee40d2ea914312856b3))
+
+* fix: resolve notify_future on disconnect (#103)
+
+Signed-off-by: Felix Kaechele &lt;felix@kaechele.ca&gt; ([`81ac894`](https://github.com/kaechele/bonaparte/commit/81ac894293105c9d9e4d89964e81cb1ecfd61d9e))
+
+* fix(deps): remove async-timeout, we don&#39;t use it directly
+
+Signed-off-by: Felix Kaechele &lt;felix@kaechele.ca&gt; ([`546b67b`](https://github.com/kaechele/bonaparte/commit/546b67bd1030802976ad9d2891746a65a3fda165))
+
+* fix(deps): update dependency bleak to v0.21.1 ([`665d94c`](https://github.com/kaechele/bonaparte/commit/665d94ca313d73030d59c45757ef5214bbd6cb31))
+
+* fix(deps): update dependency bleak-retry-connector to v3.1.3 ([`0ed760a`](https://github.com/kaechele/bonaparte/commit/0ed760a391f21f919c96e44dd2cedd0be9d8a728))
+
+### Unknown
+
+* Revert &#34;chore(deps): update codecov/codecov-action action to v4&#34;
+
+This reverts commit f9ab5c4248f4d144a726d6dbcff83056116e7337. ([`b949f63`](https://github.com/kaechele/bonaparte/commit/b949f636f19eca453647dfb95e8d7292f76ca71f))
+
+
+## v0.1.2 (2023-09-07)
 
 ### Chore
 
@@ -23,6 +133,25 @@
 * chore(deps): update pre-commit hook kaechele/pre-commit-mirror-prettier to v3.0.3 ([`39591f6`](https://github.com/kaechele/bonaparte/commit/39591f69875910fdc48041a470bfc184bab03c2c))
 
 * chore(deps): update dependency sphinx to v7.2.4 ([`07ae2c1`](https://github.com/kaechele/bonaparte/commit/07ae2c1e1f335de72a9310dd39e5a5aca5bb17eb))
+
+### Fix
+
+* fix(deps): update bleak-retry-connector
+
+Signed-off-by: Felix Kaechele &lt;felix@kaechele.ca&gt; ([`dfd6d49`](https://github.com/kaechele/bonaparte/commit/dfd6d49e0772cc0fd410058ac61fddaae70360a3))
+
+* fix: sync version numbers
+
+Signed-off-by: Felix Kaechele &lt;felix@kaechele.ca&gt; ([`f41cd64`](https://github.com/kaechele/bonaparte/commit/f41cd64bd4b42050e27757911a30bb6f81fc05fe))
+
+* fix: update bleak and fix python version constraints
+
+Signed-off-by: Felix Kaechele &lt;felix@kaechele.ca&gt; ([`56f3163`](https://github.com/kaechele/bonaparte/commit/56f31634ec5b0edcf042ddf2eab9a2d15d4f4d76))
+
+
+## v0.1.1 (2023-08-27)
+
+### Chore
 
 * chore(deps): update python-semantic-release/python-semantic-release action to v8.0.8 ([`5574dc1`](https://github.com/kaechele/bonaparte/commit/5574dc1c9fb458f3df07192f5bb0b284b24d5732))
 
@@ -105,18 +234,6 @@
 * chore(deps): update python-semantic-release/python-semantic-release action to v8.0.3 ([`608ac5e`](https://github.com/kaechele/bonaparte/commit/608ac5ea62387bfd0da0f73c4ce69e663657a931))
 
 ### Fix
-
-* fix(deps): update bleak-retry-connector
-
-Signed-off-by: Felix Kaechele &lt;felix@kaechele.ca&gt; ([`dfd6d49`](https://github.com/kaechele/bonaparte/commit/dfd6d49e0772cc0fd410058ac61fddaae70360a3))
-
-* fix: sync version numbers
-
-Signed-off-by: Felix Kaechele &lt;felix@kaechele.ca&gt; ([`f41cd64`](https://github.com/kaechele/bonaparte/commit/f41cd64bd4b42050e27757911a30bb6f81fc05fe))
-
-* fix: update bleak and fix python version constraints
-
-Signed-off-by: Felix Kaechele &lt;felix@kaechele.ca&gt; ([`56f3163`](https://github.com/kaechele/bonaparte/commit/56f31634ec5b0edcf042ddf2eab9a2d15d4f4d76))
 
 * fix: expose Fireplace features attribute
 
