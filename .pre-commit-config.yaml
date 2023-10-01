@@ -70,7 +70,7 @@ repos:
       - id: codespell
         exclude: (poetry.lock)
   - repo: https://github.com/PyCQA/pylint
-    rev: v2.17.6
+    rev: v2.17.7
     hooks:
       - id: pylint
         exclude: (docs|tests|setup.py)
