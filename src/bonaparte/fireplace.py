@@ -466,7 +466,7 @@ class Fireplace(EfireDevice):
             EfireCommand.SET_LED_POWER,
             LedState.ON.long  # type: ignore[attr-defined] # pylint: disable=no-member
             if on
-            else LedState.OFF.long,  # type: ignore[attr-defined] # pylint: disable=no-member # noqa: E501
+            else LedState.OFF.long,  # type: ignore[attr-defined] # pylint: disable=no-member
         )
 
     @needs_auth
@@ -515,7 +515,7 @@ class Fireplace(EfireDevice):
         """Update the power state of the LED Controller."""
         result = await self.execute_command(EfireCommand.GET_LED_STATE)
 
-        self._state.led = result == LedState.ON.long  # type: ignore[attr-defined] # pylint: disable=no-member # noqa: E501
+        self._state.led = result == LedState.ON.long  # type: ignore[attr-defined] # pylint: disable=no-member
 
     # E1
     @needs_auth
