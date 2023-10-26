@@ -299,13 +299,13 @@ typing-extensions = {version = ">=4.7.0", markers = "python_version < \"3.12\""}
 
 [[package]]
 name = "bleak-retry-connector"
-version = "3.2.1"
+version = "3.3.0"
 description = "A connector for Bleak Clients that handles transient connection failures"
 optional = false
 python-versions = ">=3.10,<3.13"
 files = [
-    {file = "bleak_retry_connector-3.2.1-py3-none-any.whl", hash = "sha256:248dd096fd1ff5386187ae5e538c802da205905122c41c8ff8405b6858204c45"},
-    {file = "bleak_retry_connector-3.2.1.tar.gz", hash = "sha256:7592c93c75fba1920739b3c6a1094ab3d4aa76a8be46339889ec8dac1f663fa4"},
+    {file = "bleak_retry_connector-3.3.0-py3-none-any.whl", hash = "sha256:d3c9bd3dc950a1022d6e57ae298b4a4067649cf36800a554a003b7454790bfd7"},
+    {file = "bleak_retry_connector-3.3.0.tar.gz", hash = "sha256:56a53fd49a0d4cd1a467d07677f4f7741b1fe03ce9c781585b595e2c1b2230df"},
 ]
 
 [package.dependencies]
