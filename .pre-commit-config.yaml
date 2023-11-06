@@ -76,7 +76,6 @@ repos:
         exclude: (docs|tests|setup.py)
         additional_dependencies:
           - aenum
-          - async_timeout
           - bleak
           - bleak_retry_connector
   - repo: https://github.com/pre-commit/mirrors-mypy
