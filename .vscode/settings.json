@@ -1,15 +1,9 @@
 {
-  "python.formatting.provider": "black",
-  "python.formatting.blackArgs": ["--experimental-string-processing"],
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
-    "source.organizeImports": true
+    "source.organizeImports": "explicit"
   },
   "[lua]": {
     "editor.defaultFormatter": "JohnnyMorganz.stylua"
-  },
-  "python.analysis.typeCheckingMode": "basic",
-  "python.linting.pylintEnabled": true,
-  "python.linting.enabled": true,
-  "ruff.organizeImports": false
+  }
 }
