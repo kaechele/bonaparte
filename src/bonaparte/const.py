@@ -2,15 +2,9 @@
 
 from __future__ import annotations
 
-from enum import IntEnum
-import sys
+from enum import IntEnum, StrEnum
 
 from aenum import MultiValueEnum
-
-if sys.version_info >= (3, 11):
-    from enum import StrEnum
-else:
-    from aenum import StrEnum
 
 # Package format constants
 HEADER = 0xAB
