@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import asyncio
 import logging
-from typing import TYPE_CHECKING, Any, Concatenate, ParamSpec, TypeVar
+from typing import TYPE_CHECKING, Any, ParamSpec, TypeVar
 
 from bleak.exc import BleakDBusError, BleakError
 from bleak_retry_connector import (
@@ -33,7 +33,7 @@ from .utils import build_message, checksum_message
 
 if TYPE_CHECKING:
     from asyncio import AbstractEventLoop, Task
-    from collections.abc import Awaitable, Callable
+    from collections.abc import Callable
 
     from bleak.backends.characteristic import BleakGATTCharacteristic
     from bleak.backends.device import BLEDevice
@@ -48,22 +48,6 @@ BLEAK_BACKOFF_TIME = 0.25
 
 P = ParamSpec("P")
 T = TypeVar("T")
-
-
-def raise_if_not_connected(
-    func: Callable[Concatenate[EfireDevice, P], Awaitable[T]]
-) -> Callable[Concatenate[EfireDevice, P], Awaitable[T]]:
-    """Define a wrapper to authenticate if we aren't yet."""
-
-    async def _raise_if_not_connected(
-        self: EfireDevice, *args: P.args, **kwargs: P.kwargs
-    ) -> T:
-        if not self._is_connected:  # pylint: disable=protected-access
-            msg = "Fireplace is not connected"
-            raise DisconnectedException(msg)
-        return await func(self, *args, **kwargs)
-
-    return _raise_if_not_connected
 
 
 class EfireDevice:
