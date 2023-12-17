@@ -5,5 +5,8 @@
   },
   "[lua]": {
     "editor.defaultFormatter": "JohnnyMorganz.stylua"
+  },
+  "[python]": {
+    "editor.defaultFormatter": "charliermarsh.ruff"
   }
 }
