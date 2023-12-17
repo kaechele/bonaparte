@@ -16,4 +16,13 @@ response = {
     "cmd2_state_all_off": bytes.fromhex("ab bb 05 e4 00 00 e1 55"),
     "led_color_0000ff": bytes.fromhex("ab bb 06 e1 00 02 ff 1a 55"),
     "led_controller_state": bytes.fromhex("ab bb 08 ee ff 00 00 ff 02 e4 55"),
+    "password_mgmt_success": bytes.fromhex("ab bb 04 c6 00 c2 55"),
+}
+
+invalid_responses = {
+    "invalid_header": bytes.fromhex("bb bb 06 f2 00 08 00 fc 55"),
+    "invalid_msg_type_header": bytes.fromhex("ab ab 06 f2 00 08 00 fc 55"),
+    "incorrect_length": bytes.fromhex("ab bb 03 f2 00 08 00 fc 55"),
+    "invalid_checksum": bytes.fromhex("ab bb 06 f2 00 08 00 00 55"),
+    "invalid_footer": bytes.fromhex("ab bb 06 f2 00 08 00 fc 44"),
 }

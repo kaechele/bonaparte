@@ -79,6 +79,7 @@ class EfireDevice:
         self._is_connected = False
         self._loop: AbstractEventLoop | None = None
         self._notifications_started = False
+        self._notify_future = None
         self._write_lock = asyncio.Lock()
 
     @property
@@ -126,10 +127,10 @@ class EfireDevice:
                 return
             _LOGGER.debug("[%s]: Connecting; RSSI: %s", self.name, self.rssi)
             client = await establish_connection(
-                BleakClientWithServiceCache,
-                self._ble_device,
-                self.name,
-                self._disconnected,
+                client_class=BleakClientWithServiceCache,
+                device=self._ble_device,
+                name=self.name,
+                disconnected_callback=self._disconnected,
                 use_services_cache=True,
                 ble_device_callback=lambda: self._ble_device,
             )
@@ -235,7 +236,7 @@ class EfireDevice:
         if len(message) < MIN_MESSAGE_LENGTH:
             msg = (
                 f"Message too short. Got {len(message)} bytes, expected at least 6"
-                " bytes"
+                " bytes."
             )
             raise EfireMessageValueError(msg)
         if message[0] != HEADER:
@@ -257,17 +258,17 @@ class EfireDevice:
             )
             raise EfireMessageValueError(msg)
         if message[-1] != FOOTER:
-            msg = f"Invalid fooer {message[-1]}. Message should end with {FOOTER}."
+            msg = f"Invalid footer {message[-1]}. Message should end with {FOOTER}."
             raise EfireMessageValueError(msg)
 
     async def _notification_handler(
         self, _char: BleakGATTCharacteristic, message: bytearray
     ) -> None:
         _LOGGER.debug(
-            "[%s]: Receiving response via notify: %s (expected=%s)",
+            "[%s]: Receiving an %sexpected response via notify: %s",
             self.name,
+            "un" if self._notify_future is None else "",
             message.hex(" "),
-            bool(self._notify_future),
         )
 
         if not self._notify_future:
