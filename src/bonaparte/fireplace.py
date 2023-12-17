@@ -43,7 +43,7 @@ T = TypeVar("T")
 
 
 def needs_auth(
-    func: Callable[Concatenate[Fireplace, P], Awaitable[T]]
+    func: Callable[Concatenate[Fireplace, P], Awaitable[T]],
 ) -> Callable[Concatenate[Fireplace, P], Awaitable[T]]:
     """Define a wrapper to authenticate if we aren't yet authenticated."""
 

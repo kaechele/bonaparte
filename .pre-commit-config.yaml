@@ -56,15 +56,23 @@ repos:
         args:
           - --in-place
           - --remove-all-unused-imports
-  - repo: https://github.com/psf/black
-    rev: 23.12.0
-    hooks:
-      - id: black
-  - repo: https://github.com/charliermarsh/ruff-pre-commit
+  - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.1.8
     hooks:
+      - id: ruff-format
+        name: ruff (format)
+        args: ["."]
+        pass_filenames: false
       - id: ruff
-        args: [--fix, --exit-non-zero-on-fix]
+        name: ruff (lint)
+        args:
+          - "--fix"
+          - "--exit-non-zero-on-fix"
+          - "--statistics"
+          - "--output-format=text"
+          - "."
+        pass_filenames: false
+
   - repo: https://github.com/codespell-project/codespell
     rev: v2.2.6
     hooks:
