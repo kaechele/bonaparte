@@ -530,7 +530,7 @@ class Fireplace(EfireDevice):
         """Update the mode of the LED colors."""
         result = await self.execute_command(EfireCommand.GET_LED_MODE)
 
-        self._state.led_mode = LedMode(int.from_bytes(result, "big"))
+        self._state.led_mode = LedMode(bytes(result))
 
     # E3
     @needs_auth
