@@ -1,8 +1,7 @@
 """Representation of a Fireplace."""
 from __future__ import annotations
 
-from dataclasses import dataclass
-from dataclasses import fields as dc_fields
+from dataclasses import dataclass, fields as dc_fields
 import logging
 from typing import TYPE_CHECKING, Concatenate, ParamSpec, TypeVar
 
@@ -43,7 +42,7 @@ T = TypeVar("T")
 
 
 def needs_auth(
-    func: Callable[Concatenate[Fireplace, P], Awaitable[T]]
+    func: Callable[Concatenate[Fireplace, P], Awaitable[T]],
 ) -> Callable[Concatenate[Fireplace, P], Awaitable[T]]:
     """Define a wrapper to authenticate if we aren't yet authenticated."""
 

@@ -1,8 +1,7 @@
 """Miscellaneous tests."""
 from bleak.backends.device import BLEDevice
-import pytest
-
 from bonaparte import Fireplace, FireplaceFeatures
+import pytest
 
 fp = Fireplace(BLEDevice("aa:bb:cc:dd:ee:ff", "Fireplace", details=None, rssi=0))
 

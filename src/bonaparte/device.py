@@ -8,12 +8,12 @@ from typing import TYPE_CHECKING, Any, Concatenate, ParamSpec, TypeVar
 
 from bleak.exc import BleakDBusError, BleakError
 from bleak_retry_connector import (
+    BLEAK_RETRY_EXCEPTIONS as BLEAK_EXCEPTIONS,
     BleakClientWithServiceCache,
     BleakNotFoundError,
     establish_connection,
     retry_bluetooth_connection_error,
 )
-from bleak_retry_connector import BLEAK_RETRY_EXCEPTIONS as BLEAK_EXCEPTIONS
 
 from .const import (
     FOOTER,
@@ -51,7 +51,7 @@ T = TypeVar("T")
 
 
 def raise_if_not_connected(
-    func: Callable[Concatenate[EfireDevice, P], Awaitable[T]]
+    func: Callable[Concatenate[EfireDevice, P], Awaitable[T]],
 ) -> Callable[Concatenate[EfireDevice, P], Awaitable[T]]:
     """Define a wrapper to authenticate if we aren't yet."""
 
