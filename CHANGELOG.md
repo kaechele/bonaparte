@@ -2,6 +2,219 @@
 
 
 
+## v0.3.0 (2023-12-29)
+
+### Build
+
+* build: use Python 3.12 in tooling
+
+Signed-off-by: Felix Kaechele &lt;felix@kaechele.ca&gt; ([`eb978a1`](https://github.com/kaechele/bonaparte/commit/eb978a19a7e9aa46073ee552763f77a81e0a51d4))
+
+* build: clean up pre-commit and tooling
+
+Replace a few tools with ruff in the process.
+
+Signed-off-by: Felix Kaechele &lt;felix@kaechele.ca&gt; ([`15f2298`](https://github.com/kaechele/bonaparte/commit/15f2298dcae82a7e016dca5c7519ef081162efa5))
+
+### Chore
+
+* chore: format files using new settings
+
+Signed-off-by: Felix Kaechele &lt;felix@kaechele.ca&gt; ([`135405c`](https://github.com/kaechele/bonaparte/commit/135405c8681b07410466bb4a09d7e8ee35655eec))
+
+* chore(deps): lock dependencies
+
+Signed-off-by: Felix Kaechele &lt;felix@kaechele.ca&gt; ([`47be2fd`](https://github.com/kaechele/bonaparte/commit/47be2fd390e3ac986acc2c6f0a2a8cb4ab035edb))
+
+* chore(deps): update pre-commit hook psf/black to v23.12.1 ([`0669ed0`](https://github.com/kaechele/bonaparte/commit/0669ed0e4c42ee0a13915bfc94d2c442af28125b))
+
+* chore(deps): update dependency black to v23.12.1 ([`66d1135`](https://github.com/kaechele/bonaparte/commit/66d11357f3dab0f7e05e3d34c9175104b6650acc))
+
+* chore(deps): update python-semantic-release/python-semantic-release action to v8.7.0 ([`c331d7c`](https://github.com/kaechele/bonaparte/commit/c331d7cbf1a8e5de2657ba4801e5974dc6d5a445))
+
+* chore(deps): update pre-commit hook pre-commit/mirrors-mypy to v1.8.0 ([`9080ab9`](https://github.com/kaechele/bonaparte/commit/9080ab925eda60eafae69856d3537a5b511c35d5))
+
+* chore(deps): update pre-commit hook charliermarsh/ruff-pre-commit to v0.1.9 ([`b9b090c`](https://github.com/kaechele/bonaparte/commit/b9b090c13f53410a9a2a5f9fb4d69235ac3adb5d))
+
+* chore(deps): update python-semantic-release/python-semantic-release action to v8.5.2 ([`e6e2e6c`](https://github.com/kaechele/bonaparte/commit/e6e2e6c482e28e902aa9b7f25429d9a664c0e343))
+
+* chore(deps): update pre-commit hook pycqa/isort to v5.13.2 ([`aacf051`](https://github.com/kaechele/bonaparte/commit/aacf051d22f73536551d2351a4405546cb91f7b4))
+
+* chore(deps): update actions/setup-python action to v5 ([`1a4cb49`](https://github.com/kaechele/bonaparte/commit/1a4cb4985137bfb8269946c164b1a52fb4e0749f))
+
+* chore(deps): update pre-commit hook charliermarsh/ruff-pre-commit to v0.1.8 ([`5e6145a`](https://github.com/kaechele/bonaparte/commit/5e6145af17558dcdbd75656c68d7632ebc17b89b))
+
+* chore(deps): update python-semantic-release/python-semantic-release action to v8.5.1 ([`3845fe3`](https://github.com/kaechele/bonaparte/commit/3845fe36756e86b1b906ae6cd09aa78ac5dc809a))
+
+* chore(deps): update pre-commit hook psf/black to v23.12.0 ([`0251a8d`](https://github.com/kaechele/bonaparte/commit/0251a8d9ca9e66a57cae0ebecfd0d36ede145dd3))
+
+* chore(deps): update dependency black to v23.12.0 ([`8cf5dcd`](https://github.com/kaechele/bonaparte/commit/8cf5dcdff8ec3da1c6827e3c3193a65de7184a2e))
+
+* chore(deps): update pre-commit hook pycqa/pylint to v3.0.3 ([`fa39b2c`](https://github.com/kaechele/bonaparte/commit/fa39b2ce11279c23c3e16ededc4b7cb2d9693c5f))
+
+* chore(deps): update pre-commit hook pycqa/isort to v5.13.1 ([`432a173`](https://github.com/kaechele/bonaparte/commit/432a173615b221f5ae4309d90eeae36b17b71ea9))
+
+* chore(deps): update dependency reportlab to v4.0.8 ([`81622ce`](https://github.com/kaechele/bonaparte/commit/81622cea3b8ddea8eb9129f146464e4cd0753f62))
+
+* chore(deps): update dependency pylint to v3.0.3 ([`cbc8a07`](https://github.com/kaechele/bonaparte/commit/cbc8a07950b9b96194bc0c5d972ee4849432cce9))
+
+* chore(deps): update pre-commit hook kaechele/pre-commit-mirror-prettier to v3.1.1 ([`330fe78`](https://github.com/kaechele/bonaparte/commit/330fe78ff2303c4060c06144e373052d05b1cfe8))
+
+* chore(deps): update pre-commit hook pycqa/isort to v5.13.0 ([`e57439a`](https://github.com/kaechele/bonaparte/commit/e57439aa493a401a5f33d05f135a2475b5826afe))
+
+* chore(deps): update pre-commit hook pycqa/bandit to v1.7.6 ([`28c5e6a`](https://github.com/kaechele/bonaparte/commit/28c5e6a17c329854f5a750d59aba321abd005504))
+
+* chore(deps): update pre-commit hook lunarmodules/luacheck to v1.1.2 ([`643fbe6`](https://github.com/kaechele/bonaparte/commit/643fbe6fed279a3847134f724c61d3c7a4ff0940))
+
+* chore(deps): update python-semantic-release/python-semantic-release action to v8.5.0 ([`e43a43a`](https://github.com/kaechele/bonaparte/commit/e43a43a532e51b8a623e4e3e81087bfa197a7f56))
+
+* chore(deps): update pre-commit hook charliermarsh/ruff-pre-commit to v0.1.7 ([`507430b`](https://github.com/kaechele/bonaparte/commit/507430b87ec0fd4986e0ab33bd82c20b70df73a1))
+
+* chore(deps): update pre-commit hook commitizen-tools/commitizen to v3.13.0 ([`81735ae`](https://github.com/kaechele/bonaparte/commit/81735ae3a6a558f907f0a8ecfec07da5cc3c261b))
+
+* chore(deps): update indirect dependencies
+
+Signed-off-by: Felix Kaechele &lt;felix@kaechele.ca&gt; ([`cc44ffa`](https://github.com/kaechele/bonaparte/commit/cc44ffa22c7243055545a9cdade1a102a414663b))
+
+* chore(deps): update pre-commit hook pre-commit/mirrors-mypy to v1.7.1 ([`b4a535a`](https://github.com/kaechele/bonaparte/commit/b4a535aa9d7267266804106fecd7c7914b8d771f))
+
+* chore(deps): update pre-commit hook charliermarsh/ruff-pre-commit to v0.1.6 ([`444d76e`](https://github.com/kaechele/bonaparte/commit/444d76ec18ee2baf3fab0b872db1e624557cf68e))
+
+* chore(deps): update pre-commit hook python-poetry/poetry to v1.7.1 ([`9d78e01`](https://github.com/kaechele/bonaparte/commit/9d78e01b63dbd0fa909278303e74b6d384850ed6))
+
+* chore(deps): update pre-commit hook johnnymorganz/stylua to v0.19.1 ([`59ead82`](https://github.com/kaechele/bonaparte/commit/59ead82bef5be705f66a315ed17ff75646326287))
+
+* chore(deps): update pre-commit hook kaechele/pre-commit-mirror-prettier to v3.1.0 ([`d9c8256`](https://github.com/kaechele/bonaparte/commit/d9c825635dab0d6d1a1f733ec654545299713246))
+
+* chore(deps): update pre-commit hook johnnymorganz/stylua to v0.19.0 ([`5f6ffd4`](https://github.com/kaechele/bonaparte/commit/5f6ffd4b6996a0111fff39d3d4c47eb46cd429c5))
+
+* chore(deps): update pre-commit hook pre-commit/mirrors-mypy to v1.7.0 ([`bc3b510`](https://github.com/kaechele/bonaparte/commit/bc3b51071e1ccb0fcf809ce4cdc32f009ec0e039))
+
+* chore(deps): update pre-commit hook charliermarsh/ruff-pre-commit to v0.1.5 ([`55c206d`](https://github.com/kaechele/bonaparte/commit/55c206d3aea270b48b34701d6cfb1168551f5dcf))
+
+* chore(deps): update pre-commit hook psf/black to v23.11.0 ([`9ee22da`](https://github.com/kaechele/bonaparte/commit/9ee22dae876d5f9508a6dd6c72908c3615eb5347))
+
+* chore(deps): update dependency reportlab to v4.0.7 ([`2cd9aa1`](https://github.com/kaechele/bonaparte/commit/2cd9aa10b91c039c8b7a2b44d5d3b2c61b3506a9))
+
+* chore(deps): update dependency black to v23.11.0 ([`d028ee9`](https://github.com/kaechele/bonaparte/commit/d028ee95dd68ca2ee76b529ef3b959dbbeac01fe))
+
+* chore: remove unused configurations
+
+Signed-off-by: Felix Kaechele &lt;felix@kaechele.ca&gt; ([`78acf17`](https://github.com/kaechele/bonaparte/commit/78acf17b58f5acfd7cd05efc698e55ecc5e58f6e))
+
+* chore: update VSCode workspace settings
+
+Signed-off-by: Felix Kaechele &lt;felix@kaechele.ca&gt; ([`b9cc27e`](https://github.com/kaechele/bonaparte/commit/b9cc27e5b860e477ec58a63e67a88a9dc9605c15))
+
+* chore(deps): update dependencies
+
+Signed-off-by: Felix Kaechele &lt;felix@kaechele.ca&gt; ([`cd90b06`](https://github.com/kaechele/bonaparte/commit/cd90b064e0fd81e56a6c724191050f7bcc0483d6))
+
+* chore(deps): update pre-commit hook charliermarsh/ruff-pre-commit to v0.1.4 ([`f4e0b75`](https://github.com/kaechele/bonaparte/commit/f4e0b752b9ff74a7d8da09a32fc6a0b7a19317bb))
+
+* chore(deps): update pre-commit hook python-poetry/poetry to v1.7.0 ([`95d6fd5`](https://github.com/kaechele/bonaparte/commit/95d6fd50e804452325a0dd3a19402cf60052eba9))
+
+* chore(deps): update wagoid/commitlint-github-action action to v5.4.4 ([`4a48c32`](https://github.com/kaechele/bonaparte/commit/4a48c32e558372cac6a9cb1033d468631d67ee5e))
+
+* chore(deps): update pre-commit hook charliermarsh/ruff-pre-commit to v0.1.3 ([`c2e2679`](https://github.com/kaechele/bonaparte/commit/c2e267939f9cee303ad86564735c0fe03d34894b))
+
+* chore(deps): update dependency pytest to v7.4.3 ([`a35e24f`](https://github.com/kaechele/bonaparte/commit/a35e24fd3e43ecb82bad8f308aefdb198a37824a))
+
+* chore(deps): update pre-commit hook charliermarsh/ruff-pre-commit to v0.1.2 ([`74c6dee`](https://github.com/kaechele/bonaparte/commit/74c6dee54cab521c7b6a81469bc9362d21cc727b))
+
+* chore(deps): update python-semantic-release/python-semantic-release action to v8.3.0 ([`0bfe76c`](https://github.com/kaechele/bonaparte/commit/0bfe76c8150b449e9d713aa1eb10cdb1519e0605))
+
+* chore(deps): update pre-commit hook psf/black to v23.10.1 ([`6a1b395`](https://github.com/kaechele/bonaparte/commit/6a1b395944e4473950968856beb17870310df89f))
+
+* chore(deps): update dependency black to v23.10.1 ([`2548fd4`](https://github.com/kaechele/bonaparte/commit/2548fd41c816c1b85993038ba65630fd51e56255))
+
+* chore(deps): update pre-commit hook pycqa/pylint to v3.0.2 ([`cafb070`](https://github.com/kaechele/bonaparte/commit/cafb070a525a94244f10570f515fe0888f6fe0aa))
+
+* chore(deps): update dependency pylint to v3.0.2 ([`50be153`](https://github.com/kaechele/bonaparte/commit/50be153933e3e99070853a2a23643aa8c2ec472a))
+
+* chore(deps): update pre-commit hook charliermarsh/ruff-pre-commit to v0.1.1 ([`5e489da`](https://github.com/kaechele/bonaparte/commit/5e489da3a28f467292c72c34cc4e9a09c5c7cfc2))
+
+* chore(deps): update pre-commit hook pre-commit/mirrors-mypy to v1.6.1 ([`52fad2f`](https://github.com/kaechele/bonaparte/commit/52fad2f043c347df5aacc2e3be517e84b738a8fe))
+
+* chore(deps): update pre-commit hook commitizen-tools/commitizen to v3.12.0 ([`c1de611`](https://github.com/kaechele/bonaparte/commit/c1de61151a39c11bd28b42b27de60a29e52fb9da))
+
+* chore(deps): update dependency black to v23.10.0 ([`5d06834`](https://github.com/kaechele/bonaparte/commit/5d06834fdbdeb9381605838f59b959ea40457758))
+
+* chore(deps): update pre-commit hook psf/black to v23.10.0 ([`577008f`](https://github.com/kaechele/bonaparte/commit/577008f272c8d8b641d298162bb661a130781692))
+
+* chore(deps): update pre-commit hook commitizen-tools/commitizen to v3.11.0 ([`e7e0373`](https://github.com/kaechele/bonaparte/commit/e7e037309260bdca713ba64035bbb9223f6447fa))
+
+* chore(deps): update pre-commit hook charliermarsh/ruff-pre-commit to v0.1.0 ([`b4d82ca`](https://github.com/kaechele/bonaparte/commit/b4d82ca15f8cf72369c46b560f6ba53c6c1c6bdb))
+
+* chore(deps): update pre-commit hook commitizen-tools/commitizen to v3.10.1 ([`05413ad`](https://github.com/kaechele/bonaparte/commit/05413ade408c72489137a75f8f3109d13dfd1926))
+
+* chore(deps): update python-semantic-release/python-semantic-release action to v8.1.2 ([`dfded2f`](https://github.com/kaechele/bonaparte/commit/dfded2f53993b1bd817c2b07e2cba22bfe33c52e))
+
+* chore(deps): update pre-commit hook pre-commit/mirrors-mypy to v1.6.0 ([`960b573`](https://github.com/kaechele/bonaparte/commit/960b5730b09e5851f4c0ea1acf3eadbb4d9b3d96))
+
+* chore(deps): update pre-commit hook charliermarsh/ruff-pre-commit to v0.0.292 ([`79fe0d5`](https://github.com/kaechele/bonaparte/commit/79fe0d5e0a13e3c24656facdb7c586a60edcb60f))
+
+* chore(deps): update dependency reportlab to v4.0.6 ([`dbd8b5d`](https://github.com/kaechele/bonaparte/commit/dbd8b5d1afced6907d22c92ccef2eb3988bd125f))
+
+* chore(deps): update pre-commit hook pycqa/pylint to v3 ([`d0fce12`](https://github.com/kaechele/bonaparte/commit/d0fce12803918da8ad905b27d49b135fec040878))
+
+* chore(deps): update dependency pylint to v3.0.1 ([`dabc7d0`](https://github.com/kaechele/bonaparte/commit/dabc7d0399a1f3b6832fa6903a6ad7cd10a255d6))
+
+* chore(deps): update dependency pylint to v3 ([`548bf81`](https://github.com/kaechele/bonaparte/commit/548bf81689baa065c91c2a2c9349b334781e01c6))
+
+* chore(deps): update pre-commit hook pre-commit/pre-commit-hooks to v4.5.0 ([`a15e097`](https://github.com/kaechele/bonaparte/commit/a15e097fe5ee7c196a8c57b128aa889a48f6574e))
+
+* chore(deps): update pre-commit hook asottile/pyupgrade to v3.15.0 ([`526d298`](https://github.com/kaechele/bonaparte/commit/526d29886617885397949c94f68a106c4ced1f11))
+
+* chore(deps): update pre-commit hook asottile/pyupgrade to v3.14.0 ([`df94547`](https://github.com/kaechele/bonaparte/commit/df9454751d5382d00de587ef1764dbf404bb6e95))
+
+* chore(deps): update pre-commit hook codespell-project/codespell to v2.2.6 ([`6c78c7e`](https://github.com/kaechele/bonaparte/commit/6c78c7e433e83eb7db264f35974a74c7654d67bb))
+
+* chore(deps): update pre-commit hook pycqa/pylint to v2.17.7 ([`d9084ff`](https://github.com/kaechele/bonaparte/commit/d9084ffe325e72d04778bf9be9dca37e8e9eec99))
+
+* chore(deps): update dependency pylint to v2.17.7 ([`4f77150`](https://github.com/kaechele/bonaparte/commit/4f771503f70f1fc656c7b5d83945462aa1966257))
+
+### Ci
+
+* ci: revert python-semantic-release to 8.3.0
+
+Later versions reverted https://github.com/python-semantic-release/python-semantic-release/pull/692
+which breaks builds on Python projects requiring a newer interpreter
+than 3.10, which their container uses.
+
+Should be fine to update after
+https://github.com/python-semantic-release/python-semantic-release/pull/741
+is merged again.
+
+Signed-off-by: Felix Kaechele &lt;felix@kaechele.ca&gt; ([`2b6d7b0`](https://github.com/kaechele/bonaparte/commit/2b6d7b01b89322c31e002f6800993e4ab4224cfd))
+
+* ci: use v4 version tag for action/checkout
+
+Signed-off-by: Felix Kaechele &lt;felix@kaechele.ca&gt; ([`7952ed7`](https://github.com/kaechele/bonaparte/commit/7952ed7b470016a44bc5c23a12a2401458248c2c))
+
+### Feature
+
+* feat: add Python 3.12, drop 3.10
+
+Signed-off-by: Felix Kaechele &lt;felix@kaechele.ca&gt; ([`d16f8a3`](https://github.com/kaechele/bonaparte/commit/d16f8a3a2a5784b1e48869daf8136dd830764c7b))
+
+### Fix
+
+* fix: correct LedState handling as bytes
+
+Signed-off-by: Felix Kaechele &lt;felix@kaechele.ca&gt; ([`31ec630`](https://github.com/kaechele/bonaparte/commit/31ec63089fb27beeeb40533348075e9c5816787b))
+
+* fix: remove async_timeout from pre-commit-config
+
+Signed-off-by: Felix Kaechele &lt;felix@kaechele.ca&gt; ([`218431f`](https://github.com/kaechele/bonaparte/commit/218431f35a0cc40f7f189aac19e6aeaff6f53436))
+
+* fix(deps): update dependency bleak-retry-connector to v3.3.0 ([`7ed4c4c`](https://github.com/kaechele/bonaparte/commit/7ed4c4c3f63d2782668e9aeed83be1d8fe9e75c5))
+
+* fix: ruff suggested fixes
+
+Signed-off-by: Felix Kaechele &lt;felix@kaechele.ca&gt; ([`7fae4cb`](https://github.com/kaechele/bonaparte/commit/7fae4cb5ab6bb5df1b015eac242ef06a2f0d7d94))
+
+
 ## v0.2.0 (2023-09-30)
 
 ### Chore
