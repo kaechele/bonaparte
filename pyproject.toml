@@ -42,7 +42,7 @@ myst-parser = ">=0.16"
 sphinx = ">=4.0"
 sphinxcontrib-nwdiag = "^2.0.0"
 reportlab = "^4.0.0"
-furo = "^2023.5.20"
+furo = "^2024.0.0"
 pillow = "<10"
 
 [tool.semantic_release]
