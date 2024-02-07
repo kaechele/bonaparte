@@ -22,7 +22,7 @@ jobs:
         with:
           packages: luarocks
           version: 1.0
-      - uses: pre-commit/action@v3.0.0
+      - uses: pre-commit/action@v3.0.1
 
   # Make sure commit messages follow the conventional commits convention:
   # https://www.conventionalcommits.org
