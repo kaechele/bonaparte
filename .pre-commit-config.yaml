@@ -65,7 +65,7 @@ repos:
       - id: codespell
         exclude: (poetry.lock)
   - repo: https://github.com/PyCQA/pylint
-    rev: v3.0.4
+    rev: v3.1.0
     hooks:
       - id: pylint
         exclude: (docs|tests|setup.py)
