@@ -1,4 +1,5 @@
 """Representation of a Fireplace."""
+
 from __future__ import annotations
 
 from dataclasses import dataclass, fields as dc_fields

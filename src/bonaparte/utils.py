@@ -1,4 +1,5 @@
 """Helper functions and utilities used in the Bonaparte library."""
+
 from __future__ import annotations
 
 from functools import reduce

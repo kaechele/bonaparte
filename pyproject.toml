@@ -135,15 +135,16 @@ expected-line-ending-format = "LF"
 target-version = "py312"
 exclude = ["docs", "setup.py"]
 
+# Same as Black.
+line-length = 88
+
+[tool.ruff.lint]
 # Let's tone this down once we release the first version
 select = ["ALL"]
 ignore = ["ANN101", "I001", "COM"]
 unfixable = ["ERA"]
 
-# Same as Black.
-line-length = 88
-
-[tool.ruff.flake8-import-conventions.extend-aliases]
+[tool.ruff.lint.flake8-import-conventions.extend-aliases]
 voluptuous = "vol"
 "homeassistant.helpers.area_registry" = "ar"
 "homeassistant.helpers.config_validation" = "cv"
@@ -152,22 +153,22 @@ voluptuous = "vol"
 "homeassistant.helpers.issue_registry" = "ir"
 "homeassistant.util.dt" = "dt_util"
 
-[tool.ruff.flake8-pytest-style]
+[tool.ruff.lint.flake8-pytest-style]
 fixture-parentheses = false
 
-[tool.ruff.flake8-tidy-imports.banned-api]
+[tool.ruff.lint.flake8-tidy-imports.banned-api]
 "async_timeout".msg = "use asyncio.timeout instead"
 "pytz".msg = "use zoneinfo instead"
 
-[tool.ruff.isort]
+[tool.ruff.lint.isort]
 force-sort-within-sections = true
 combine-as-imports = true
 split-on-trailing-comma = false
 
-[tool.ruff.per-file-ignores]
+[tool.ruff.lint.per-file-ignores]
 "tests/*" = ["S101"]
 
-[tool.ruff.mccabe]
+[tool.ruff.lint.mccabe]
 max-complexity = 25
 
 [build-system]

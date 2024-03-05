@@ -1,4 +1,5 @@
 """Miscellaneous tests."""
+
 from bleak.backends.device import BLEDevice
 from bonaparte import Fireplace, FireplaceFeatures
 import pytest

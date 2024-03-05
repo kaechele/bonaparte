@@ -1,4 +1,5 @@
 """Exceptions used in the Bonaparte library."""
+
 from __future__ import annotations
 
 

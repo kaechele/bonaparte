@@ -1,4 +1,5 @@
 """Parsers used in the Bonaparte library."""
+
 from __future__ import annotations
 
 from .const import LedMode, LedState
