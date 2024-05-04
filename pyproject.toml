@@ -25,7 +25,7 @@ packages = [
 
 [tool.poetry.dependencies]
 python = "^3.11"
-bleak = { version = "^0.21.0", python = ">=3.10,<3.13" }
+bleak = { version = "^0.22.0", python = ">=3.10,<3.13" }
 bleak-retry-connector = { version="^3.1.0", python = ">=3.10,<3.13" }
 aenum = "^3.1.11"
 
