@@ -26,13 +26,13 @@ packages = [
 [tool.poetry.dependencies]
 python = "^3.11"
 bleak = { version = "^0.22.0", python = ">=3.10,<3.13" }
-bleak-retry-connector = { version="^3.1.0", python = ">=3.10,<3.13" }
-aenum = "^3.1.11"
+bleak-retry-connector = { version="^3.5.0", python = ">=3.10,<3.13" }
+aenum = "^3.1.15"
 
 [tool.poetry.group.dev.dependencies]
-pytest = "^8.0.0"
+pytest = "^8.2.2"
 pytest-cov = "^5.0.0"
-pylint = "^3.0.0"
+pylint = "^3.2.2"
 
 [tool.poetry.group.docs]
 optional = true
