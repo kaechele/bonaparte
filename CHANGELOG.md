@@ -2,6 +2,262 @@
 
 
 
+## v0.3.1 (2024-06-05)
+
+### Build
+
+* build: downgrade pytest and update ruff config
+
+Signed-off-by: Felix Kaechele &lt;felix@kaechele.ca&gt; ([`f8c96f6`](https://github.com/kaechele/bonaparte/commit/f8c96f6aedbff97bc9d904726d4582f81fc9d30b))
+
+### Chore
+
+* chore(deps): update python-semantic-release/upload-to-gh-release action to v9.8.1 ([`6e87d6f`](https://github.com/kaechele/bonaparte/commit/6e87d6fe3035d342b5837d628b45ec7d192bb243))
+
+* chore(deps): update python-semantic-release/python-semantic-release action to v9.8.1 ([`7b1aca0`](https://github.com/kaechele/bonaparte/commit/7b1aca0e088a5cfa3d12d704a530a499300c71e5))
+
+* chore(deps): update dependency myst-parser to v3 ([`e4a60f7`](https://github.com/kaechele/bonaparte/commit/e4a60f73d0f5130a751668418e813f84e5b1ed2f))
+
+* chore(deps): update wagoid/commitlint-github-action action to v6 ([`d3fdcbd`](https://github.com/kaechele/bonaparte/commit/d3fdcbd5e9d4fe83327fcd5dcd4dbf2e2f2e6e86))
+
+* chore(deps): update pre-commit hook astral-sh/ruff-pre-commit to v0.4.8 ([`8321ca1`](https://github.com/kaechele/bonaparte/commit/8321ca112203c54d95762bb65dc34c6708febe64))
+
+* chore(deps): update dependency pytest to v8.2.2 ([`f59e7f9`](https://github.com/kaechele/bonaparte/commit/f59e7f9ebd8cb817a0ef11ee950e50198e04fe7b))
+
+* chore(deps): update pre-commit hook kaechele/pre-commit-mirror-prettier to v3.3.0 ([`efddcea`](https://github.com/kaechele/bonaparte/commit/efddcead712b37bb478ff2cdac89e378ef1c849d))
+
+* chore(deps): update pre-commit hook astral-sh/ruff-pre-commit to v0.4.7 ([`46a9870`](https://github.com/kaechele/bonaparte/commit/46a987090120f1fe3ed5f3849315a8372326fcdf))
+
+* chore(deps): update pre-commit hook astral-sh/ruff-pre-commit to v0.4.6 ([`95741c8`](https://github.com/kaechele/bonaparte/commit/95741c88eb3400f959d528a6afd3559eed1db88b))
+
+* chore(deps): update pre-commit hook lunarmodules/luacheck to v1.2.0 ([`2db1bfd`](https://github.com/kaechele/bonaparte/commit/2db1bfd630ddad30299c769bb0b3b9630b5cdc5b))
+
+* chore(deps): update pre-commit hook codespell-project/codespell to v2.3.0 ([`5615834`](https://github.com/kaechele/bonaparte/commit/56158344cef7c83ce18f9847eac21dbf9ed415b7))
+
+* chore(deps): update pre-commit hook astral-sh/ruff-pre-commit to v0.4.5 ([`3e672e1`](https://github.com/kaechele/bonaparte/commit/3e672e1d8675883264a950e27e3ff01909428dd7))
+
+* chore(deps): update pre-commit hook commitizen-tools/commitizen to v3.27.0 ([`2ab2598`](https://github.com/kaechele/bonaparte/commit/2ab25984dd1756392dd678059d284ed6942ade75))
+
+* chore(deps): update pre-commit hook pycqa/pylint to v3.2.2 ([`aaf369d`](https://github.com/kaechele/bonaparte/commit/aaf369da534a9f796293819b96f8c0ee6e28ccdf))
+
+* chore(deps): update dependency pylint to v3.2.2 ([`27846e5`](https://github.com/kaechele/bonaparte/commit/27846e565584c7f001069969a25d5381a9d4097d))
+
+* chore(deps): update dependency pytest to v8.2.1 ([`d87ec3b`](https://github.com/kaechele/bonaparte/commit/d87ec3bb9fd325165a964bb2a3a8c5b36ad78255))
+
+* chore(deps): update pre-commit hook pycqa/pylint to v3.2.1 ([`7d653f2`](https://github.com/kaechele/bonaparte/commit/7d653f28fa41148572c84420bda58cffe14b2b13))
+
+* chore(deps): update dependency pylint to v3.2.1 ([`f1bfe80`](https://github.com/kaechele/bonaparte/commit/f1bfe80338ea2647c33160164ec167d1cfd211d2))
+
+* chore(deps): update pre-commit hook commitizen-tools/commitizen to v3.26.0 ([`1d5b19f`](https://github.com/kaechele/bonaparte/commit/1d5b19f92d6ddbb054b6e66cb41c06c48f5b9ff3))
+
+* chore(deps): update pre-commit hook commitizen-tools/commitizen to v3.25.1 ([`f8e5c57`](https://github.com/kaechele/bonaparte/commit/f8e5c5727c382f2c14f5be88bd1ff9fba0909399))
+
+* chore(deps): update pre-commit hook pycqa/pylint to v3.2.0 ([`903a37e`](https://github.com/kaechele/bonaparte/commit/903a37e0350e76dd75085a4e3f11da958a8a679d))
+
+* chore(deps): update dependency pylint to v3.2.0 ([`3352d04`](https://github.com/kaechele/bonaparte/commit/3352d0418064a75baacd738f38c614c867ac2e96))
+
+* chore(deps): update pre-commit hook pycqa/pylint to v3.1.1 ([`f8b7344`](https://github.com/kaechele/bonaparte/commit/f8b7344662adcfe6cf47417b0d15b6860df831dc))
+
+* chore(deps): update dependency pylint to v3.1.1 ([`a244f59`](https://github.com/kaechele/bonaparte/commit/a244f59061cc6e18fb1b407dd37413575cd03a6f))
+
+* chore(deps): update pre-commit hook astral-sh/ruff-pre-commit to v0.4.4 ([`6ca9c86`](https://github.com/kaechele/bonaparte/commit/6ca9c86fba31b5c459527f25dba486568f63ab50))
+
+* chore(deps): update dependency furo to v2024.5.6 ([`bc4b9e5`](https://github.com/kaechele/bonaparte/commit/bc4b9e50d6d8e1942bde4ca031816dff5e6e7af0))
+
+* chore(deps): update pre-commit hook astral-sh/ruff-pre-commit to v0.4.3 ([`177bd8b`](https://github.com/kaechele/bonaparte/commit/177bd8b6d84ef190670e258f0d2c5c1a5494cf5a))
+
+* chore(deps): update pre-commit hook python-poetry/poetry to v1.8.3 ([`0b1b32c`](https://github.com/kaechele/bonaparte/commit/0b1b32c7454bd2a4fa2aeb140e7ed21d20389f8e))
+
+* chore(deps): update pre-commit hook commitizen-tools/commitizen to v3.25.0 ([`8e05fb9`](https://github.com/kaechele/bonaparte/commit/8e05fb9bd4edf3c05e0a0d358215082fdf7fac14))
+
+* chore(deps): update dependency pytest to v8.2.0 ([`c148844`](https://github.com/kaechele/bonaparte/commit/c1488445b955fc208a90e31853b51467529cabae))
+
+* chore(deps): update dependency furo to v2024.4.27 ([`b10fbf2`](https://github.com/kaechele/bonaparte/commit/b10fbf2c913953a89bccf36d6af7382a4dbbdb29))
+
+* chore(deps): update dependency pytest to v8.1.2 ([`074ac74`](https://github.com/kaechele/bonaparte/commit/074ac74772441843ab96233dfe0f63fd2578b015))
+
+* chore(deps): update pre-commit hook astral-sh/ruff-pre-commit to v0.4.2 ([`b58a16b`](https://github.com/kaechele/bonaparte/commit/b58a16bc0f19973e781a5a56e40721cd4e8508c6))
+
+* chore(deps): update pre-commit hook pre-commit/mirrors-mypy to v1.10.0 ([`bbb064c`](https://github.com/kaechele/bonaparte/commit/bbb064ce67c21b064bb8d1cd693bfca34cc3f17c))
+
+* chore(deps): update pre-commit hook astral-sh/ruff-pre-commit to v0.4.1 ([`f0034f9`](https://github.com/kaechele/bonaparte/commit/f0034f944a7fd6e92bf7f4ae43646592f090e360))
+
+* chore(deps): update dependency sphinx to v7.3.7 ([`c185f9f`](https://github.com/kaechele/bonaparte/commit/c185f9f0e4622e69e026c847115bdfcdfddb2710))
+
+* chore(deps): update pre-commit hook astral-sh/ruff-pre-commit to v0.4.0 ([`11c53be`](https://github.com/kaechele/bonaparte/commit/11c53be9ea7ee5c8568d1cbf7463d5f91d6bd6ea))
+
+* chore(deps): update dependency reportlab to v4.2.0 ([`ea101e1`](https://github.com/kaechele/bonaparte/commit/ea101e113e77309160b2ac5a1536c25586e0cfc6))
+
+* chore(deps): update pre-commit hook commitizen-tools/commitizen to v3.24.0 ([`cc32422`](https://github.com/kaechele/bonaparte/commit/cc32422d7844b9105cba07dd797d6f590d9f80f6))
+
+* chore(deps): update dependency sphinx to v7.3.6 ([`7943ea3`](https://github.com/kaechele/bonaparte/commit/7943ea301c153fb5c804a531e5e16e3e12df04f1))
+
+* chore(deps): update dependency sphinx to v7.3.5 ([`bace728`](https://github.com/kaechele/bonaparte/commit/bace72815d5dcf0b9b05a7165d4d82eb0526c16a))
+
+* chore(deps): update dependency sphinx to v7.3.4 ([`cf0588a`](https://github.com/kaechele/bonaparte/commit/cf0588ab70c6c9b0a6c6c7af1420553d0889d01a))
+
+* chore(deps): update pre-commit hook astral-sh/ruff-pre-commit to v0.3.7 ([`a6c78fb`](https://github.com/kaechele/bonaparte/commit/a6c78fbf755af664634facca5662bea0f42c404d))
+
+* chore(deps): update pre-commit hook commitizen-tools/commitizen to v3.22.0 ([`bfe0194`](https://github.com/kaechele/bonaparte/commit/bfe01945f647e7bbc868839b00ad690d89b1c831))
+
+* chore(deps): update pre-commit hook astral-sh/ruff-pre-commit to v0.3.6 ([`3239194`](https://github.com/kaechele/bonaparte/commit/323919403e16cc33907391b1e0812222d474158d))
+
+* chore(deps): update pre-commit hook pre-commit/pre-commit-hooks to v4.6.0 ([`cfebe72`](https://github.com/kaechele/bonaparte/commit/cfebe72ad936969501bd0854a92a64f8e1469833))
+
+* chore(deps): update pre-commit hook astral-sh/ruff-pre-commit to v0.3.5 ([`b04e24e`](https://github.com/kaechele/bonaparte/commit/b04e24e812df199b140bd8b649f778d9c6a62fd9))
+
+* chore(deps): update pre-commit hook commitizen-tools/commitizen to v3.21.3 ([`79ab85d`](https://github.com/kaechele/bonaparte/commit/79ab85dda67b661225e40cac710f5b60b8435cb3))
+
+* chore(deps): update wagoid/commitlint-github-action action to v5.5.1 ([`31b2d13`](https://github.com/kaechele/bonaparte/commit/31b2d1312ff579646c00dc4451638350ffbff401))
+
+* chore(deps): update dependency pytest-cov to v5 ([`f08e808`](https://github.com/kaechele/bonaparte/commit/f08e808bf78679f4b48bfb0bb230f000d488da63))
+
+* chore(deps): update pre-commit hook astral-sh/ruff-pre-commit to v0.3.4 ([`e63a29f`](https://github.com/kaechele/bonaparte/commit/e63a29f9f877b6f6864d1c9db826ecd2a70b10cb))
+
+* chore(deps): update pre-commit hook commitizen-tools/commitizen to v3.20.0 ([`7ba5264`](https://github.com/kaechele/bonaparte/commit/7ba5264e6e86066de19d703d9c40297e4e26bd44))
+
+* chore(deps): update pre-commit hook astral-sh/ruff-pre-commit to v0.3.3 ([`18e9ff9`](https://github.com/kaechele/bonaparte/commit/18e9ff91b76e498c50fe4f1cde2d853453c2637e))
+
+* chore(deps): update pre-commit hook commitizen-tools/commitizen to v3.18.4 ([`1e06b6d`](https://github.com/kaechele/bonaparte/commit/1e06b6d7884af8a18a1999a194d4fe2c549b1f37))
+
+* chore(deps): update pre-commit hook pycqa/autoflake to v2.3.1 ([`86a00b7`](https://github.com/kaechele/bonaparte/commit/86a00b71fe5ab18a7a3eae0d4dab6b7ef8e8aa8f))
+
+* chore(deps): update pre-commit hook commitizen-tools/commitizen to v3.18.3 ([`baaeb83`](https://github.com/kaechele/bonaparte/commit/baaeb83894b5e5ca3ef48b79eb04fa7ba1163ab7))
+
+* chore(deps): update pre-commit hook commitizen-tools/commitizen to v3.18.2 ([`70b9619`](https://github.com/kaechele/bonaparte/commit/70b96198c576cdd7eac767fb21c7a7c3bef8ccf0))
+
+* chore(deps): update pre-commit hook commitizen-tools/commitizen to v3.18.1 ([`b023a59`](https://github.com/kaechele/bonaparte/commit/b023a5950e4f7906ea1b33ad43a92a8e54ccd003))
+
+* chore(deps): update dependency pytest to v8.1.1 ([`f70ef68`](https://github.com/kaechele/bonaparte/commit/f70ef6826d562c03e1b31daaec515ff0b3655889))
+
+* chore(deps): update pre-commit hook pre-commit/mirrors-mypy to v1.9.0 ([`3a151fe`](https://github.com/kaechele/bonaparte/commit/3a151fe2785222a099a251c611a67cdf7c6c2752))
+
+* chore(deps): update pre-commit hook astral-sh/ruff-pre-commit to v0.3.2 ([`484914a`](https://github.com/kaechele/bonaparte/commit/484914a5a2a5a4fa7c91f90a154133dc62a939e9))
+
+* chore(deps): update pre-commit hook commitizen-tools/commitizen to v3.18.0 ([`ce2fe13`](https://github.com/kaechele/bonaparte/commit/ce2fe13f83610ba8c844086b4101d45579c1b2fb))
+
+* chore(deps): update pre-commit hook astral-sh/ruff-pre-commit to v0.3.1 ([`62d74da`](https://github.com/kaechele/bonaparte/commit/62d74dafe7ccfd54bb976e1afa94d60c9ca843e0))
+
+* chore(deps): update pre-commit hook commitizen-tools/commitizen to v3.17.0 ([`eadf936`](https://github.com/kaechele/bonaparte/commit/eadf936a49c822ce580f520a938645d5095e02e5))
+
+* chore(deps): update pre-commit hook astral-sh/ruff-pre-commit to v0.3.0 ([`a9392aa`](https://github.com/kaechele/bonaparte/commit/a9392aab579ad1c5e913dc63fd1b98162846eac2))
+
+* chore(deps): update dependency pytest to v8.1.0 ([`46597a3`](https://github.com/kaechele/bonaparte/commit/46597a3ff1148d8e604b8990a97c6b534f45f3a9))
+
+* chore(deps): update pre-commit hook python-poetry/poetry to v1.8.2 ([`51c62a3`](https://github.com/kaechele/bonaparte/commit/51c62a3cc2d95d124283a682482515175538ac7b))
+
+* chore(deps): update pre-commit hook python-poetry/poetry to v1.8.1 ([`ecf8b42`](https://github.com/kaechele/bonaparte/commit/ecf8b427b94b9142dc2c3638e1cd22815f1cb02e))
+
+* chore(deps): update pre-commit hook commitizen-tools/commitizen to v3.16.0 ([`3fa5e40`](https://github.com/kaechele/bonaparte/commit/3fa5e400dbb1fb778fe73afee865b764d72c51a3))
+
+* chore(deps): update pre-commit hook pycqa/pylint to v3.1.0 ([`89156b4`](https://github.com/kaechele/bonaparte/commit/89156b4987bde7353f38324d1cbfb712982a5eac))
+
+* chore(deps): update dependency pylint to v3.1.0 ([`01e8521`](https://github.com/kaechele/bonaparte/commit/01e85214edb5f3880b56ecbfe9c830c01975df0c))
+
+* chore(deps): update pre-commit hook python-poetry/poetry to v1.8.0 ([`ff4949f`](https://github.com/kaechele/bonaparte/commit/ff4949f62912b36841fe1c753e3ee229a776bcd9))
+
+* chore(deps): update dependency pytest to v8.0.2 ([`08d6c69`](https://github.com/kaechele/bonaparte/commit/08d6c69ef74ea621ce522a4d5bddbb18694d6457))
+
+* chore(deps): update pre-commit hook pycqa/pylint to v3.0.4 ([`601785d`](https://github.com/kaechele/bonaparte/commit/601785d1f5925b71518b59e650722a0425b8867b))
+
+* chore(deps): update dependency pylint to v3.0.4 ([`714e36b`](https://github.com/kaechele/bonaparte/commit/714e36b49c8d3c7a02f5974f4842e2f733cd8377))
+
+* chore(deps): update pre-commit hook pycqa/autoflake to v2.3.0 ([`7465880`](https://github.com/kaechele/bonaparte/commit/74658808917da22447436b78e43115b664c69a6c))
+
+* chore(deps): update pre-commit hook astral-sh/ruff-pre-commit to v0.2.2 ([`a421acd`](https://github.com/kaechele/bonaparte/commit/a421acd695bb6f64576d53342f1eb8f69f4121fc))
+
+* chore(deps): update pre-commit hook commitizen-tools/commitizen to v3.15.0 ([`d1a8f70`](https://github.com/kaechele/bonaparte/commit/d1a8f70d3a660f68b124bd755aa28393d10b170d))
+
+* chore(deps): update dependency pytest to v8.0.1 ([`717bc39`](https://github.com/kaechele/bonaparte/commit/717bc39f73ff16fdf55e805342d5d9fad597666c))
+
+* chore(deps): update dependency reportlab to v4.1.0 ([`9990045`](https://github.com/kaechele/bonaparte/commit/9990045ca5ba494f5aedb3e107281a820feddb36))
+
+* chore(deps): update pre-commit/action action to v3.0.1 ([`000eb38`](https://github.com/kaechele/bonaparte/commit/000eb38236855adcf40906a8ae396f851feb4d34))
+
+* chore(deps): update pre-commit hook astral-sh/ruff-pre-commit to v0.2.1 ([`682b08e`](https://github.com/kaechele/bonaparte/commit/682b08ee629dee30fba401a424cf2220c5666dbb))
+
+* chore(deps): update pre-commit hook commitizen-tools/commitizen to v3.14.1 ([`e0c7292`](https://github.com/kaechele/bonaparte/commit/e0c729269b1c2b667de9f0a089204d18ef44d316))
+
+* chore(deps): update pre-commit hook kaechele/pre-commit-mirror-prettier to v3.2.5 ([`54ee77c`](https://github.com/kaechele/bonaparte/commit/54ee77c5f0c09f8a1c86836662deacc5963e7b93))
+
+* chore(deps): update dependency pytest to v8 ([`b7a0a74`](https://github.com/kaechele/bonaparte/commit/b7a0a74e69645349e760ea7afc88819dceafa215))
+
+* chore(deps): update dependency furo to v2024 ([`bb27b05`](https://github.com/kaechele/bonaparte/commit/bb27b05136fb7b9670eb59a68927d2c8512678e5))
+
+* chore(deps): update codecov/codecov-action action to v4 ([`ac4d062`](https://github.com/kaechele/bonaparte/commit/ac4d0627f0a9a63ffdd7500f5606fecc39f7a9d5))
+
+* chore(deps): update pre-commit hook astral-sh/ruff-pre-commit to v0.2.0 ([`316d470`](https://github.com/kaechele/bonaparte/commit/316d47011ded8f050737894702a4ce7ca822a10a))
+
+* chore(deps): update pre-commit hook commitizen-tools/commitizen to v3.14.0 ([`552f3f0`](https://github.com/kaechele/bonaparte/commit/552f3f0f2dcff74b2ef84f300254f82354dab053))
+
+* chore(deps): update pre-commit hook astral-sh/ruff-pre-commit to v0.1.15 ([`8c47e26`](https://github.com/kaechele/bonaparte/commit/8c47e2683a7b3397216b3da4c4ce6f6435e3496c))
+
+* chore(deps): update tiangolo/issue-manager action to v0.5.0 ([`31dd385`](https://github.com/kaechele/bonaparte/commit/31dd3854a9ee02ab088449424ddc8b5a0a8dc45b))
+
+* chore(deps): update pre-commit hook johnnymorganz/stylua to v0.20.0 ([`eea010f`](https://github.com/kaechele/bonaparte/commit/eea010ff7e36ca11582328cb7335b5688ec7143f))
+
+* chore(deps): update pre-commit hook astral-sh/ruff-pre-commit to v0.1.14 ([`ef62ae2`](https://github.com/kaechele/bonaparte/commit/ef62ae2aaa44c3d647fa4a6f41ca957cac7089ac))
+
+* chore(deps): update pre-commit hook kaechele/pre-commit-mirror-prettier to v3.2.4 ([`e33e89b`](https://github.com/kaechele/bonaparte/commit/e33e89ba7eead42fa8fceb8d2b531989728ec491))
+
+* chore(deps): update pre-commit hook kaechele/pre-commit-mirror-prettier to v3.2.3 ([`5c9d360`](https://github.com/kaechele/bonaparte/commit/5c9d360f5c19457dbca136921454c1a12566af39))
+
+* chore(deps): update pre-commit hook kaechele/pre-commit-mirror-prettier to v3.2.2 ([`193e967`](https://github.com/kaechele/bonaparte/commit/193e967d98e902db1ac1c72ff7f39540469d64e1))
+
+* chore(deps): update pre-commit hook kaechele/pre-commit-mirror-prettier to v3.2.1 ([`9101e21`](https://github.com/kaechele/bonaparte/commit/9101e21b96af183af6d5adf9ac499430f683ac3e))
+
+* chore(deps): update pre-commit hook astral-sh/ruff-pre-commit to v0.1.13 ([`52d6528`](https://github.com/kaechele/bonaparte/commit/52d6528077da62416316f8f3ec2cf8eb87e51e0e))
+
+* chore(deps): update pre-commit hook astral-sh/ruff-pre-commit to v0.1.12 ([`8fe425f`](https://github.com/kaechele/bonaparte/commit/8fe425f7ce095b78472ce6cd5ec4ade7a69a5dcf))
+
+* chore(deps): update dependency reportlab to v4.0.9 ([`a74e61f`](https://github.com/kaechele/bonaparte/commit/a74e61fcc4b97493fe03af760918e400376a38f8))
+
+* chore(deps): update tiangolo/issue-manager action to v0.4.1 ([`b72752f`](https://github.com/kaechele/bonaparte/commit/b72752f266d41002abc7c3aab1e2db2f894f0881))
+
+* chore(deps): update wagoid/commitlint-github-action action to v5.4.5 ([`ecf743b`](https://github.com/kaechele/bonaparte/commit/ecf743b105ccd5a2179af1deefd7679eec79e7c4))
+
+* chore(deps): update python-semantic-release/python-semantic-release action to v8.7.2 ([`071dab3`](https://github.com/kaechele/bonaparte/commit/071dab321a22d814b80daa3f6a3bf7c6b2e81483))
+
+* chore(deps): update pre-commit hook astral-sh/ruff-pre-commit to v0.1.11 ([`bd0e51b`](https://github.com/kaechele/bonaparte/commit/bd0e51b65dae7c385aef04510fc62a2f99ab21f0))
+
+* chore(deps): update pre-commit hook astral-sh/ruff-pre-commit to v0.1.10 ([`c380c57`](https://github.com/kaechele/bonaparte/commit/c380c570a95d579bc3bacfcc5bd95dee0d68ff17))
+
+* chore(deps): update dependency pytest to v7.4.4 ([`0098a5f`](https://github.com/kaechele/bonaparte/commit/0098a5feb5490823ad6cdcf039ae21018a36b3a3))
+
+### Documentation
+
+* docs: automatically update project version upon release
+
+Signed-off-by: Felix Kaechele &lt;felix@kaechele.ca&gt; ([`504a907`](https://github.com/kaechele/bonaparte/commit/504a907efeb35a9d6981f6cb8cb800b2f129fd03))
+
+### Fix
+
+* fix(deps): update dependencies
+
+Signed-off-by: Felix Kaechele &lt;felix@kaechele.ca&gt; ([`4e28ab1`](https://github.com/kaechele/bonaparte/commit/4e28ab18091eda5272c456d4ad32f5598e2e4f1f))
+
+* fix(deps): update dependency bleak to v0.22.2 ([`3d95e90`](https://github.com/kaechele/bonaparte/commit/3d95e90cc1e8b67880d0ec4815c2610e36100885))
+
+* fix(deps): update dependency bleak to v0.22.1 ([`bece36a`](https://github.com/kaechele/bonaparte/commit/bece36a88def1360d0b7d13dcd068bfc1039e7e8))
+
+* fix(deps): update dependency bleak to ^0.22.0 ([`9d22c73`](https://github.com/kaechele/bonaparte/commit/9d22c733c6065baa4a1f060487e4b96a18906595))
+
+* fix(deps): update dependency bleak-retry-connector to v3.5.0 ([`50da253`](https://github.com/kaechele/bonaparte/commit/50da2535ceaf6fb39cc41947a3c21c67de513a70))
+
+* fix(deps): update dependency bleak-retry-connector to v3.4.0 ([`753a1f4`](https://github.com/kaechele/bonaparte/commit/753a1f43ddaf04a95917a5bb72a1a961a71e3bf6))
+
+* fix: docs generation, downgrade Pillow
+
+blockdiag doesn&#39;t support Pillow 10
+(https://github.com/blockdiag/blockdiag/issues/178) and also seems to be
+abandoned.
+
+Pin Pillow to a version below 10 for now and possibly remove blockdiag
+in the future.
+
+Signed-off-by: Felix Kaechele &lt;felix@kaechele.ca&gt; ([`53f644f`](https://github.com/kaechele/bonaparte/commit/53f644f64c7b6f0917457d8e4dae4344f989bd74))
+
+
 ## v0.3.0 (2023-12-29)
 
 ### Build
@@ -325,7 +581,7 @@ Signed-off-by: Felix Kaechele &lt;felix@kaechele.ca&gt; ([`546b67b`](https://git
 This reverts commit f9ab5c4248f4d144a726d6dbcff83056116e7337. ([`b949f63`](https://github.com/kaechele/bonaparte/commit/b949f636f19eca453647dfb95e8d7292f76ca71f))
 
 
-## v0.1.2 (2023-09-07)
+## v0.1.2 (2023-09-06)
 
 ### Chore
 
