@@ -276,7 +276,7 @@ class EfireDevice:
             msg = f"Invalid fooer {message[-1]}. Message should end with {FOOTER}."
             raise EfireMessageValueError(msg)
 
-    async def _notification_handler(
+    def _notification_handler(
         self, _char: BleakGATTCharacteristic, message: bytearray
     ) -> None:
         _LOGGER.debug(
