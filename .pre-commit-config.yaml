@@ -10,7 +10,7 @@ ci:
 
 repos:
   - repo: https://github.com/commitizen-tools/commitizen
-    rev: v3.27.0
+    rev: v3.29.1
     hooks:
       - id: commitizen
         stages: [commit-msg]
@@ -33,7 +33,7 @@ repos:
     hooks:
       - id: poetry-check
   - repo: https://github.com/kaechele/pre-commit-mirror-prettier
-    rev: v3.3.0
+    rev: v3.3.3
     hooks:
       - id: prettier
         args: ["--tab-width", "2"]
@@ -45,7 +45,7 @@ repos:
           - --in-place
           - --remove-all-unused-imports
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.4.8
+    rev: v0.6.8
     hooks:
       - id: ruff-format
         name: ruff (format)
@@ -57,7 +57,7 @@ repos:
           - "--fix"
           - "--exit-non-zero-on-fix"
           - "--statistics"
-          - "--output-format=text"
+          - "--output-format=concise"
           - "."
         pass_filenames: false
   - repo: https://github.com/codespell-project/codespell
@@ -66,7 +66,7 @@ repos:
       - id: codespell
         exclude: (poetry.lock)
   - repo: https://github.com/PyCQA/pylint
-    rev: v3.2.2
+    rev: v3.3.1
     hooks:
       - id: pylint
         exclude: (docs|tests|setup.py)
@@ -75,7 +75,7 @@ repos:
           - bleak
           - bleak_retry_connector
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.10.0
+    rev: v1.11.2
     hooks:
       - id: mypy
   - repo: https://github.com/DanielNoord/pydocstringformatter

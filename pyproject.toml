@@ -30,9 +30,9 @@ bleak-retry-connector = { version="^3.5.0", python = ">=3.10,<3.13" }
 aenum = "^3.1.15"
 
 [tool.poetry.group.dev.dependencies]
-pytest = "^8.2.2"
+pytest = "^8.3.3"
 pytest-cov = "^5.0.0"
-pylint = "^3.2.2"
+pylint = "^3.3.1"
 
 [tool.poetry.group.docs]
 optional = true
