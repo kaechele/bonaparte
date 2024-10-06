@@ -110,13 +110,13 @@ winrt-runtime = {version = ">=2,<3", markers = "platform_system == \"Windows\" a
 
 [[package]]
 name = "bleak-retry-connector"
-version = "3.5.0"
+version = "3.6.0"
 description = "A connector for Bleak Clients that handles transient connection failures"
 optional = false
-python-versions = "<3.13,>=3.10"
+python-versions = "<3.14,>=3.10"
 files = [
-    {file = "bleak_retry_connector-3.5.0-py3-none-any.whl", hash = "sha256:ea8218d4ad1852a790337babf5819de500544dcaaadc8382130d54601dadfe06"},
-    {file = "bleak_retry_connector-3.5.0.tar.gz", hash = "sha256:f616a25113ff7be05d95cbfbcd9b30e3762202521c4b3727bae5ebdb4cca3496"},
+    {file = "bleak_retry_connector-3.6.0-py3-none-any.whl", hash = "sha256:fed2a366444cb8fa28235242a7a51e43bedde5b4fa748013c6b90f80e9c695e0"},
+    {file = "bleak_retry_connector-3.6.0.tar.gz", hash = "sha256:2be9f2eaf2e83fd1f87170caefbf0e992b192df8634df81d937d626ed0ec5148"},
 ]
 
 [package.dependencies]
