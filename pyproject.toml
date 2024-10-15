@@ -43,7 +43,7 @@ sphinx = ">=4.0"
 sphinxcontrib-nwdiag = "^2.0.0"
 reportlab = "^4.0.0"
 furo = "^2024.0.0"
-pillow = "<10"
+pillow = "<12"
 
 [tool.semantic_release]
 logging_use_named_masks = true
