@@ -15,9 +15,7 @@ classifiers = [
     "Topic :: Home Automation",
     "Topic :: Software Development :: Libraries",
 ]
-packages = [
-    { include = "bonaparte", from = "src" },
-]
+packages = [{ include = "bonaparte", from = "src" }]
 
 [tool.poetry.urls]
 "Bug Tracker" = "https://github.com/kaechele/bonaparte/issues"
@@ -26,7 +24,7 @@ packages = [
 [tool.poetry.dependencies]
 python = "^3.11"
 bleak = { version = "^0.22.0", python = ">=3.10,<3.13" }
-bleak-retry-connector = { version="^3.6.0", python = ">=3.10,<3.13" }
+bleak-retry-connector = { version = "^3.6.0", python = ">=3.10,<3.13" }
 aenum = "^3.1.15"
 
 [tool.poetry.group.dev.dependencies]
@@ -83,10 +81,7 @@ no_implicit_optional = true
 show_error_codes = true
 warn_unreachable = true
 warn_unused_ignores = true
-exclude = [
-    'docs/.*',
-    'setup.py',
-]
+exclude = ['docs/.*', 'setup.py']
 
 [[tool.mypy.overrides]]
 module = "tests.*"
@@ -98,13 +93,8 @@ ignore_errors = true
 
 [tool.pylint.MAIN]
 py-version = "3.12"
-ignore = [
-    "tests",
-]
-load-plugins = [
-    "pylint.extensions.code_style",
-    "pylint.extensions.typing",
-]
+ignore = ["tests"]
+load-plugins = ["pylint.extensions.code_style", "pylint.extensions.typing"]
 
 [tool.pylint."MESSAGES CONTROL"]
 disable = [
@@ -124,10 +114,7 @@ disable = [
     "unused-argument",
     "wrong-import-order",
 ]
-enable = [
-    "useless-suppression",
-    "use-symbolic-message-instead",
-]
+enable = ["useless-suppression", "use-symbolic-message-instead"]
 
 [tool.pylint.FORMAT]
 expected-line-ending-format = "LF"
@@ -142,7 +129,7 @@ line-length = 88
 [tool.ruff.lint]
 # Let's tone this down once we release the first version
 select = ["ALL"]
-ignore = ["ANN101", "I001", "COM"]
+ignore = ["COM", "D203", "D213", "I001", "ISC001"]
 unfixable = ["ERA"]
 
 [tool.ruff.lint.flake8-import-conventions.extend-aliases]
