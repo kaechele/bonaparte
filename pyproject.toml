@@ -26,13 +26,14 @@ packages = [
 [tool.poetry.dependencies]
 python = "^3.11"
 bleak = { version = "^0.22.0", python = ">=3.10,<3.13" }
-bleak-retry-connector = { version="^3.5.0", python = ">=3.10,<3.13" }
+bleak-retry-connector = { version="^3.6.0", python = ">=3.10,<3.13" }
 aenum = "^3.1.15"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3.3"
 pytest-cov = "^6.0.0"
 pylint = "^3.3.1"
+pre-commit = "^4.0.1"
 
 [tool.poetry.group.docs]
 optional = true
@@ -40,10 +41,10 @@ optional = true
 [tool.poetry.group.docs.dependencies]
 myst-parser = ">=0.16"
 sphinx = ">=4.0"
+blockdiag = { git = "https://github.com/yuzutech/blockdiag.git", tag = "v3.3.0" }
 sphinxcontrib-nwdiag = "^2.0.0"
 reportlab = "^4.0.0"
 furo = "^2024.0.0"
-pillow = "<10"
 
 [tool.semantic_release]
 logging_use_named_masks = true
