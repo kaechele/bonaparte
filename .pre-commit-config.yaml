@@ -33,7 +33,7 @@ repos:
     hooks:
       - id: poetry-check
   - repo: https://github.com/kaechele/pre-commit-mirror-prettier
-    rev: v3.4.1
+    rev: v3.4.2
     hooks:
       - id: prettier
         args: ["--tab-width", "2"]
