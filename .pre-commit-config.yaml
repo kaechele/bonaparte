@@ -10,7 +10,7 @@ ci:
 
 repos:
   - repo: https://github.com/commitizen-tools/commitizen
-    rev: v3.31.0
+    rev: v4.1.0
     hooks:
       - id: commitizen
         stages: [commit-msg]
@@ -45,7 +45,7 @@ repos:
           - --in-place
           - --remove-all-unused-imports
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.8.6
+    rev: v0.9.1
     hooks:
       - id: ruff-format
         name: ruff (format)

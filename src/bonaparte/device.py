@@ -264,7 +264,7 @@ class EfireDevice:
             )
             raise EfireMessageValueError(msg)
         if message[2] != len(message) - 3:
-            msg = f"Incorrect message length {len(message)}. Expected {message[2]+3}."
+            msg = f"Incorrect message length {len(message)}. Expected {message[2] + 3}."
             raise EfireMessageValueError(msg)
         if message[-2] != checksum_message(message):
             msg = (
