@@ -29,7 +29,7 @@ jobs:
       # - Publish to PyPI
       - name: Python Semantic Release
         id: release
-        uses: python-semantic-release/python-semantic-release@v9.18.1
+        uses: python-semantic-release/python-semantic-release@v9.19.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
