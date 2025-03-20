@@ -192,7 +192,7 @@ class Fireplace(EfireDevice):
                 f" in input set: {invalid_feature}"
             )
             raise ValueError(msg)
-        new_featureset = FireplaceFeatures(**{f: True for f in features})
+        new_featureset = FireplaceFeatures(**dict.fromkeys(features, True))
         self._features = new_featureset
         return self._features
 
