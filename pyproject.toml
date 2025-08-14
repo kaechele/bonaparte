@@ -23,15 +23,15 @@ packages = [{ include = "bonaparte", from = "src" }]
 
 [tool.poetry.dependencies]
 python = ">=3.10,<3.14"
-bleak = ">=0.21.0"
-bleak-retry-connector = "^3.6.0"
-aenum = "^3.1.15"
+bleak = ">=1.0.0"
+bleak-retry-connector = "^4.0.1"
+aenum = "^3.1.16"
 
 [tool.poetry.group.dev.dependencies]
-pytest = "^8.3.3"
-pytest-cov = "^6.0.0"
-pylint = "^3.3.1"
-pre-commit = "^4.0.1"
+pytest = "^8.4.1"
+pytest-cov = "^6.2.1"
+pylint = "^3.3.8"
+pre-commit = "^4.3.0"
 
 [tool.poetry.group.docs]
 optional = true
