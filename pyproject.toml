@@ -22,10 +22,9 @@ packages = [{ include = "bonaparte", from = "src" }]
 "Changelog" = "https://github.com/kaechele/bonaparte/blob/main/CHANGELOG.md"
 
 [tool.poetry.dependencies]
-python = ">=3.10,<3.14"
+python = ">=3.13,<3.14"
 bleak = ">=1.0.0"
 bleak-retry-connector = "^4.0.1"
-aenum = "^3.1.16"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.4.1"
@@ -71,7 +70,7 @@ exclude_lines = [
 ]
 
 [tool.mypy]
-python_version = "3.12"
+python_version = "3.13"
 check_untyped_defs = true
 disallow_any_generics = true
 disallow_incomplete_defs = true
@@ -92,7 +91,7 @@ module = "docs.*"
 ignore_errors = true
 
 [tool.pylint.MAIN]
-py-version = "3.12"
+py-version = "3.13"
 ignore = ["tests"]
 load-plugins = ["pylint.extensions.code_style", "pylint.extensions.typing"]
 
@@ -120,7 +119,7 @@ enable = ["useless-suppression", "use-symbolic-message-instead"]
 expected-line-ending-format = "LF"
 
 [tool.ruff]
-target-version = "py312"
+target-version = "py313"
 exclude = ["docs", "setup.py"]
 
 # Same as Black.

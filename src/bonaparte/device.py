@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import asyncio
 import logging
-from typing import TYPE_CHECKING, Any, Concatenate, ParamSpec, TypeVar
+from typing import TYPE_CHECKING, Any, Concatenate
 
 from bleak.exc import BleakDBusError, BleakError
 from bleak_retry_connector import (
@@ -46,11 +46,10 @@ DISCONNECT_DELAY = 120
 DEFAULT_ATTEMPTS = 3
 BLEAK_BACKOFF_TIME = 0.25
 
-P = ParamSpec("P")
-T = TypeVar("T")
 
-
-def raise_if_not_connected(
+# Pylint doesn't like the ParamSpec to be called P
+# pylint: disable-next=invalid-name
+def raise_if_not_connected[T, **P](
     func: Callable[Concatenate[EfireDevice, P], Awaitable[T]],
 ) -> Callable[Concatenate[EfireDevice, P], Awaitable[T]]:
     """Define a wrapper to authenticate if we aren't yet."""
@@ -197,15 +196,15 @@ class EfireDevice:
         if pending_response:
             # self._notify_future cannot be None if pending_response is true,
             # but mypy doesn't know that, hence:
-            assert self._notify_future is not None  # noqa: S101 # nosec
+            assert self._notify_future is not None  # noqa: S101
             msg = "Disconnected while response from device was pending"
             self._notify_future.set_exception(DisconnectedException(msg))
 
         for callback in self._disconnect_callbacks:
             callback(self)
 
-    def _register_disconnect_callback(
-        self, callback: Callable[[AnyEfireDevice], None]
+    def _register_disconnect_callback[T: EfireDevice](
+        self, callback: Callable[[T], None]
     ) -> Callable[[], None]:
         def unregister() -> None:
             self._disconnect_callbacks.remove(callback)
@@ -410,6 +409,3 @@ class EfireDevice:
 
         # return just the response payload sans overhead
         return response[4:-2]
-
-
-AnyEfireDevice = TypeVar("AnyEfireDevice", bound=EfireDevice)

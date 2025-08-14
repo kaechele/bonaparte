@@ -52,12 +52,12 @@ def parse_led_controller_state(
     payload: bytes | bytearray,
 ) -> tuple[bool, tuple[int, int, int], LedMode]:
     """Parse the LED Controller state."""
-    light_state = payload[0] == LedState.ON.short  # type: ignore[attr-defined] # pylint: disable=no-member
+    light_state = payload[0] == LedState.ON.short
     light_color = (
         int(payload[1] & 0xFF),
         int(payload[2] & 0xFF),
         int(payload[3] & 0xFF),
     )
-    light_mode = LedMode(payload[4])  # pyright: ignore[reportGeneralTypeIssues]
+    light_mode = LedMode(payload[4])
 
     return light_state, light_color, light_mode

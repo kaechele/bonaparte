@@ -1,10 +1,14 @@
 """Miscellaneous tests."""
 
+# ruff: noqa: PLR2004
+
 from bleak.backends.device import BLEDevice
-from bonaparte import Fireplace, FireplaceFeatures
 import pytest
 
-fp = Fireplace(BLEDevice("aa:bb:cc:dd:ee:ff", "Fireplace", details=None, rssi=0))
+from bonaparte import Fireplace, FireplaceFeatures
+from bonaparte.const import LedMode, LedState
+
+fp = Fireplace(BLEDevice("aa:bb:cc:dd:ee:ff", "Fireplace", details=None))
 
 full_valid_set = {"aux", "blower", "led_lights", "night_light", "split_flow", "timer"}
 partial_valid_set = {"blower", "night_light"}
@@ -61,3 +65,45 @@ def test_partial_invalid_featureset() -> None:
         ValueError, match="Invalid feature value found in input set: {'foo'}"
     ):
         fp.set_features(partial_invalid_set)
+
+
+def test_led_state_enum() -> None:
+    """LED state multi value enum works when instantiated with any of the values."""
+    assert LedState.ON.short == 0xFF
+    assert LedState.ON.long == bytes([0xFF, 0xFF, 0xFF])
+
+    assert LedState.OFF.short == 0x00
+    assert LedState.OFF.long == bytes([0, 0, 0])
+
+    assert LedState(LedState.ON.short) == LedState.ON
+    assert LedState(LedState.ON.long) == LedState.ON
+
+    assert LedState(LedState.OFF.short) == LedState.OFF
+    assert LedState(LedState.OFF.long) == LedState.OFF
+
+
+def test_led_mode_enum() -> None:
+    """LED mode multi value enum works when instantiated with any of the values."""
+    assert LedMode.CYCLE.short == 0x01
+    assert LedMode.CYCLE.long == bytes([0x01, 0x01, 0x01])
+    assert LedMode.CYCLE.setvalue == 0x20
+
+    assert LedMode(LedMode.CYCLE.short) == LedMode.CYCLE
+    assert LedMode(LedMode.CYCLE.long) == LedMode.CYCLE
+    assert LedMode(LedMode.CYCLE.setvalue) == LedMode.CYCLE
+
+    assert LedMode.HOLD.short == 0x02
+    assert LedMode.HOLD.long == bytes([0x02, 0x02, 0x02])
+    assert LedMode.HOLD.setvalue == 0x30
+
+    assert LedMode(LedMode.HOLD.short) == LedMode.HOLD
+    assert LedMode(LedMode.HOLD.long) == LedMode.HOLD
+    assert LedMode(LedMode.HOLD.setvalue) == LedMode.HOLD
+
+    assert LedMode.EMBER_BED.short == 0xFF
+    assert LedMode.EMBER_BED.long == bytes([0xFF, 0xFF, 0xFF])
+    assert LedMode.EMBER_BED.setvalue == 0x10
+
+    assert LedMode(LedMode.EMBER_BED.short) == LedMode.EMBER_BED
+    assert LedMode(LedMode.EMBER_BED.long) == LedMode.EMBER_BED
+    assert LedMode(LedMode.EMBER_BED.setvalue) == LedMode.EMBER_BED

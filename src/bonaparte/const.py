@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 
-from enum import IntEnum, StrEnum
-
-from aenum import MultiValueEnum
+from dataclasses import dataclass, field
+from enum import Enum, IntEnum, StrEnum
+from typing import Self
 
 # Package format constants
 HEADER = 0xAB
@@ -112,19 +112,36 @@ class PasswordSetResult(IntEnum):
     SUCCESS = 0x53
 
 
-class LedState(MultiValueEnum):
-    """Enum encapsulating LED controller state."""
+@dataclass(frozen=True)
+class LedDataMixin:
+    """Mixin class for LED enum data."""
 
-    _init_ = "short long"
+    short: int
+    long: bytes
+    setvalue: int = field(default=0)
+
+
+class LedMultiValueEnum(LedDataMixin, Enum):
+    """Enum class supporting multiple values per member."""
+
+    def __new__(cls, value: bytes | int, *values: bytes | int) -> Self:
+        """Create a new enum member with multiple values."""
+        self = object.__new__(cls)
+        self._value_ = value
+        for v in values:
+            self._add_value_alias_(v)  # type: ignore[attr-defined]
+        return self
+
+
+class LedState(LedMultiValueEnum):
+    """Enum encapsulating LED controller state."""
 
     OFF = 0x00, bytes([0, 0, 0])
     ON = 0xFF, bytes([0xFF, 0xFF, 0xFF])
 
 
-class LedMode(MultiValueEnum):
+class LedMode(LedMultiValueEnum):
     """Enum encapsulating LED controller modes."""
-
-    _init_ = "short long setvalue"
 
     CYCLE = 0x01, bytes([0x01, 0x01, 0x01]), 0x20
     HOLD = 0x02, bytes([0x02, 0x02, 0x02]), 0x30

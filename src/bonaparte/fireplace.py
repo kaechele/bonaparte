@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, fields as dc_fields
 import logging
-from typing import TYPE_CHECKING, Concatenate, ParamSpec, TypeVar
+from typing import TYPE_CHECKING, Concatenate
 
 from .const import (
     MAX_BLOWER_SPEED,
@@ -38,11 +38,10 @@ if TYPE_CHECKING:
 
 _LOGGER = logging.getLogger(__name__)
 
-P = ParamSpec("P")
-T = TypeVar("T")
 
-
-def needs_auth(
+# Pylint doesn't like the ParamSpec to be called P
+# pylint: disable-next=invalid-name
+def needs_auth[T, **P](
     func: Callable[Concatenate[Fireplace, P], Awaitable[T]],
 ) -> Callable[Concatenate[Fireplace, P], Awaitable[T]]:
     """Define a wrapper to authenticate if we aren't yet authenticated."""
@@ -93,7 +92,7 @@ class FireplaceState:
     flame_height: int = 0
     ifc_power: bool = False
     led_color: tuple[int, int, int] = (0, 0, 0)
-    led_mode: LedMode = LedMode.HOLD  # type: ignore[assignment]
+    led_mode: LedMode = LedMode.HOLD
     led: bool = False
     mcu_version: str = ""
     night_light_brightness: int = 0
@@ -464,9 +463,7 @@ class Fireplace(EfireDevice):
 
         return await self._simple_command(
             EfireCommand.SET_LED_POWER,
-            LedState.ON.long  # type: ignore[attr-defined] # pylint: disable=no-member
-            if on
-            else LedState.OFF.long,  # type: ignore[attr-defined] # pylint: disable=no-member
+            LedState.ON.long if on else LedState.OFF.long,
         )
 
     @needs_auth
@@ -515,7 +512,7 @@ class Fireplace(EfireDevice):
         """Update the power state of the LED Controller."""
         result = await self.execute_command(EfireCommand.GET_LED_STATE)
 
-        self._state.led = result == LedState.ON.long  # type: ignore[attr-defined] # pylint: disable=no-member
+        self._state.led = result == LedState.ON.long
 
     # E1
     @needs_auth

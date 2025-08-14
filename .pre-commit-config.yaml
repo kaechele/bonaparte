@@ -71,7 +71,6 @@ repos:
       - id: pylint
         exclude: (docs|tests|setup.py)
         additional_dependencies:
-          - aenum
           - bleak
           - bleak_retry_connector
   - repo: https://github.com/pre-commit/mirrors-mypy
@@ -92,9 +91,12 @@ repos:
       - id: python-typing-update
         stages: [manual]
         args:
-          - --py310-plus
+          - --py313-plus
           - --force
           - --keep-updates
+          - --ruff
+        additional_dependencies:
+          - ruff
   - repo: https://github.com/lunarmodules/luacheck
     rev: v1.2.0
     hooks:

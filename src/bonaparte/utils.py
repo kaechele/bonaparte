@@ -24,11 +24,4 @@ def build_message(payload: bytearray | bytes) -> bytes:
     # add the length of the message to the beginning of the payload
     # it needs to be part of the payload for checksum calculation
     payload = bytes([len(payload) + 2]) + payload
-
-    message = bytearray()
-    message.append(HEADER)
-    message.append(REQUEST_HEADER)
-    message = message + payload
-    message.append(checksum(payload))
-    message.append(FOOTER)
-    return bytes(message)
+    return bytes([HEADER, REQUEST_HEADER, *payload, checksum(payload), FOOTER])
