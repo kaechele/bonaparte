@@ -1,57 +1,71 @@
-[tool.poetry]
+[project]
 name = "pybonaparte"
 version = "0.3.1"
 description = "Library to control Napoleon eFIRE enabled fireplaces"
-authors = ["Felix Kaechele <felix@kaechele.ca>"]
-license = "MIT"
+authors = [{ name = "Felix Kaechele", email = "felix@kaechele.ca" }]
+requires-python = ">=3.13,<3.14"
 readme = "README.md"
-repository = "https://github.com/kaechele/bonaparte"
-documentation = "https://bonaparte.readthedocs.io"
+license = "MIT"
 classifiers = [
-    "Development Status :: 3 - Alpha",
+    "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
     "Natural Language :: English",
     "Operating System :: OS Independent",
     "Topic :: Home Automation",
     "Topic :: Software Development :: Libraries",
 ]
-packages = [{ include = "bonaparte", from = "src" }]
+dependencies = [
+    "bleak>=1.1.0",
+    "bleak-retry-connector>=4.0.1",
+]
 
-[tool.poetry.urls]
+[project.urls]
+Repository = "https://github.com/kaechele/bonaparte"
+Documentation = "https://bonaparte.readthedocs.io"
 "Bug Tracker" = "https://github.com/kaechele/bonaparte/issues"
-"Changelog" = "https://github.com/kaechele/bonaparte/blob/main/CHANGELOG.md"
+Changelog = "https://github.com/kaechele/bonaparte/blob/main/CHANGELOG.md"
 
-[tool.poetry.dependencies]
-python = ">=3.13,<3.14"
-bleak = ">=1.0.0"
-bleak-retry-connector = "^4.0.1"
+[dependency-groups]
+dev = [
+    "pre-commit>=4.3.0",
+    "pylint>=3.3.8",
+    "pytest>=8.4.1",
+    "pytest-cov>=6.2.1",
+    "python-semantic-release>=10.3.1",
+]
+docs = [
+    "blockdiag",
+    "furo>=2025.7.19",
+    "myst-parser>=4.0.1",
+    "sphinx>=8.2.3",
+    "sphinxcontrib-nwdiag>=2.0.0",
+]
 
-[tool.poetry.group.dev.dependencies]
-pytest = "^8.4.1"
-pytest-cov = "^6.2.1"
-pylint = "^3.3.8"
-pre-commit = "^4.3.0"
+[tool.uv]
+default-groups = [
+    "dev",
+    "docs",
+]
 
-[tool.poetry.group.docs]
-optional = true
-
-[tool.poetry.group.docs.dependencies]
-myst-parser = ">=0.16"
-sphinx = ">=4.0"
+[tool.uv.sources]
 blockdiag = { git = "https://github.com/yuzutech/blockdiag.git", tag = "v3.3.0" }
-sphinxcontrib-nwdiag = "^2.0.0"
-reportlab = "^4.0.0"
-furo = "^2024.0.0"
+
+[build-system]
+requires = ["uv_build>=0.8.11,<0.9.0"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-name = "bonaparte"
 
 [tool.semantic_release]
 logging_use_named_masks = true
 branch = "main"
-version_toml = ["pyproject.toml:tool.poetry.version"]
+version_toml = ["pyproject.toml:project.version"]
 version_variables = [
     "src/bonaparte/__init__.py:__version__",
     "docs/conf.py:release",
 ]
-build_command = "pip install poetry && poetry build"
+build_command = "uv build"
 
 [tool.pytest.ini_options]
 addopts = "-v -Wdefault --cov=bonaparte --cov-report=term-missing:skip-covered"
@@ -84,7 +98,7 @@ exclude = ['docs/.*', 'setup.py']
 
 [[tool.mypy.overrides]]
 module = "tests.*"
-allow_untyped_defs = true
+disallow_untyped_defs = false
 
 [[tool.mypy.overrides]]
 module = "docs.*"
@@ -157,7 +171,3 @@ split-on-trailing-comma = false
 
 [tool.ruff.lint.mccabe]
 max-complexity = 25
-
-[build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
