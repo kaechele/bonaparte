@@ -137,6 +137,53 @@ wheels = [
 ]
 
 [[package]]
+name = "bonaparte"
+version = "0.3.1"
+source = { editable = "." }
+dependencies = [
+    { name = "bleak" },
+    { name = "bleak-retry-connector" },
+]
+
+[package.dev-dependencies]
+dev = [
+    { name = "pre-commit" },
+    { name = "pylint" },
+    { name = "pytest" },
+    { name = "pytest-cov" },
+    { name = "python-semantic-release" },
+]
+docs = [
+    { name = "blockdiag" },
+    { name = "furo" },
+    { name = "myst-parser" },
+    { name = "sphinx" },
+    { name = "sphinxcontrib-nwdiag" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "bleak", specifier = ">=1.1.0" },
+    { name = "bleak-retry-connector", specifier = ">=4.0.1" },
+]
+
+[package.metadata.requires-dev]
+dev = [
+    { name = "pre-commit", specifier = ">=4.3.0" },
+    { name = "pylint", specifier = ">=3.3.8" },
+    { name = "pytest", specifier = ">=8.4.1" },
+    { name = "pytest-cov", specifier = ">=6.2.1" },
+    { name = "python-semantic-release", specifier = ">=10.3.1" },
+]
+docs = [
+    { name = "blockdiag", git = "https://github.com/yuzutech/blockdiag.git?tag=v3.3.0" },
+    { name = "furo", specifier = ">=2025.7.19" },
+    { name = "myst-parser", specifier = ">=4.0.1" },
+    { name = "sphinx", specifier = ">=8.2.3" },
+    { name = "sphinxcontrib-nwdiag", specifier = ">=2.0.0" },
+]
+
+[[package]]
 name = "certifi"
 version = "2025.8.3"
 source = { registry = "https://pypi.org/simple" }
@@ -607,53 +654,6 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/ff/29/7cf5bbc236333876e4b41f56e06857a87937ce4bf91e117a6991a2dbb02a/pre_commit-4.3.0.tar.gz", hash = "sha256:499fe450cc9d42e9d58e606262795ecb64dd05438943c62b66f6a8673da30b16", size = 193792, upload-time = "2025-08-09T18:56:14.651Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/5b/a5/987a405322d78a73b66e39e4a90e4ef156fd7141bf71df987e50717c321b/pre_commit-4.3.0-py2.py3-none-any.whl", hash = "sha256:2b0747ad7e6e967169136edffee14c16e148a778a54e4f967921aa1ebf2308d8", size = 220965, upload-time = "2025-08-09T18:56:13.192Z" },
-]
-
-[[package]]
-name = "pybonaparte"
-version = "0.3.1"
-source = { editable = "." }
-dependencies = [
-    { name = "bleak" },
-    { name = "bleak-retry-connector" },
-]
-
-[package.dev-dependencies]
-dev = [
-    { name = "pre-commit" },
-    { name = "pylint" },
-    { name = "pytest" },
-    { name = "pytest-cov" },
-    { name = "python-semantic-release" },
-]
-docs = [
-    { name = "blockdiag" },
-    { name = "furo" },
-    { name = "myst-parser" },
-    { name = "sphinx" },
-    { name = "sphinxcontrib-nwdiag" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "bleak", specifier = ">=1.1.0" },
-    { name = "bleak-retry-connector", specifier = ">=4.0.1" },
-]
-
-[package.metadata.requires-dev]
-dev = [
-    { name = "pre-commit", specifier = ">=4.3.0" },
-    { name = "pylint", specifier = ">=3.3.8" },
-    { name = "pytest", specifier = ">=8.4.1" },
-    { name = "pytest-cov", specifier = ">=6.2.1" },
-    { name = "python-semantic-release", specifier = ">=10.3.1" },
-]
-docs = [
-    { name = "blockdiag", git = "https://github.com/yuzutech/blockdiag.git?tag=v3.3.0" },
-    { name = "furo", specifier = ">=2025.7.19" },
-    { name = "myst-parser", specifier = ">=4.0.1" },
-    { name = "sphinx", specifier = ">=8.2.3" },
-    { name = "sphinxcontrib-nwdiag", specifier = ">=2.0.0" },
 ]
 
 [[package]]

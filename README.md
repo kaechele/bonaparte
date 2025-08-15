@@ -20,19 +20,18 @@
   </a>
 </p>
 <p align="center">
-  <img src="https://img.shields.io/pypi/pyversions/pybonaparte.svg?style=flat-square&logo=python&amp;logoColor=fff" alt="Supported Python versions">
-  <img src="https://img.shields.io/pypi/l/pybonaparte.svg?style=flat-square" alt="License">
+  <img src="https://img.shields.io/pypi/pyversions/bonaparte.svg?style=flat-square&logo=python&amp;logoColor=fff" alt="Supported Python versions">
+  <img src="https://img.shields.io/pypi/l/bonaparte.svg?style=flat-square" alt="License">
 </p>
 
 Library to control Napoleon eFIRE enabled fireplaces
 
+> [!NOTE]
+> This package was recently renamed from `pybonaparte` to `bonaparte` on PyPI. Please update your dependencies accordingly.
+
 ## Installation
 
-For now the project uses the `pybonaparte` name on PyPI.
-
-To install use: `pip install pybonaparte`.
-
-The name may change to `bonaparte` some time in the future depending on the outcome of this ticket: https://github.com/pypi/support/issues/2683
+To install use: `pip install bonaparte`.
 
 ## Contributors ✨
 

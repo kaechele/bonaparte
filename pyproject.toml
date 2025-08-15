@@ -1,5 +1,5 @@
 [project]
-name = "pybonaparte"
+name = "bonaparte"
 version = "0.3.1"
 description = "Library to control Napoleon eFIRE enabled fireplaces"
 authors = [{ name = "Felix Kaechele", email = "felix@kaechele.ca" }]
