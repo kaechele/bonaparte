@@ -65,7 +65,7 @@ version_variables = [
     "src/bonaparte/__init__.py:__version__",
     "docs/conf.py:release",
 ]
-build_command = "uv build"
+build_command = "pip install uv && uv build"
 
 [tool.pytest.ini_options]
 addopts = "-v -Wdefault --cov=bonaparte --cov-report=term-missing:skip-covered"
