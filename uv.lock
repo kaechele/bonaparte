@@ -138,7 +138,7 @@ wheels = [
 
 [[package]]
 name = "bonaparte"
-version = "0.3.1"
+version = "1.0.0"
 source = { editable = "." }
 dependencies = [
     { name = "bleak" },
@@ -163,8 +163,8 @@ docs = [
 
 [package.metadata]
 requires-dist = [
-    { name = "bleak", specifier = ">=1.1.0" },
-    { name = "bleak-retry-connector", specifier = ">=4.0.1" },
+    { name = "bleak", specifier = ">=1.0.0" },
+    { name = "bleak-retry-connector", specifier = ">=4.0.0" },
 ]
 
 [package.metadata.requires-dev]

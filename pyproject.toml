@@ -15,8 +15,8 @@ classifiers = [
     "Topic :: Software Development :: Libraries",
 ]
 dependencies = [
-    "bleak>=1.1.0",
-    "bleak-retry-connector>=4.0.1",
+    "bleak>=1.0.0",
+    "bleak-retry-connector>=4.0.0",
 ]
 
 [project.urls]
