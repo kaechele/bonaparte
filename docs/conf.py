@@ -7,7 +7,7 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = "Bonaparte"
-copyright = "2023, Felix Kaechele"
+copyright = "2023-2025, Felix Kaechele"
 author = "Felix Kaechele"
 release = "0.3.1"
 
