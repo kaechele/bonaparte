@@ -1,6 +1,6 @@
 [project]
 name = "bonaparte"
-version = "0.3.1"
+version = "1.0.0"
 description = "Library to control Napoleon eFIRE enabled fireplaces"
 authors = [{ name = "Felix Kaechele", email = "felix@kaechele.ca" }]
 requires-python = ">=3.13,<3.14"
