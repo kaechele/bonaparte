@@ -9,6 +9,11 @@ from .const import FOOTER, HEADER, REQUEST_HEADER
 
 def checksum(payload: bytearray | bytes) -> int:
     """Calculate the checksum for a command payload."""
+    if len(payload) < 1:
+        raise ValueError(
+            "Payload must contain at least one byte for checksum calculation"
+        )
+
     # checksum is a single byte XOR of all bytes in the payload
     return reduce(lambda x, y: x ^ y, payload)
 
