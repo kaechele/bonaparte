@@ -19,6 +19,7 @@ dependencies = [
     "bleak-retry-connector>=4.0.0",
 ]
 
+
 [project.urls]
 Repository = "https://github.com/kaechele/bonaparte"
 Documentation = "https://bonaparte.readthedocs.io"
@@ -30,6 +31,7 @@ dev = [
     "pre-commit>=4.3.0",
     "pylint>=3.3.8",
     "pytest>=8.4.1",
+    "pytest-asyncio>=0.24.0",
     "pytest-cov>=6.2.1",
     "python-semantic-release>=10.3.1",
 ]
