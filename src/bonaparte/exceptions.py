@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 
-class EfireException(Exception):  # noqa: N818
+class EfireException(Exception):
     """Generic eFIRE device exception."""
 
 

@@ -196,7 +196,7 @@ class EfireDevice:
         if pending_response:
             # self._notify_future cannot be None if pending_response is true,
             # but mypy doesn't know that, hence:
-            assert self._notify_future is not None  # noqa: S101
+            assert self._notify_future is not None
             msg = "Disconnected while response from device was pending"
             self._notify_future.set_exception(DisconnectedException(msg))
 

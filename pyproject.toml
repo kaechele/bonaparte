@@ -3,7 +3,7 @@ name = "bonaparte"
 version = "1.0.1"
 description = "Library to control Napoleon eFIRE enabled fireplaces"
 authors = [{ name = "Felix Kaechele", email = "felix@kaechele.ca" }]
-requires-python = ">=3.13,<3.14"
+requires-python = ">=3.13"
 readme = "README.md"
 license = "MIT"
 classifiers = [
@@ -131,43 +131,3 @@ enable = ["useless-suppression", "use-symbolic-message-instead"]
 
 [tool.pylint.FORMAT]
 expected-line-ending-format = "LF"
-
-[tool.ruff]
-target-version = "py313"
-exclude = ["docs", "setup.py"]
-
-# Same as Black.
-line-length = 88
-
-[tool.ruff.lint]
-# Let's tone this down once we release the first version
-select = ["ALL"]
-ignore = ["COM", "D203", "D213", "I001", "ISC001"]
-unfixable = ["ERA"]
-
-[tool.ruff.lint.flake8-import-conventions.extend-aliases]
-voluptuous = "vol"
-"homeassistant.helpers.area_registry" = "ar"
-"homeassistant.helpers.config_validation" = "cv"
-"homeassistant.helpers.device_registry" = "dr"
-"homeassistant.helpers.entity_registry" = "er"
-"homeassistant.helpers.issue_registry" = "ir"
-"homeassistant.util.dt" = "dt_util"
-
-[tool.ruff.lint.flake8-pytest-style]
-fixture-parentheses = false
-
-[tool.ruff.lint.flake8-tidy-imports.banned-api]
-"async_timeout".msg = "use asyncio.timeout instead"
-"pytz".msg = "use zoneinfo instead"
-
-[tool.ruff.lint.isort]
-force-sort-within-sections = true
-combine-as-imports = true
-split-on-trailing-comma = false
-
-[tool.ruff.lint.per-file-ignores]
-"tests/*" = ["S101"]
-
-[tool.ruff.lint.mccabe]
-max-complexity = 25

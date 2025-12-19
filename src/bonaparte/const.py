@@ -129,7 +129,7 @@ class LedMultiValueEnum(LedDataMixin, Enum):
         self = object.__new__(cls)
         self._value_ = value
         for v in values:
-            self._add_value_alias_(v)  # type: ignore[attr-defined]
+            self._add_value_alias_(v)
         return self
 
 

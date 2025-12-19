@@ -37,7 +37,7 @@ def parse_timer(payload: bytes | bytearray) -> tuple[tuple[int, int, int], bool]
     """Parse timer state."""
     hours = payload[0]
     minutes = payload[1]
-    seconds = payload[3] if len(payload) > 3 else 0  # noqa: PLR2004
+    seconds = payload[3] if len(payload) > 3 else 0
     timer_on = payload[2] in {1, 3}
 
     return (hours, minutes, seconds), timer_on

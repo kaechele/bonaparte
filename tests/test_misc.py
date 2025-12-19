@@ -1,7 +1,5 @@
 """Miscellaneous tests."""
 
-# ruff: noqa: PLR2004
-
 from bleak.backends.device import BLEDevice
 import pytest
 
