@@ -135,7 +135,7 @@ class Fireplace(EfireDevice):
         super().__init__(ble_device)
 
         self._compatibility_mode = compatibility_mode
-        self._features = features if features else FireplaceFeatures()
+        self._features = features or FireplaceFeatures()
 
         self._is_authenticated = False
         self._state = FireplaceState(compatibility_mode=self._compatibility_mode)

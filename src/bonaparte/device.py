@@ -295,7 +295,7 @@ class EfireDevice:
             self._notify_future.set_exception(ex)
             self._notify_future = None
             return
-        self._notify_future.set_result(message)
+        self._notify_future.set_result(bytes(message))
         self._notify_future = None
 
     @retry_bluetooth_connection_error(DEFAULT_ATTEMPTS)
