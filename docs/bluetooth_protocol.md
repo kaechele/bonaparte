@@ -14,18 +14,18 @@ UUID `0000ff02-0000-1000-8000-00805f9b34fb`.
 
 The eFIRE Controller uses a binary protocol that follows a TLV schema.
 
-```{packetdiag}
-{
-  colwidth = 16
-
-  * Header (0xAB) [len=8]
-  * Message Type (0xAA or 0xBB) [len=8]
-  * Length [len=8]
-  * Command [len=8]
-  * (Variable length data) [style=dashed, len=16]
-  * Checksum (XOR) [len=8]
-  * Footer (0x55) [len=8]
-}
+```{mermaid}
+---
+config: {"packet": {"bitsPerRow": 16}}
+---
+packet
+    0-7: "Header (0xAB)"
+    8-15: "Message Type (0xAA or 0xBB)"
+    16-23: "Length"
+    24-31: "Command"
+    32-47: "Data (variable length)"
+    48-55: "Checksum (XOR)"
+    56-63: "Footer (0x55)"
 ```
 
 Message Type specifies whether the packet is a request (`0xAA`) or a response (`0xBB`).
@@ -56,26 +56,24 @@ respective parameters.
 This command interacts with the first set of settings of the IFC. This first set
 of settings comprises:
 
-1. Power (0 or 1)
-2. Thermostat (0 or 1)
+1. Power (0 (off) or 1 (on))
+2. Thermostat (0 (off) or 1 (on))
 3. Night Light Level (0-6)
-4. Continuous Pilot (0 or 1)
+4. Continuous Pilot (0 (Intermittent Pilot) or 1 (Continuous Pilot))
 
 Payload format:
 
-```{packetdiag}
-{
-  colwidth = 16
-  node_height = 120
-  scale_direction = rtl
-
-  * Power State [len=1, rotate=270]
-  * Thermostat Mode [len=1, rotate=270]
-  * [len=2]
-  * Night Light [len=3, rotate=270]
-  * Pilot Mode [len=1, rotate=270]
-  * [len=8]
-}
+```{mermaid}
+---
+config: {"packet": {"bitWidth": 72, "bitsPerRow": 8}}
+---
+packet
+    0: "Power"
+    1: "Thermostat"
+    2-3: "Reserved"
+    4-6: "Night Light"
+    7: "Pilot"
+    8-15: "Reserved (always 0x00)"
 ```
 
 :parameters:
@@ -101,23 +99,21 @@ of settings comprises:
 
 1. Flame Height (0-6)
 2. Blower Speed (0-6)
-3. Aux Relay (0 or 1)
-4. Split Flow (0 or 1)
+3. Aux Relay (0 (off) or 1 (on))
+4. Split Flow (0 (off) or 1 (on))
 
 Payload format:
 
-```{packetdiag}
-{
-  colwidth = 16
-  node_height = 120
-  scale_direction = rtl
-
-  * Flame Height [len=3, rotate=270]
-  * AUX Relay [len=1, rotate=270]
-  * Blower Speed [len=3, rotate=270]
-  * Split Flow Valve [len=1, rotate=270]
-  * [len=8]
-}
+```{mermaid}
+---
+config: {"packet": {"bitWidth": 72, "bitsPerRow": 8}}
+---
+packet
+    0-2: "Flame Height"
+    3: "AUX Relay"
+    4-6: "Blower Speed"
+    7: "Split Flow"
+    8-15: "Reserved (always 0x00)"
 ```
 
 :parameters:

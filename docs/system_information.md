@@ -86,15 +86,15 @@ The IFC does not generate any output unless requested through a message.
 
 ### Message format
 
-```{packetdiag}
-{
-  colwidth = 8
-
-  * Message Type [len=8]
-  * Payload [len=24]
-  * Register [len=8]
-  * Checksum (XOR) [len=8]
-}
+```{mermaid}
+---
+config: {"packet": {"bitsPerRow": 16}}
+---
+packet
+   0-7: "Message Type"
+   8-31: "Payload"
+   32-39: "Register"
+   40-47: "Checksum (XOR)"
 ```
 
 #### Message Type

@@ -7,7 +7,7 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = "Bonaparte"
-copyright = "2023-2025, Felix Kaechele"
+copyright = "2023-2026, Felix Kaechele"
 author = "Felix Kaechele"
 release = "1.0.1"
 
@@ -16,7 +16,7 @@ release = "1.0.1"
 
 extensions = [
     "myst_parser",
-    "sphinxcontrib.packetdiag",
+    "sphinxcontrib.mermaid",
 ]
 
 # The suffix of source filenames.
@@ -36,6 +36,3 @@ html_theme = "furo"
 html_static_path = ["_static"]
 
 myst_enable_extensions = ["colon_fence", "fieldlist"]
-
-packetdiag_html_image_format = "SVG"
-packetdiag_latex_image_format = "PDF"
