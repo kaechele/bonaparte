@@ -62,7 +62,7 @@ repos:
       - id: codespell
         exclude: (uv.lock)
   - repo: https://github.com/PyCQA/pylint
-    rev: v4.0.5
+    rev: v4.0.6
     hooks:
       - id: pylint
         exclude: (docs|tests|setup.py)
