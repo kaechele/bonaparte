@@ -41,7 +41,7 @@ repos:
           - --in-place
           - --remove-all-unused-imports
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.16.1
+    rev: v0.16.2
     hooks:
       - id: ruff-format
         name: ruff (format)
@@ -62,7 +62,7 @@ repos:
       - id: codespell
         exclude: (uv.lock)
   - repo: https://github.com/PyCQA/pylint
-    rev: v4.0.6
+    rev: v4.0.7
     hooks:
       - id: pylint
         exclude: (docs|tests|setup.py)
