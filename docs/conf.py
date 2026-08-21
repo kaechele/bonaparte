@@ -9,7 +9,7 @@
 project = "Bonaparte"
 copyright = "2023-2026, Felix Kaechele"
 author = "Felix Kaechele"
-release = "1.0.1"
+release = "1.0.2"
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
