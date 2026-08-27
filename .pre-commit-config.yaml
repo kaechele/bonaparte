@@ -34,14 +34,14 @@ repos:
       - id: prettier
         args: ["--tab-width", "2"]
   - repo: https://github.com/PyCQA/autoflake
-    rev: v2.3.3
+    rev: v2.4.0
     hooks:
       - id: autoflake
         args:
           - --in-place
           - --remove-all-unused-imports
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.16.3
+    rev: v0.16.4
     hooks:
       - id: ruff-format
         name: ruff (format)
