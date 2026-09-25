@@ -10,7 +10,7 @@ ci:
 
 repos:
   - repo: https://github.com/commitizen-tools/commitizen
-    rev: v4.18.1
+    rev: v4.19.0
     hooks:
       - id: commitizen
         stages: [commit-msg]
@@ -41,7 +41,7 @@ repos:
           - --in-place
           - --remove-all-unused-imports
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.16.8
+    rev: v0.16.9
     hooks:
       - id: ruff-format
         name: ruff (format)
@@ -62,7 +62,7 @@ repos:
       - id: codespell
         exclude: (uv.lock)
   - repo: https://github.com/PyCQA/pylint
-    rev: v4.0.8
+    rev: v4.0.9
     hooks:
       - id: pylint
         exclude: (docs|tests|setup.py)
