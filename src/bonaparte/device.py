@@ -75,6 +75,7 @@ class EfireDevice:
     _address: str
     _notifications_started: bool
     _notify_future: asyncio.Future[bytes] | None
+    _expected_command: int | None
     _read_char: BleakGATTCharacteristic | None
     _write_char: BleakGATTCharacteristic | None
     _write_lock: asyncio.Lock
@@ -94,6 +95,8 @@ class EfireDevice:
         self._is_connected = False
         self._loop: AbstractEventLoop | None = None
         self._notifications_started = False
+        self._notify_future = None
+        self._expected_command = None
         self._write_lock = asyncio.Lock()
 
     @property
@@ -199,6 +202,8 @@ class EfireDevice:
             assert self._notify_future is not None
             msg = "Disconnected while response from device was pending"
             self._notify_future.set_exception(DisconnectedException(msg))
+            self._notify_future = None
+            self._expected_command = None
 
         for callback in self._disconnect_callbacks:
             callback(self)
@@ -294,9 +299,13 @@ class EfireDevice:
         except EfireMessageValueError as ex:
             self._notify_future.set_exception(ex)
             self._notify_future = None
+            self._expected_command = None
+            return
+        if message[3] != self._expected_command:
             return
         self._notify_future.set_result(bytes(message))
         self._notify_future = None
+        self._expected_command = None
 
     @retry_bluetooth_connection_error(DEFAULT_ATTEMPTS)
     async def _execute_locked(self, message: bytes | bytearray) -> bytes:
@@ -312,6 +321,7 @@ class EfireDevice:
         try:
             future: asyncio.Future[bytes] = asyncio.Future()
             self._notify_future = future
+            self._expected_command = message[3]
 
             await self._client.write_gatt_char(self._write_char, message, response=True)
             result = await future
@@ -345,6 +355,10 @@ class EfireDevice:
                 ex,
             )
             raise
+        finally:
+            if self._notify_future is future:
+                self._notify_future = None
+                self._expected_command = None
         return result
 
     async def _execute(

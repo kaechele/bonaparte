@@ -1,11 +1,47 @@
 """Tests for device.py functionality."""
 
+import asyncio
+from unittest.mock import AsyncMock, patch
+
 from bleak.backends.device import BLEDevice
 import pytest
 
-from bonaparte.const import FOOTER, HEADER
+from bonaparte.const import FOOTER, HEADER, EfireCommand
 from bonaparte.device import EfireDevice
 from bonaparte.exceptions import EfireMessageValueError
+
+from .mock_messages import response
+
+
+@pytest.mark.asyncio
+async def test_execute_command_ignores_unsolicited_notification() -> None:
+    """Test a pending command waits for a response with the same command ID."""
+    device = EfireDevice(BLEDevice("aa:bb:cc:dd:ee:ff", "Test", details=None))
+    write_complete = asyncio.Event()
+    client = AsyncMock()
+    client.write_gatt_char.side_effect = lambda *_args, **_kwargs: write_complete.set()
+    device._client = client  # noqa: SLF001
+    device._write_char = object()  # noqa: SLF001
+
+    with patch.object(device, "_ensure_connected", new_callable=AsyncMock):
+        command = asyncio.create_task(
+            device.execute_command(EfireCommand.GET_IFC_CMD1_STATE)
+        )
+        await write_complete.wait()
+
+        device._notification_handler(  # noqa: SLF001
+            None,
+            bytearray.fromhex("ab bb 04 ee 00 ea 55"),
+        )
+        await asyncio.sleep(0)
+        assert not command.done()
+
+        device._notification_handler(  # noqa: SLF001
+            None,
+            bytearray(response["cmd1_state_power_on"]),
+        )
+
+        assert await command == bytes([0x00, 0x01])
 
 
 def test_message_validation_too_short() -> None:
